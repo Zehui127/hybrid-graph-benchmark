@@ -1,2 +1,2 @@
 # hypergraph-benchmarks
-A benchmark dataset for hypergraph construction
+A benchmark of a collections of datasets for hypergraph tasks
