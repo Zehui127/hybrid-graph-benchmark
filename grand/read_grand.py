@@ -2,7 +2,6 @@ import ensembl_rest
 import igraph
 import logging
 import networkx as nx
-from netZooPy.panda.panda import Panda
 import numpy as np
 import os
 import pandas as pd
@@ -10,10 +9,12 @@ import re
 import torch
 import urllib.request
 import numbers
-from genome_graph import DATA_DIR
+import json
+from .get_grand_path import get_path
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 class GrandGraph(object):
     """_summary_
@@ -21,50 +22,34 @@ class GrandGraph(object):
     Args:
         network_link: the url used to download the tissue or diseases
     Usage:
-        GrandGraph(network_link="")
+        GrandGraph(tag_name="",network_link="")
     Returns:
         _description_
     """
-    _ppi_link = 'https://granddb.s3.amazonaws.com/tissues/ppi/tissues_ppi.txt'
-    _motif_link = 'https://granddb.s3.amazonaws.com/tissues/motif/tissues_motif.txt'
-    _exp_link = 'https://granddb.s3.amazonaws.com/tissues/expression/Liver.csv'
     _network_link = 'https://granddb.s3.amazonaws.com/tissues/networks/Liver.csv'
     _tag_name = 'liver'
 
     max_ensembl_attempts = 5
 
-    def __init__(
-            self, tag_name=None,
-            ppi_link=None, motif_link=None,
-            exp_link=None, network_link=None, build=False):
+    def __init__(self, tag_name=None, network_link=None, build=False):
+        json_path = os.path.join(get_path(), "grand_config.json")
+        self.json_data = json.load(open(json_path))
+        self.path = self.json_data['path']
         self.tag_name = tag_name
-        self.ppi_link = ppi_link
-        self.motif_link = motif_link
-        self.exp_link = exp_link
         self.network_link = network_link
         if self.downloaded:
             logging.info(f"Data already downloaded for {self.tag_name}")
             path_name = self.get_network_name(self.path, self.network_link)
-            network = pd.read_csv(path_name,index_col=0)
+            self.network = pd.read_csv(self.path + '/panda_results_{tag_name}.csv',header=0,index_col=0)
             logging.info(f"Loaded from {path_name}")
         else:
             logging.info(f"Downloading data for {self.tag_name}")
             file_name_map = self.download_links()
             logging.info(f"Downloaded data, storing in {self.path}")
-            if not build:
-                network = pd.read_csv(file_name_map['network'],index_col=0)
-            else:
-                logging.info('Building network, this might take a while.')
-                panda_obj = Panda(
-                    self.exp_link, self.motif_link, self.ppi_link)
-                panda_obj.save_panda_results(self.path + '/panda_results.csv')
-                network = pd.read_csv(self.path + '/panda_results.csv',index_col=0)
-        # Standardise columns to Ensembl IDs if not already
-        if not self.downloaded:
-        #if not any([re.match('ENSG[0-9]+',el) for el in network.index]):
+            network = pd.read_csv(file_name_map['network'],index_col=0)
             logging.info("Converting network indices to Ensembl IDs...")
             good=False
-            attempts=0
+            attempts = 0
             while not good:
                 try:
                     result = ensembl_rest.symbol_post(species='homo sapiens',
@@ -86,19 +71,15 @@ class GrandGraph(object):
                       "TODO: Implement other ways of identifying the Ensembl ID.")
                 network = network.loc[result.keys()]
                 network.index = [result[el]['id'] for el in network.index]
-                network.to_csv(self.path + '/panda_results.csv')
-        self.network = pd.read_csv(self.path + '/panda_results.csv',header=0,index_col=0)
+                network.to_csv(self.path + f'/panda_results_{tag_name}.csv')
+        # Standardise columns to Ensembl IDs if not already
+        #if not self.downloaded:
         logging.info(f'Loaded network with a shape of {network.shape}')
 
     def get_network_name(self, path, network_link):
         file_name = network_link.split('/')[-1]
         file_name = 'network_' + file_name
         return os.path.join(path, file_name)
-
-    @property
-    def path(self):
-        path = os.path.join(DATA_DIR,'grand',self.tag_name)
-        return path
 
     @property
     def tag_name(self):
@@ -108,33 +89,6 @@ class GrandGraph(object):
     def tag_name(self,tag_name):
         if tag_name is not None:
             self._tag_name = tag_name
-
-    @property
-    def ppi_link(self):
-        return self._ppi_link
-
-    @ppi_link.setter
-    def ppi_link(self,ppi_link):
-        if ppi_link is not None:
-            self._ppi_link = ppi_link
-
-    @property
-    def motif_link(self):
-        return self._motif_link
-
-    @motif_link.setter
-    def motif_link(self,motif_link):
-        if motif_link is not None:
-            self._motif_link = motif_link
-
-    @property
-    def exp_link(self):
-        return self._exp_link
-
-    @exp_link.setter
-    def exp_link(self,exp_link):
-        if exp_link is not None:
-            self._exp_link = exp_link
 
     @property
     def network_link(self):
@@ -147,22 +101,13 @@ class GrandGraph(object):
 
     @property
     def links(self):
-        return {
-                #'ppi': self.ppi_link,
-                #'motif': self.motif_link,
-                #'exp': self.exp_link,
-                'network': self.network_link
-            }
+        return {'network': self.network_link}
 
     @property
     def downloaded(self):
-        files = []
-        for name, link in self.links.items():
-            file_name = link.split('/')[-1]
-            if name == 'network':
-                file_name = 'network_' + file_name
-            files.append(os.path.join(self.path, file_name))
-        return all([os.path.exists(file) for file in files])
+        file_name = self.links['network'].split('/')[-1]
+        file = os.path.join(self.path, f"/panda_results_{file_name}.csv")
+        return os.path.exists(file)
 
 
     @property
@@ -256,12 +201,13 @@ class GrandGraph(object):
                 files[name] = save_file
         return files
 
+
 def get_available_networks(family):
     assert family in ['drugs','cancers','tissues','cell']
     return pd.read_html(f"https://grand.networkmedicine.org/{family}/")[0]
 
 
-def get_dataset_ensembl_ids(ensembl_file="", bed_annot_dir="") -> pd.DataFrame:
+def get_dataset_ensembl_ids(ensembl_file=None) -> pd.DataFrame:
     """Get Ensembl IDs for sequences in a Basenji dataset.
 
     Generates files for the sequences containing the genome annotations, if they don't already exist.
@@ -274,6 +220,8 @@ def get_dataset_ensembl_ids(ensembl_file="", bed_annot_dir="") -> pd.DataFrame:
     Usage:
         bed_with_ensembl = genome_graph.data.basenji.get_dataset_ensembl_ids('human',41,num_procs=3,chunksize=100)
     """
+    if ensembl_file == None:
+        ensembl_file = os.path.join(get_path(),"raw_data","ensembl_ids.csv")
     with open(ensembl_file, 'r') as f:
         # Read the lines
         cols = [len(l.split(',')) for l in f.readlines()]

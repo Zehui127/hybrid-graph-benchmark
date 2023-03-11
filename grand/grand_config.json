@@ -1,11 +1,47 @@
 {
-    "type":
-            {
-                "tissues":["URL"]
+                "path":"/Users/lizehui/Desktop/workspace/hypergraph-benchmarks/grand/raw_data",
+                "tissues":["https://granddb.s3.amazonaws.com/tissues/networks/Adipose_Subcutaneous.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Adipose_Visceral.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Adrenal_Gland.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Artery_Aorta.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Artery_Coronary.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Artery_Tibial.csv",
 
-            },
-            {
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Brain_Other.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Brain_Cerebellum.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Brain_Basal_Ganglia.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Breast.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Colon_Sigmoid.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Colon_Transverse.csv",
+
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Gastro_Esophageal_Junction.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Esophagus_Mucosa.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Esophagus_Muscularis.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Heart_Atrial_Appendage.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Heart_Left_Ventricle.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Kidney_Cortex.csv",
+
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Liver.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Lung.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Minor_Salivary_Gland.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Skeletal_Muscle.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Tibial_Nerve.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Ovary.csv",
+
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Pancreas.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Pituitary.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Prostate.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Skin.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Intestine_Terminal_Ileum.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Spleen.csv",
+
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Stomach.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Testis.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Thyroid.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Uterus.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Vagina.csv",
+                            "https://granddb.s3.amazonaws.com/tissues/networks/Whole_Blood.csv"],
+
                 "cancer":["URL"]
-            }
 
 }
