@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # csv
-*.csv
+network*.csv
+panda*.csv

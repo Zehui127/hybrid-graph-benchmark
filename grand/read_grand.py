@@ -6,7 +6,6 @@ import numpy as np
 import os
 import pandas as pd
 import re
-import torch
 import urllib.request
 import numbers
 import json
@@ -26,9 +25,6 @@ class GrandGraph(object):
     Returns:
         _description_
     """
-    _network_link = 'https://granddb.s3.amazonaws.com/tissues/networks/Liver.csv'
-    _tag_name = 'liver'
-
     max_ensembl_attempts = 5
 
     def __init__(self, tag_name=None, network_link=None, build=False):
@@ -37,10 +33,11 @@ class GrandGraph(object):
         self.path = self.json_data['path']
         self.tag_name = tag_name
         self.network_link = network_link
+
         if self.downloaded:
             logging.info(f"Data already downloaded for {self.tag_name}")
             path_name = self.get_network_name(self.path, self.network_link)
-            self.network = pd.read_csv(self.path + '/panda_results_{tag_name}.csv',header=0,index_col=0)
+            self.network = pd.read_csv(self.path + f'/panda_results_{tag_name}.csv',header=0,index_col=0)
             logging.info(f"Loaded from {path_name}")
         else:
             logging.info(f"Downloading data for {self.tag_name}")
@@ -72,9 +69,10 @@ class GrandGraph(object):
                 network = network.loc[result.keys()]
                 network.index = [result[el]['id'] for el in network.index]
                 network.to_csv(self.path + f'/panda_results_{tag_name}.csv')
+                self.network = network
         # Standardise columns to Ensembl IDs if not already
         #if not self.downloaded:
-        logging.info(f'Loaded network with a shape of {network.shape}')
+        logging.info(f'Loaded network with a shape of {self.network.shape}')
 
     def get_network_name(self, path, network_link):
         file_name = network_link.split('/')[-1]
@@ -106,7 +104,7 @@ class GrandGraph(object):
     @property
     def downloaded(self):
         file_name = self.links['network'].split('/')[-1]
-        file = os.path.join(self.path, f"/panda_results_{file_name}.csv")
+        file = os.path.join(self.path, f"panda_results_{file_name}")
         return os.path.exists(file)
 
 
