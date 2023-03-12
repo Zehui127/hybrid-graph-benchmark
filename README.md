@@ -4,6 +4,11 @@ A benchmark of a collections of datasets for hypergraph tasks
 # Grand - gene regulatory networks
 There are 36 gene regulatory networks for tissues and 27 networks for diseases. The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges.
 
+#### Requirement
+```
+pip3 -r install grand/requirements.txt
+```
+
 #### Usage
 Change the ```path``` property in grand_config.json to the directory where you want to store grand graphs
 
