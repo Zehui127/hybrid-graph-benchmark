@@ -1,0 +1,8 @@
+"Breast_invasive_carcinoma",
+"https://granddb.s3.amazonaws.com/cancer/breast_cancer/cancer_breast_otter_network.csv",
+
+"Liver_hepatocellular_carcinoma",
+"https://granddb.s3.amazonaws.com/cancer/liver_cancer/cancer_liver_otter_network.csv",
+
+"Pancreatic_adenocarcinoma",
+"https://grand.networkmedicine.org/cancers/PAAD_cancer/#cardtissuetcga",

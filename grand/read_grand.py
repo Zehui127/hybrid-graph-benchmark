@@ -54,6 +54,7 @@ class GrandGraph(object):
                     good=True
                 except Exception as e:
                     if attempts>=self.max_ensembl_attempts:
+                        print(len(list(network.index)))
                         raise e
                     else:
                         logging.info("Ensembl rest failed: {}\nRetrying... ({}/{})".format(e,attempts,self.max_ensembl_attempts))
@@ -104,7 +105,7 @@ class GrandGraph(object):
     @property
     def downloaded(self):
         file_name = self.links['network'].split('/')[-1]
-        file = os.path.join(self.path, f"panda_results_{file_name}")
+        file = os.path.join(self.path, f"panda_results_{self.tag_name}.csv")
         return os.path.exists(file)
 
 
@@ -236,3 +237,4 @@ def get_dataset_ensembl_ids(ensembl_file=None) -> pd.DataFrame:
         # Matches alphanumeric up until a \.[0-9]
         ensembl_ids.append([re.search("[\w0-9]+(?=\.[0-9]+)",el).group(0) for el in row.dropna() if re.search("[\w0-9]+(?=\.[0-9]+)",el)])
     return ensembl_ids
+#network_cancer_breast_otter_network.csv
