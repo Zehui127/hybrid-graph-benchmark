@@ -87,7 +87,7 @@ class OneHotEncoder():
                         kmers[kmer] = 1
             return kmers
         kmers_dict = count_kmers(sequences, self.k)
-        emb = np.zeros(self.kmer_length, dtype=np.float16)
+        emb = np.zeros(self.kmer_length, dtype=np.int64)
         for i, ele in enumerate(self.kmers):
             if ele in kmers_dict:
                 emb[i] = kmers_dict[ele]

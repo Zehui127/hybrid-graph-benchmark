@@ -132,3 +132,6 @@ dmypy.json
 network*.csv
 panda*.csv
 *node_emb.csv
+
+/legacy
+/grand_graph
