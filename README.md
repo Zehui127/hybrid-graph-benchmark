@@ -1,18 +1,17 @@
 # hypergraph-benchmarks
-A benchmark of a collections of datasets for hypergraphs
-![hypergraph](https://ibb.co/f2VCvdP)
-
 [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]()
 &nbsp;&nbsp;&nbsp;
 [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html)
 
+![](https://github.com/Zehui127/zehui127/blob/main/images/icon2.png?raw=true)
 
+This is a benchmark dataset for the hypergraph learning, includes various hypergraphs with ported hypergraph learning algorithms.
 # Data Specification
 
 we use the ```torch_geometric.data.Data``` to wrap the graphs with additional adjacency matrix for hyperedge representation.
 
 ## Hyperedge representation
-The format of hyper edge follows the following [convention:](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) each node $v$ is mapped to a hyperedge $e$: $[v,e]$
+The format of hyper edge follows the following [convention:](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) each node $v$ is mapped to a hyperedge $e$ $[v,e]$
 <details open>
 <summary><b>For example</b></summary>
 
@@ -27,15 +26,22 @@ The format of hyper edge follows the following [convention:](https://pytorch-geo
 >                                 [0, 0, 0, 1, 1, 1]])
 >```
 </details>
+
 ## Data
 
 The graphs are wrapped with ```torch_geometric.data.Data```. Each graph includes the following properties:
 ```x:``` the node embedding
+
 ```y:``` the classes of y
+
 ```adj:``` the edge_index of graph
+
 ```sparse_adj:``` the sparse format of edge_index
+
 ```hyperedge_index:``` the hyperedge index of the graph
+
 ```sparse_hyperedge_index:``` the sparse format of hyperedge index
+
 An example is included as below:
 ```
 Graph = Data(x=[30171, 340], y=[30171], adj=[2, 2496126],
