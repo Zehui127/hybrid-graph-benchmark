@@ -5,7 +5,10 @@
 
 ![](https://github.com/Zehui127/zehui127/blob/main/images/icon2.png?raw=true)
 
-This is a benchmark dataset for the hypergraph learning, includes various hypergraphs with ported hypergraph learning algorithms.
+This is a benchmark dataset for the hypergraph learning, including various hypergraphs with ported hypergraph learning algorithms.
+
+# How to get started
+
 # Data Specification
 
 we use the ```torch_geometric.data.Data``` to wrap the graphs with additional adjacency matrix for hyperedge representation.
@@ -21,6 +24,7 @@ The format of hyper edge follows the following [convention:](https://pytorch-geo
 >     two hyperedges $\mathcal{E} = \{ \{ 0, 1, 2 \}, \{ 1, 2, 3 \} \}$,
 >     the `hyperedge_index` is represented as:
 
+>Example:
 >```
 >hyperedge_index = torch.tensor([[0, 1, 2, 1, 2, 3],
 >                                 [0, 0, 0, 1, 1, 1]])
@@ -28,31 +32,31 @@ The format of hyper edge follows the following [convention:](https://pytorch-geo
 </details>
 
 ## Data
+The graphs are wrapped with ```torch_geometric.data.Data```.
 
-The graphs are wrapped with ```torch_geometric.data.Data```. Each graph includes the following properties:
-```x:``` the node embedding
+<details open>
+<summary><b> Specification </b></summary>
 
-```y:``` the classes of y
+> ```x:``` the node embedding
+> ```y:``` the classes of y
+> ```adj:``` the edge_index of graph
+> ```sparse_adj:``` the sparse format of edge_index
+> ```hyperedge_index:``` the hyperedge index of the graph
+> ```sparse_hyperedge_index:``` the sparse format of hyperedge index
 
-```adj:``` the edge_index of graph
+>Example:
+>```
+># grand gene regulatory network
+>Graph = Data(x=[30171, 340], y=[30171], adj=[2, 2496126],
+>             sparse_adj=[30171, 30167, nnz=2496126],
+>             hyperedge_index=[2, 72098],
+>             sparse_hyperedge_index=[30170, 38170, nnz=72098])
+>```
+</details>
 
-```sparse_adj:``` the sparse format of edge_index
 
-```hyperedge_index:``` the hyperedge index of the graph
 
-```sparse_hyperedge_index:``` the sparse format of hyperedge index
-
-An example is included as below:
-```
-Graph = Data(x=[30171, 340], y=[30171], adj=[2, 2496126],
-             sparse_adj=[30171, 30167, nnz=2496126],
-             hyperedge_index=[2, 72098],
-             sparse_hyperedge_index=[30170, 38170, nnz=72098])
-# convert the edge_index to sparse format
-sparse_adj = SparseTensor.from_edge_index(adj,weights)
-```
-
-# Datasets
+# Benchmarks
 ## Gene regulatory networks
 There are 36 gene regulatory networks for tissues and 24 networks for diseases. The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges.
 
@@ -60,6 +64,7 @@ There are 36 gene regulatory networks for tissues and 24 networks for diseases. 
 
 ## Amazon Reviews
 
-# Useful links
-
-A collection of [datasets benchmarks papers](https://nips.cc/virtual/2022/events/datasets-benchmarks-2022) from NeurIPS 2022
+# Ported Learning Algorithms
+1. Hypergraph Convolution and Hypergraph Attention (To be ported)
+    * Paper: [link](https://arxiv.org/abs/1901.08150)
+    * Implementation: [link](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv)
