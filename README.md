@@ -20,8 +20,8 @@ The format of hyper edge follows the following [convention:](https://pytorch-geo
 
 >   In the hypergraph scenario
 >     A graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ with
->     vertices $\mathcal{V} = \{ 0, 1, 2, 3 \}$ and
->     two hyperedges $\mathcal{E} = \{ \{ 0, 1, 2 \}, \{ 1, 2, 3 \} \}$,
+>     vertices $\mathcal{V} = \\{ 0, 1, 2, 3 \\}$ and
+>     two hyperedges $\mathcal{E} = \\{ \\{ 0, 1, 2 \\}, \\{ 1, 2, 3 \\} \\}$,
 >     the `hyperedge_index` is represented as:
 
 >Example:
