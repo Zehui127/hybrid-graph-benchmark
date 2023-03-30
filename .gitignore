@@ -144,6 +144,7 @@ panda*.csv
 /legacy
 /grand_graph
 /cache
-/data
 
 playground.*
+data
+data/
