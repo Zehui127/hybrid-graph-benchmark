@@ -220,7 +220,7 @@ def get_dataset_ensembl_ids(ensembl_file=None) -> pd.DataFrame:
         bed_with_ensembl = genome_graph.data.basenji.get_dataset_ensembl_ids('human',41,num_procs=3,chunksize=100)
     """
     if ensembl_file == None:
-        ensembl_file = os.path.join(get_path(),"raw_data","ensembl_ids.csv")
+        ensembl_file = os.path.join(get_path(), "raw_data", "ensembl_ids.csv")
     with open(ensembl_file, 'r') as f:
         # Read the lines
         cols = [len(l.split(',')) for l in f.readlines()]
