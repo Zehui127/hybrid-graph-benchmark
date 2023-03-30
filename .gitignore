@@ -128,7 +128,15 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# csv
+# Pycharm stuff
+.idea
+.idea/
+
+# macOS stuff
+._*
+.DS_Store
+
+# Project specific
 network*.csv
 panda*.csv
 *node_emb.csv
@@ -136,3 +144,5 @@ panda*.csv
 /legacy
 /grand_graph
 /cache
+
+playground.*
