@@ -7,7 +7,7 @@ import pandas as pd
 import torch
 from torch_geometric.data import Data
 from torch_geometric.datasets import WikipediaNetwork
-from torch_geometric.utils import to_dense_adj, to_networkx
+from torch_geometric.utils import to_networkx
 
 
 def find_max_cliques(name: str):
