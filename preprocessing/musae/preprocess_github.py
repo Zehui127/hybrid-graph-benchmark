@@ -1,4 +1,5 @@
 import csv
+import json
 import pickle
 
 import networkx as nx
@@ -7,6 +8,8 @@ import pandas as pd
 import torch
 from torch_geometric.datasets import GitHub
 from torch_geometric.utils import to_dense_adj, to_networkx
+
+NUM_NODES = 37700
 
 
 def validate_dataset():
@@ -56,7 +59,27 @@ def build_hyperedges():
                 writer.writerow({'node': node, 'hyperedge': i})
 
 
+def save_processed_data():
+    with open('data/github/musae-github/musae_git_features.json', 'r') as f:
+        raw_featrues_json = json.load(f)
+
+    max_feature_idx = -1
+    for features in raw_featrues_json.values():
+        max_feature_idx = max(max_feature_idx, max(features))
+
+    raw_features = np.zeros((NUM_NODES, max_feature_idx + 1))
+    for node, features in raw_featrues_json.items():
+        for feature_idx in features:
+            raw_features[int(node), feature_idx] = 1
+
+    hyperedges_df = pd.read_csv('hyperedges/github_hyperedges.csv')
+    hyperedges = np.array([hyperedges_df['node'].values, hyperedges_df['hyperedge'].values])
+
+    np.savez_compressed('data/github/github_preprocessed.npz', raw_features=raw_features, hyperedges=hyperedges)
+
+
 if __name__ == '__main__':
     validate_dataset()
     find_max_cliques()
     build_hyperedges()
+    save_processed_data()
