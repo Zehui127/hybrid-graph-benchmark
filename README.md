@@ -72,5 +72,5 @@ There are 3 English Wikipedia page-page networks on specific topics (chameleons,
     * Implementation: [link](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv)
 
 # FAQs
-Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to download the ```musae``` datasets. How to solve it?  
-A: Simply delete the downloaded files and try downloading again.
+Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to load the ```musae``` datasets. How to solve it?  
+A: Simply delete the downloaded files and try loading again.
