@@ -1,4 +1,5 @@
 import csv
+import json
 import pickle
 
 import networkx as nx
@@ -7,6 +8,16 @@ import pandas as pd
 import torch
 from torch_geometric.datasets import Twitch
 from torch_geometric.utils import to_dense_adj, to_networkx
+
+NUM_NODES = {
+    'DE': 9498,
+    'EN': 7126,
+    'ES': 4648,
+    'FR': 6549,
+    'PT': 1912,
+    'RU': 4385
+}
+NUM_RAW_FEATURES = 3170
 
 
 def validate_dataset(name: str):
@@ -26,7 +37,7 @@ def validate_dataset(name: str):
     y_musae = torch.Tensor(y_musae['mature'].values)
 
     if name == 'FR':
-        assert torch.equal(adj_pyg[:, :6549, :6549], adj_musae)
+        assert torch.equal(adj_pyg[:, :NUM_NODES['FR'], :NUM_NODES['FR']], adj_musae)
     else:
         assert torch.equal(adj_pyg, adj_musae)
     assert torch.equal(y_pyg, y_musae)
@@ -61,10 +72,40 @@ def build_hyperedges(name: str):
                 writer.writerow({'node': node, 'hyperedge': i})
 
 
+def save_processed_data(name: str):
+    pyg_data = np.load(f'data/twitch/pyg-twitch/{name[:2]}/raw/{name[:2]}.npz', 'r', allow_pickle=True)
+    if name == 'FR':
+        emb_features = pyg_data['features'][:NUM_NODES['FR']]
+        target = pyg_data['target'][:NUM_NODES['FR']]
+    else:
+        emb_features = pyg_data['features']
+        target = pyg_data['target']
+
+    with open(f'data/twitch/musae-twitch/{name}/musae_{name}_features.json', 'r') as f:
+        raw_featrues_json = json.load(f)
+
+    raw_features = np.zeros((NUM_NODES[name[:2]], NUM_RAW_FEATURES))
+    for node, features in raw_featrues_json.items():
+        for feature_idx in features:
+            raw_features[int(node), feature_idx] = 1
+
+    edges_df = pd.read_csv(f'data/twitch/musae-twitch/{name}/musae_{name}_edges.csv')
+    edges = np.array([pd.concat([edges_df['from'], edges_df['to']]).values,
+                      pd.concat([edges_df['to'], edges_df['from']]).values])
+
+    hyperedges_df = pd.read_csv(f'hyperedges/twitch_{name[:2]}_hyperedges.csv')
+    hyperedges = np.array([hyperedges_df['node'].values, hyperedges_df['hyperedge'].values])
+
+    np.savez_compressed(f'data/twitch/twitch_{name[:2]}.npz',
+                        features=emb_features, raw_features=raw_features,
+                        target=target, edges=edges, hyperedges=hyperedges)
+
+
 if __name__ == '__main__':
     for name in ['DE', 'ENGB', 'ES', 'FR', 'PTBR', 'RU']:
         print(f'Processing {name[:2]} dataset:')
         validate_dataset(name)
         find_max_cliques(name)
         build_hyperedges(name)
+        save_processed_data(name)
         print()
