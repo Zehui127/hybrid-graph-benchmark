@@ -71,6 +71,38 @@ There are 3 English Wikipedia page-page networks on specific topics (chameleons,
     * Paper: [link](https://arxiv.org/abs/1901.08150)
     * Implementation: [link](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv)
 
+# Training
+The training workflow is written in pytorch lightning, more instruction to add later.
+Currrent traing only work with the following argument:
+```
+python hg.py train grand1 toynet
+```
+## PyG
+
+- Installing PyG
+
+    ```bash
+    TORCH=1.13.0
+    CUDA=cpu #cu111... depending on the cuda version on your system
+    python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+    python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+    python -m pip install torch-geometric
+    ```
+
+- training
+    ```
+     python hg.py train grand1 toynet # training
+    ```
+
+- evaluation
+    ```bash
+     python hg.py eval cora toynet --load ./lightning_logs/...
+    ```
+- check available arugments with the following
+    ```bash
+     python hg.py 
+    ```
+
 # FAQs
 Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to load the ```musae``` datasets. How to solve it?  
 A: Simply delete the downloaded files and try loading again.
