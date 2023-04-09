@@ -148,3 +148,5 @@ panda*.csv
 playground.*
 data
 data/
+
+/lightning_logs

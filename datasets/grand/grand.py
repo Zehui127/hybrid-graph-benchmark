@@ -27,10 +27,14 @@ class Grand(InMemoryDataset):
     num_graphs = 10
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
 
-    def __init__(self, root: str):
+    def __init__(self, name: str, root='cache'):
         super().__init__(root)
-        self.data = torch.load(self.processed_paths[0])
-        self.names = self.raw_file_names
+        self.name = name
+        self.data = torch.load(self.processed_paths[0])[self.get_index_name]
+    @property
+    def get_index_name(self):
+        indices = [index for index, element in enumerate(self.raw_file_names) if element == f"{self.name}.pt"]
+        return indices[0]
     @property
     def raw_file_names(self) -> List[str]:
         return ['Artery_Aorta.pt', 'Breast.pt', 'Vagina.pt',
