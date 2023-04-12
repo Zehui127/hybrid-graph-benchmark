@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import torch_geometric
 from torch_geometric import transforms
+import torch_geometric.utils as utils
 import logging
 
 from .utils import device
@@ -23,92 +24,205 @@ if dataset_dir not in sys.path:
 import datasets
 
 DATASET_INFO = {
-    'grand1': {
+    'grand_ArteryAorta': {
         'type': 'Grand',
         'name': 'Artery_Aorta',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-        'num_node_features': 340,
-        'num_classes': 3
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
 
     },
-    'grand2': {
+    'grand_Breast': {
         'type': 'Grand',
         'name': 'Breast',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
 
     },
-    'grand3': {
+    'grand_Vagina': {
         'type': 'Grand',
         'name': 'Vagina',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand4': {
+    'grand_ArteryCoronary': {
         'type': 'Grand',
         'name': 'Artery_Coronary',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand5': {
+    'grand_ColonAdenocarcinoma': {
         'type': 'Grand',
         'name': 'Colon_adenocarcinoma',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand6': {
+    'grand_Sarcoma': {
         'type': 'Grand',
         'name': 'Sarcoma',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand7': {
+    'grand_Liver': {
         'type': 'Grand',
         'name': 'Liver',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand8': {
+    'grand_TibialNerve': {
         'type': 'Grand',
         'name': 'Tibial_Nerve',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-                'num_node_features': 340
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
                }
     },
-    'grand9': {
+    'grand_KidneyCarcinoma': {
         'type': 'Grand',
         'name': 'Kidney_renal_papillary_cell_carcinoma',
+        'root': 'data/grand',
         'single_graph': True,
         'info':{
-             'num_node_features': 340
+            'original_mask': False,
+             'num_node_features': 340,
+             'num_classes': 3,
                }
     },
-    'grand10': {
+    'grand_Spleen': {
         'type': 'Grand',
         'name': 'Spleen',
+        'root': 'data/grand',
         'single_graph': True,
-        'info':{'num_node_features': 340
+        'info':{
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
                }
     },
-    'musae':{
-        'type': 'Musae-palce-holder',
-        'name': 'place-holder'
+    'musae_Twitch_DE':{
+        'type': 'Twitch',
+        'name': 'DE',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
     },
+    'musae_Twitch_EN':{
+        'type': 'Twitch',
+        'name': 'EN',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+     'musae_Twitch_ES':{
+        'type': 'Twitch',
+        'name': 'ES',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+        'musae_Twitch_FR':{
+        'type': 'Twitch',
+        'name': 'FR',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+    'musae_Twitch_PT':{
+        'type': 'Twitch',
+        'name': 'PT',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+     'musae_Twitch_RU':{
+        'type': 'Twitch',
+        'name': 'RU',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+    'musae_Facebook':{
+        'type': 'Facebook',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 4,
+        }
+    },
+    'musae_Github':{
+        'type': 'GitHub',
+        'root': 'data/musae',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 2,
+        }
+    },
+
     'amazon':{
         'type': 'Amazon-place-holder',
         'name': 'place-holder'
@@ -147,7 +261,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
                 item.y = torch.argmax(item.y, dim=1)
             yield (item.to(device), None)
 
-def get_dataset(name, original_mask=True, split=0.9, batch_size=128, workers=2):
+def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)
@@ -172,13 +286,23 @@ def get_dataset(name, original_mask=True, split=0.9, batch_size=128, workers=2):
     }
 
     if single_graph:
+        original_mask = dataset_info.pop('original_mask')
         Loader = functools.partial(DataLoader, **kwargs)
         dataset, masks = mask_split(dataset, original_mask)
         # take one sample mask out
         train_mask, eval_mask, test_mask = masks[0]
-        logging.info(
+        dataset = dataset[0]
+        dataset.train_mask = train_mask
+        dataset.val_mask = eval_mask
+        dataset.test_mask = test_mask
+        # dataloader requires a list of dataset
+        dataset = [dataset]
+        #logging.info(
+        print(
             f"Search with a partition of {train_mask.sum()} train data, "
             f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
+        print(dataset,train_mask.shape,eval_mask.shape,test_mask.shape)
+        # for single graph the masks is of no use
         print(dataset_info)
         return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
     """
@@ -228,13 +352,37 @@ def mask_split(
             eval_point = math.ceil(num_nodes * (train_portion + eval_portion))
 
             train_mask = zeros.clone()
-            eval_mask = zeros.clone()
+            val_mask = zeros.clone()
             test_mask = zeros.clone()
             train_mask[indexes[:train_point]] = 1
-            eval_mask[indexes[train_point:eval_point]] = 1
+            val_mask[indexes[train_point:eval_point]] = 1
             test_mask[indexes[eval_point:]] = 1
-            train_mask = train_mask.type(data.train_mask.type())
-            val_mask = eval_mask.type(data.val_mask.type())
-            test_mask = test_mask.type(data.test_mask.type())
+            data.train_mask = train_mask
+            data.val_mask = val_mask
+            data.test_mask = test_mask
+
+            train_mask = train_mask.type(torch.bool)
+            val_mask = val_mask.type(torch.bool)
+            test_mask = test_mask.type(torch.bool)
+
         masks.append((train_mask, val_mask, test_mask))
     return dataset, masks
+
+def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
+        # Convert to undirected graph
+        edge_index = utils.to_undirected(data.edge_index)
+
+        num_edges = edge_index.size(1)
+        num_train = int(train_ratio * num_edges)
+        num_val = int(val_ratio * num_edges)
+
+        perm = torch.randperm(num_edges)
+        train_edges = edge_index[:, perm[:num_train]]
+        val_edges = edge_index[:, perm[num_train:num_train + num_val]]
+        test_edges = edge_index[:, perm[num_train + num_val:]]
+
+        data.train_pos_edge_index = train_edges
+        data.val_pos_edge_index = val_edges
+        data.test_pos_edge_index = test_edges
+
+        return data

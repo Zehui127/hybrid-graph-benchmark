@@ -1,4 +1,4 @@
 from .grand import Grand
+from .musae import GitHub, Facebook, Twitch, Wikipedia
 #TODO
-#from .musae import Musae
 #from .amazon import Amazon

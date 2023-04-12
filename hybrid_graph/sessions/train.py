@@ -6,10 +6,12 @@ from .plt_wrapper import ModelWrapper
 def train(
         model,
         train_loader, val_loader,
-        optimizer, 
-        learning_rate, 
-        plt_trainer_args, 
-        save_path):
+        optimizer,
+        learning_rate,
+        plt_trainer_args,
+        save_path,
+        dataset_info
+        ):
     checkpoint_callback = ModelCheckpoint(
         save_top_k=1,
         monitor="val_acc",
@@ -21,6 +23,7 @@ def train(
     plt_trainer_args['callbacks'] = [checkpoint_callback]
     plt_model = ModelWrapper(
         model,
+        dataset_info,
         learning_rate=learning_rate,
         epochs=plt_trainer_args['max_epochs'],
         optimizer=optimizer)
