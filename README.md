@@ -35,12 +35,12 @@ The graphs are wrapped with ```torch_geometric.data.Data```.
 <details open>
 <summary><b> Specification </b></summary>
 
-> ```x:``` the node embedding  
-> ```y:``` the classes of y  
-> ```adj:``` the edge_index of graph  
-> ```sparse_adj:``` the sparse format of edge_index  
-> ```hyperedge_index:``` the hyperedge index of the graph  
-> ```sparse_hyperedge_index:``` the sparse format of hyperedge index  
+> ```x:``` the node embedding
+> ```y:``` the classes of y
+> ```adj:``` the edge_index of graph
+> ```sparse_adj:``` the sparse format of edge_index
+> ```hyperedge_index:``` the hyperedge index of the graph
+> ```sparse_hyperedge_index:``` the sparse format of hyperedge index
 
 >Example:
 >```
@@ -72,10 +72,25 @@ There are 3 English Wikipedia page-page networks on specific topics (chameleons,
     * Implementation: [link](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv)
 
 # Training
-The training workflow is written in pytorch lightning, more instruction to add later.
-Currrent traing only work with the following argument:
+The training workflow is written in pytorch lightning, the new models can be added in the ```hybrid_graph/models/gnn``` and register you model in ```hybrid_graph/models/gnn/__init__.py```.
+
+Currrent traing works for all datasets with gcn and sage mdoels:
 ```
-python hg.py train grand1 toynet
+python hg.py train grand_ArteryAorta gcn
+python hg.py train grand_Breast sage
+python hg.py train musae_Twitch_ES gcn
+python hg.py train musae_Twitch_FR sage
+python hg.py train musae_Facebook gcn
+python hg.py train musae_Facebook sage
+python hg.py train musae_Github gcn
+python hg.py train musae_Github sage
+```
+
+for eval
+```
+# ./lightning_logs/... should the path where the checkpoints are saved
+python hg.py eval grand_ArteryAorta gcn --load ./lightning_logs/...
+python hg.py eval grand_ArteryAorta sage --load ./lightning_logs/...
 ```
 ## PyG
 
@@ -100,9 +115,9 @@ python hg.py train grand1 toynet
     ```
 - check available arugments with the following
     ```bash
-     python hg.py 
+     python hg.py
     ```
 
 # FAQs
-Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to load the ```musae``` datasets. How to solve it?  
+Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to load the ```musae``` datasets. How to solve it?
 A: Simply delete the downloaded files and try loading again.

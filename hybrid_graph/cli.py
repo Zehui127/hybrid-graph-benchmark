@@ -40,7 +40,7 @@ class Main:
             'help': 'Maximum number of epochs for training.',
         },
         ('-b', '--batch-size'): {
-            'type': int, 'default': 128,
+            'type': int, 'default': 1,
             'help': 'Batch size for training and evaluation.',
         },
 
@@ -110,14 +110,15 @@ class Main:
         # get model
         model_cls = factory[a.model]
         model = model_cls(info=dataset_info)
-        return model, train_loader, val_loader, test_loader
+        return model, train_loader, val_loader, test_loader, dataset_info
 
     def cli_train(self):
         a = self.a
         if not a.save_name:
             logging.error('--save-name not specified.')
 
-        model, train_loader, val_loader, test_loader = self.setup_model_and_data(a)
+        model, train_loader, val_loader, test_loader, dataset_info = self.setup_model_and_data(a)
+
         plt_trainer_args = {
             'max_epochs': a.max_epochs, 'devices': a.num_devices,
             'accelerator': a.accelerator, 'strategy': a.strategy,
@@ -131,13 +132,14 @@ class Main:
             'learning_rate': a.learning_rate,
             "plt_trainer_args": plt_trainer_args,
             "save_path": a.save_name,
+            "dataset_info": dataset_info,
         }
         train(**train_params)
 
     def cli_test(self):
         a = self.a
 
-        model, train_loader, val_loader, test_loader = self.setup_model_and_data(a)
+        model, train_loader, val_loader, test_loader, dataset_info = self.setup_model_and_data(a)
         plt_trainer_args = {
             'devices': a.num_devices,
             'accelerator': a.accelerator, 'strategy': a.strategy,}
@@ -146,6 +148,7 @@ class Main:
             'test_loader': test_loader,
             'plt_trainer_args': plt_trainer_args,
             'load_path': a.load_name,
+            'dataset_info': dataset_info,
         }
         test(**test_params)
     cli_eval = cli_test

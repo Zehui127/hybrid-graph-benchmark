@@ -10,9 +10,11 @@ class ModelWrapper(pl.LightningModule):
     def __init__(
             self,
             model,
+            dataset_info,
             learning_rate=5e-4,
             epochs=200,
-            optimizer=None):
+            optimizer=None
+            ):
         super().__init__()
         self.model = model
         self.learning_rate = learning_rate
@@ -21,6 +23,7 @@ class ModelWrapper(pl.LightningModule):
         self.optimizer = optimizer
         self.train_losses = []
         self.val_losses = []
+        self.dataset_info = dataset_info
 
     def forward(self, x):
         return self.model(x)
@@ -30,7 +33,7 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.train_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=3)
+        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
         # loss
         self.log_dict(
             {"loss": loss},
@@ -46,7 +49,7 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.val_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=3)
+        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
         # val_loss
         self.log_dict(
             {"val_loss": loss},
@@ -62,7 +65,7 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.test_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=3)
+        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
         # val_loss
         self.log_dict(
             {"test_loss": loss},
