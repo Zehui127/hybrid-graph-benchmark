@@ -45,10 +45,11 @@ The graphs are wrapped with ```torch_geometric.data.Data```.
 >Example:
 >```
 ># grand gene regulatory network
->Graph = Data(x=[30171, 340], y=[30171], adj=[2, 2496126],
->              sparse_adj=[30171, 30167, nnz=2496126],
->              hyperedge_index=[2, 72098],
->              sparse_hyperedge_index=[30170, 38170, nnz=72098])
+>from datasets import grand
+>datasets = grand.Grand("data/grand",'Artery_Aorta')
+>datasets[0]
+>Data(x=[30171, 340], y=[30171], edge_index=[2, 2080169],
+>              hyperedge_index=[2, 72098],num_hyperedges=29956)
 >```
 </details>
 
@@ -56,8 +57,7 @@ The graphs are wrapped with ```torch_geometric.data.Data```.
 
 # Benchmarks
 ## Gene regulatory networks
-There are 36 gene regulatory networks for tissues and 24 networks for diseases. The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges.
-
+10 gene regulatory networks for tissues and diseases are selected and preprocessed from [GRAND: a database of gene regulatory network models across human conditions](https://grand.networkmedicine.org). The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges. Each node represets a gene, the node embedding of 340 is created using [k-mer analysis](https://en.wikipedia.org/wiki/K-mer). In this analysis, all possible k-mers with k values ranging from 1 to 4 are enumerated, and the counts of these k-mers serve as the elements of the feature vector.
 ## Social Networks
 There are 8 social networks derived from the Facebook pages, GitHub developers, and Twitch gamers in the ["Multi-scale Attributed Node Embedding" (MUSAE)](https://arxiv.org/abs/1909.13021) paper. The hypergraphs are mutually connected sub-groups that contain at least 3 nodes (i.e., maximal cliques with sizes of at least 3). Each dataset has an option to use either the raw node features, or the preprocessed node embeddings as introduced in the MUSAE paper.
 
@@ -66,10 +66,17 @@ There are 3 English Wikipedia page-page networks on specific topics (chameleons,
 
 ## Amazon Reviews
 
-# Ported Learning Algorithms
-1. Hypergraph Convolution and Hypergraph Attention (To be ported)
-    * Paper: [link](https://arxiv.org/abs/1901.08150)
-    * Implementation: [link](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv)
+# Evaluated Algorithms
+## Node Classification
+
+| Model     | Description                                                                                                                                                                                                                                                        | Accuracy on Grand | Accuracy on Social Media Network | Accuracy on Amazon Reviews |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|----------------------------------|----------------------------|
+| GCNs      | [Graph Convulutional Networks](https://arxiv.org/abs/1609.02907) on original graphs without using hyperedges/hierarchical information.                                                                                                                             |                   |                                  |                            |
+| GAT       | [Graph Attention Networks](https://personal.utdallas.edu/~fxc190007/courses/20S-7301/GAT-questions.pdf) on original graphs without using hyperedges/hierarchical information.                                                                                      |                   |                                  |                            |
+| GraphSage | [GraphSAGE](https://arxiv.org/abs/1706.02216) on original graphs without using hyperedges/hierarchical information.                                                                                                                                                |                   |                                  |                            |
+| HyperGCNs | [Hypergraph Convolution](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) only uses hyper edges to aggregate information |                   |                                  |                            |
+| HyperGAT  | [Hypergraph Attention](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) uses hyper edges to aggregate information        |                   |                                  |                            |
+
 
 # Training
 The training workflow is written in pytorch lightning, the new models can be added in the ```hybrid_graph/models/gnn``` and register you model in ```hybrid_graph/models/gnn/__init__.py```.
@@ -92,31 +99,6 @@ for eval
 python hg.py eval grand_ArteryAorta gcn --load ./lightning_logs/...
 python hg.py eval grand_ArteryAorta sage --load ./lightning_logs/...
 ```
-## PyG
-
-- Installing PyG
-
-    ```bash
-    TORCH=1.13.0
-    CUDA=cpu #cu111... depending on the cuda version on your system
-    python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-    python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
-    python -m pip install torch-geometric
-    ```
-
-- training
-    ```
-     python hg.py train grand1 toynet # training
-    ```
-
-- evaluation
-    ```bash
-     python hg.py eval cora toynet --load ./lightning_logs/...
-    ```
-- check available arugments with the following
-    ```bash
-     python hg.py
-    ```
 
 # FAQs
 Q: I got ```_pickle.UnpicklingError: Failed to interpret file '*.npz' as a pickle``` when I try to load the ```musae``` datasets. How to solve it?
