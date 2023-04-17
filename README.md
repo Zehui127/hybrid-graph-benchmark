@@ -1,38 +1,42 @@
-# Hypergraph Benchmarks
+# Hybrid-graph Benchmarks
 [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]()
 &nbsp;&nbsp;&nbsp;
 [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html)
 
 ![](https://github.com/Zehui127/zehui127/blob/main/images/icon2.png?raw=true)
 
-This is a benchmark dataset for the hypergraph learning, including various hypergraphs with ported hypergraph learning algorithms.
+This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hierarchical graph) learning algorithms. It contains:
+ - 20+ middle-size hypergraphs from the domains of biology, social media, and wikipedia
+ - Several large-size hypergraphs constructed from mutimodel data of e-commerce platform
+ - A framework to easily evaluate new learning algorithms
+
+# Benchmarks
+## Gene regulatory networks
+10 gene regulatory networks for tissues and diseases are selected and preprocessed from [GRAND: a database of gene regulatory network models across human conditions](https://grand.networkmedicine.org). The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges. Each node represets a gene, the node embedding of 340 is created using [k-mer analysis](https://en.wikipedia.org/wiki/K-mer). In this analysis, all possible k-mers with k values ranging from 1 to 4 are enumerated, and the counts of these k-mers serve as the elements of the feature vector.
+## Social Networks
+There are 8 social networks derived from the Facebook pages, GitHub developers, and Twitch gamers in the ["Multi-scale Attributed Node Embedding" (MUSAE)](https://arxiv.org/abs/1909.13021) paper. The hypergraphs are mutually connected sub-groups that contain at least 3 nodes (i.e., maximal cliques with sizes of at least 3). Each dataset has an option to use either the raw node features, or the preprocessed node embeddings as introduced in the MUSAE paper.
+
+## Wikipedia Networks
+There are 3 English Wikipedia page-page networks on specific topics (chameleons, crocodiles and squirrels) collected in December 2018, based on the ["Multi-scale Attributed Node Embedding" (MUSAE)](https://arxiv.org/abs/1909.13021) paper. The hypergraphs are mutually connected page groups that contain at least 3 pages (i.e., maximal cliques with sizes of at least 3). Each dataset has an option to use either the raw node features, or the preprocessed node embeddings as introduced in the MUSAE paper.
+
+## Amazon Reviews
+
+# Evaluated Algorithms
+## Node Classification
+
+| Model     | Description                                                                                                                                                                                                                                                        | Accuracy on Grand | Accuracy on Social Media Network | Accuracy on Amazon Reviews |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|----------------------------------|----------------------------|
+| GCNs      | [Graph Convulutional Networks](https://arxiv.org/abs/1609.02907) on original graphs without using hyperedges/hierarchical information.                                                                                                                             |                   |                                  |                            |
+| GAT       | [Graph Attention Networks](https://personal.utdallas.edu/~fxc190007/courses/20S-7301/GAT-questions.pdf) on original graphs without using hyperedges/hierarchical information.                                                                                      |                   |                                  |                            |
+| GraphSage | [GraphSAGE](https://arxiv.org/abs/1706.02216) on original graphs without using hyperedges/hierarchical information.                                                                                                                                                |                   |                                  |                            |
+| HyperGCNs | [Hypergraph Convolution](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) only uses hyper edges to aggregate information |                   |                                  |                            |
+| HyperGAT  | [Hypergraph Attention](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) uses hyper edges to aggregate information        |                   |                                  |                            |
 
 # Data Specification
 
 we use the ```torch_geometric.data.Data``` to wrap the graphs with additional adjacency matrix for hyperedge representation.
 
-## Hyperedge representation
-The format of hyper edge follows the following [convention:](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) each node $v$ is mapped to a hyperedge $e$ $[v,e]$
-<details open>
-<summary><b>For example</b></summary>
-
->   In the hypergraph scenario
->     A graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ with
->     vertices $\mathcal{V} = \\{ 0, 1, 2, 3 \\}$ and
->     two hyperedges $\mathcal{E} = \\{ \\{ 0, 1, 2 \\}, \\{ 1, 2, 3 \\} \\}$,
->     the `hyperedge_index` is represented as:
-
->Example:
->```
->hyperedge_index = torch.tensor([[0, 1, 2, 1, 2, 3],
->                                 [0, 0, 0, 1, 1, 1]])
->```
-</details>
-
-## Data
-The graphs are wrapped with ```torch_geometric.data.Data```.
-
-<details open>
+<details close>
 <summary><b> Specification </b></summary>
 
 > ```x:``` the node embedding
@@ -56,29 +60,23 @@ The graphs are wrapped with ```torch_geometric.data.Data```.
 >```
 </details>
 
+## Hyperedge representation
+The format of hyper edge follows the following [convention:](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) each node $v$ is mapped to a hyperedge $e$ $[v,e]$
+<details open>
+<summary><b>For example</b></summary>
 
+>   In the hypergraph scenario
+>     A graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ with
+>     vertices $\mathcal{V} = \\{ 0, 1, 2, 3 \\}$ and
+>     two hyperedges $\mathcal{E} = \\{ \\{ 0, 1, 2 \\}, \\{ 1, 2, 3 \\} \\}$,
+>     the `hyperedge_index` is represented as:
 
-# Benchmarks
-## Gene regulatory networks
-10 gene regulatory networks for tissues and diseases are selected and preprocessed from [GRAND: a database of gene regulatory network models across human conditions](https://grand.networkmedicine.org). The hypergraphs are constructed by connecting nearby genes in the chromosone with hyper edges. Each node represets a gene, the node embedding of 340 is created using [k-mer analysis](https://en.wikipedia.org/wiki/K-mer). In this analysis, all possible k-mers with k values ranging from 1 to 4 are enumerated, and the counts of these k-mers serve as the elements of the feature vector.
-## Social Networks
-There are 8 social networks derived from the Facebook pages, GitHub developers, and Twitch gamers in the ["Multi-scale Attributed Node Embedding" (MUSAE)](https://arxiv.org/abs/1909.13021) paper. The hypergraphs are mutually connected sub-groups that contain at least 3 nodes (i.e., maximal cliques with sizes of at least 3). Each dataset has an option to use either the raw node features, or the preprocessed node embeddings as introduced in the MUSAE paper.
-
-## Wikipedia Networks
-There are 3 English Wikipedia page-page networks on specific topics (chameleons, crocodiles and squirrels) collected in December 2018, based on the ["Multi-scale Attributed Node Embedding" (MUSAE)](https://arxiv.org/abs/1909.13021) paper. The hypergraphs are mutually connected page groups that contain at least 3 pages (i.e., maximal cliques with sizes of at least 3). Each dataset has an option to use either the raw node features, or the preprocessed node embeddings as introduced in the MUSAE paper.
-
-## Amazon Reviews
-
-# Evaluated Algorithms
-## Node Classification
-
-| Model     | Description                                                                                                                                                                                                                                                        | Accuracy on Grand | Accuracy on Social Media Network | Accuracy on Amazon Reviews |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|----------------------------------|----------------------------|
-| GCNs      | [Graph Convulutional Networks](https://arxiv.org/abs/1609.02907) on original graphs without using hyperedges/hierarchical information.                                                                                                                             |                   |                                  |                            |
-| GAT       | [Graph Attention Networks](https://personal.utdallas.edu/~fxc190007/courses/20S-7301/GAT-questions.pdf) on original graphs without using hyperedges/hierarchical information.                                                                                      |                   |                                  |                            |
-| GraphSage | [GraphSAGE](https://arxiv.org/abs/1706.02216) on original graphs without using hyperedges/hierarchical information.                                                                                                                                                |                   |                                  |                            |
-| HyperGCNs | [Hypergraph Convolution](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) only uses hyper edges to aggregate information |                   |                                  |                            |
-| HyperGAT  | [Hypergraph Attention](https://arxiv.org/abs/1901.08150)[ (link)](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.HypergraphConv.html#torch_geometric.nn.conv.HypergraphConv) uses hyper edges to aggregate information        |                   |                                  |                            |
+>Example:
+>```
+>hyperedge_index = torch.tensor([[0, 1, 2, 1, 2, 3],
+>                                 [0, 0, 0, 1, 1, 1]])
+>```
+</details>
 
 
 # Training
