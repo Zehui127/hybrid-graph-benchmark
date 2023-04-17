@@ -84,19 +84,32 @@ There are 3 English Wikipedia page-page networks on specific topics (chameleons,
 # Training
 The training workflow is written in pytorch lightning, the new models can be added in the ```hybrid_graph/models/gnn``` and register you model in ```hybrid_graph/models/gnn/__init__.py```.
 
-Currrent traing works for all datasets with gcn and sage mdoels:
+Training works for the following datasets with gcn and sage mdoels:
 ```
 python hg.py train grand_ArteryAorta gcn
 python hg.py train grand_Breast sage
+python hg.py train grand_Vagina sage
+python hg.py train grand_Artery_Coronary sage
+python hg.py train grand_Colon_adenocarcinoma sage
+python hg.py train grand_Sarcoma sage
+python hg.py train grand_Liver sage
+python hg.py train grand_Tibial_Nerve sage
+python hg.py train grand_Kidney_renal_papillary_cell_carcinoma sage
+python hg.py train grand_Spleen sage
+
 python hg.py train musae_Twitch_ES gcn
 python hg.py train musae_Twitch_FR sage
+python hg.py train musae_Twitch_DE sage
+python hg.py train musae_Twitch_EN sage
+python hg.py train musae_Twitch_PT sage
+python hg.py train musae_Twitch_RU sage
 python hg.py train musae_Facebook gcn
 python hg.py train musae_Facebook sage
 python hg.py train musae_Github gcn
 python hg.py train musae_Github sage
 ```
 
-for eval
+For eval
 ```
 # ./lightning_logs/... should the path where the checkpoints are saved
 python hg.py eval grand_ArteryAorta gcn --load ./lightning_logs/...
