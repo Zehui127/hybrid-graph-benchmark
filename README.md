@@ -36,11 +36,14 @@ The graphs are wrapped with ```torch_geometric.data.Data```.
 <summary><b> Specification </b></summary>
 
 > ```x:``` the node embedding
+>
+> ```edge_index:``` the edge_index of graph
+>
 > ```y:``` the classes of y
-> ```adj:``` the edge_index of graph
-> ```sparse_adj:``` the sparse format of edge_index
+>
 > ```hyperedge_index:``` the hyperedge index of the graph
-> ```sparse_hyperedge_index:``` the sparse format of hyperedge index
+>
+> ```num_hyperedges:``` the number of hyperedges
 
 >Example:
 >```
