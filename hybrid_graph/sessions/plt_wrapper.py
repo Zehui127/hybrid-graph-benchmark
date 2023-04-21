@@ -25,9 +25,9 @@ class ModelWrapper(pl.LightningModule):
             self.val_acc = MeanAbsoluteError()
             self.test_acc = MeanAbsoluteError()
         else:
-            self.train_acc = Accuracy(task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
-            self.val_acc = Accuracy(task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
-            self.test_acc = Accuracy(task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
+            self.train_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
+            self.val_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
+            self.test_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
             self.loss = torch.nn.CrossEntropyLoss()
         self.epochs = epochs
         self.optimizer = optimizer

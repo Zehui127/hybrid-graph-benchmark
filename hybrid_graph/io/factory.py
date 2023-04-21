@@ -236,7 +236,7 @@ DATASET_INFO = {
         'info':{
             'original_mask': False,
             'num_node_features': 128,
-            'num_classes': 2,
+            'num_classes': 4,
             'is_regression': False,
         }
     },
@@ -352,7 +352,6 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         print(
             f"Search with a partition of {train_mask.sum()} train data, "
             f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
-        print(dataset,train_mask.shape,eval_mask.shape,test_mask.shape)
         # for single graph the masks is of no use
         print(dataset_info)
         return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
