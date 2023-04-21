@@ -105,6 +105,9 @@ python hg.py train musae_Facebook gcn
 python hg.py train musae_Facebook sage
 python hg.py train musae_Github gcn
 python hg.py train musae_Github sage
+python hg.py train musae_Wiki_chameleon sage
+python hg.py train musae_Wiki_crocodile sage
+python hg.py train musae_Wiki_squirrel sage
 ```
 
 For eval
