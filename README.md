@@ -87,12 +87,12 @@ Training works for the following datasets with gcn and sage mdoels:
 python hg.py train grand_ArteryAorta gcn
 python hg.py train grand_Breast sage
 python hg.py train grand_Vagina sage
-python hg.py train grand_Artery_Coronary sage
-python hg.py train grand_Colon_adenocarcinoma sage
+python hg.py train grand_ArteryCoronary sage
+python hg.py train grand_ColonAdenocarcinoma sage
 python hg.py train grand_Sarcoma sage
 python hg.py train grand_Liver sage
 python hg.py train grand_Tibial_Nerve sage
-python hg.py train grand_Kidney_renal_papillary_cell_carcinoma sage
+python hg.py train grand_KidneyCarcinoma sage
 python hg.py train grand_Spleen sage
 
 python hg.py train musae_Twitch_ES gcn
