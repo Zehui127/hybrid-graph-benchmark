@@ -2,6 +2,7 @@ import pytorch_lightning as pl
 import torch
 import numpy as np
 from torchmetrics.functional import accuracy
+from torchmetrics import MeanAbsoluteError, Accuracy
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
 
@@ -18,7 +19,16 @@ class ModelWrapper(pl.LightningModule):
         super().__init__()
         self.model = model
         self.learning_rate = learning_rate
-        self.loss = torch.nn.CrossEntropyLoss()
+        if dataset_info["is_regression"]:
+            self.loss = torch.nn.MSELoss()
+            self.train_acc = MeanAbsoluteError()
+            self.val_acc = MeanAbsoluteError()
+            self.test_acc = MeanAbsoluteError()
+        else:
+            self.train_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
+            self.val_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
+            self.test_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
+            self.loss = torch.nn.CrossEntropyLoss()
         self.epochs = epochs
         self.optimizer = optimizer
         self.train_losses = []
@@ -33,7 +43,8 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.train_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
+        #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.train_acc(y_hat[mask], y[mask])
+        acc = self.train_acc(y_hat[mask], y[mask])
         # loss
         self.log_dict(
             {"loss": loss},
@@ -49,7 +60,8 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.val_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
+        #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.val_acc(y_hat[mask], y[mask])
+        acc = self.val_acc(y_hat[mask], y[mask])
         # val_loss
         self.log_dict(
             {"val_loss": loss},
@@ -65,7 +77,8 @@ class ModelWrapper(pl.LightningModule):
         mask = batch.test_mask
         y_hat = self.forward(x)
         loss = self.loss(y_hat[mask], y[mask])
-        acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"])
+        #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.test_acc(y_hat[mask], y[mask])
+        acc = self.test_acc(y_hat[mask], y[mask])
         # val_loss
         self.log_dict(
             {"test_loss": loss},

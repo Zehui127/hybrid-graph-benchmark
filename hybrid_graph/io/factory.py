@@ -33,6 +33,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
 
     },
@@ -45,6 +46,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
 
     },
@@ -57,6 +59,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_ArteryCoronary': {
@@ -68,6 +71,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_ColonAdenocarcinoma': {
@@ -79,6 +83,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_Sarcoma': {
@@ -90,6 +95,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_Liver': {
@@ -101,6 +107,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_TibialNerve': {
@@ -112,6 +119,7 @@ DATASET_INFO = {
                 'original_mask': False,
                 'num_node_features': 340,
                 'num_classes': 3,
+                'is_regression': False,
                }
     },
     'grand_KidneyCarcinoma': {
@@ -123,6 +131,7 @@ DATASET_INFO = {
             'original_mask': False,
              'num_node_features': 340,
              'num_classes': 3,
+             'is_regression': False,
                }
     },
     'grand_Spleen': {
@@ -134,6 +143,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 340,
             'num_classes': 3,
+            'is_regression': False,
                }
     },
     'musae_Twitch_DE':{
@@ -145,6 +155,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_EN':{
@@ -156,6 +167,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
      'musae_Twitch_ES':{
@@ -167,6 +179,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
         'musae_Twitch_FR':{
@@ -178,6 +191,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_PT':{
@@ -189,6 +203,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
      'musae_Twitch_RU':{
@@ -200,6 +215,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Facebook':{
@@ -210,6 +226,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
+            'is_regression': False,
         }
     },
     'musae_Github':{
@@ -219,7 +236,41 @@ DATASET_INFO = {
         'info':{
             'original_mask': False,
             'num_node_features': 128,
-            'num_classes': 2,
+            'num_classes': 4,
+            'is_regression': False,
+        }
+    },
+    'musae_Wiki_chameleon':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'chameleon',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
+        }
+    },
+    'musae_Wiki_crocodile':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'crocodile',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
+        }
+    },
+    'musae_Wiki_squirrel':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'squirrel',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
         }
     },
 
@@ -301,7 +352,6 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         print(
             f"Search with a partition of {train_mask.sum()} train data, "
             f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
-        print(dataset,train_mask.shape,eval_mask.shape,test_mask.shape)
         # for single graph the masks is of no use
         print(dataset_info)
         return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
