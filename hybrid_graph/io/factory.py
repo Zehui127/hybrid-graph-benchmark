@@ -446,5 +446,87 @@ def random_node_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedge
     return data
 
 
-def hyperedge_split(data, train_ratio=0.6, val_ratio=0.2):
-    pass
+def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
+    # Split the dataset by sampling hyperedges and putting all nodes
+    # within the sampled hyperedges in the same split dataset.
+    # WARNING: THIS ONLY WORKS IN THEORY. DO NOT USE.
+    num_nodes = data.num_nodes
+    num_hyperedges = data.num_hyperedges
+    hyperedge_index = data.hyperedge_index
+
+    num_train_expected = int(train_ratio * num_nodes)
+    num_val_expected = int(val_ratio * num_nodes)
+
+    train_mask = torch.zeros(num_nodes)
+    val_mask = torch.zeros(num_nodes)
+    test_mask = torch.ones(num_nodes)
+    train_hyperedge_mask = torch.zeros(num_hyperedges)
+    val_hyperedge_mask = torch.zeros(num_hyperedges)
+    test_hyperedge_mask = torch.zeros(num_hyperedges)
+    train_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+    val_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+    test_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+
+    # Sample hyperedges into the training set until it contains at least num_train_expected nodes
+    perm = torch.randperm(num_hyperedges)
+    i = 0
+    while int(torch.sum(train_mask)) <= num_train_expected:
+        sample = perm[i]
+        train_hyperedge_mask[sample] = 1
+        train_mask[hyperedge_index[0, hyperedge_index[1, :] == sample]] = 1
+        i += 1
+
+    # Remove hyperedges containing nodes in the traning set from the remaining hyperedges
+    # WARNING: THIS MAY NOT LEAVE ENOUGH HYPEREDGES FOR THE REMAINING SPLITS, OR EVEN
+    # REMOVE ALL REMAINING HYPEREDGES.
+    perm = perm[i:]
+    train_joint_hyperedges = hyperedge_index[1, train_mask[hyperedge_index[0, :]] == 1].unique()
+    train_joint_hyperedge_mask[train_joint_hyperedges] = 1
+    perm = perm[~torch.isin(perm, train_joint_hyperedges)]
+    assert perm.numel() > 0
+
+    # Sample hyperedges into the validation set until the combination of training and validation sets
+    # contain at least num_train_expected + num_val_expected nodes, or all remaining hyperedges
+    # have been sampled.
+    num_train_actual = int(torch.sum(train_mask))
+    i = 0
+    while num_train_actual + int(torch.sum(val_mask)) <= num_train_expected + num_val_expected \
+            or i == perm.numel():
+        sample = perm[i]
+        val_hyperedge_mask[sample] = 1
+        val_mask[hyperedge_index[1, :] == sample] = 1
+        i += 1
+
+    # Remove hyperedges containing nodes in the validation set from the remaining hyperedges
+    # WARNING: THIS MAY NOT LEAVE ENOUGH HYPEREDGES FOR THE TEST SET, OR EVEN
+    # REMOVE ALL REMAINING HYPEREDGES.
+    perm = perm[i:]
+    assert perm.numel() > 0
+    val_joint_hyperedges = hyperedge_index[1, val_mask[hyperedge_index[0, :]] == 1].unique()
+    val_joint_hyperedge_mask[val_joint_hyperedges] = 1
+    perm = perm[~torch.isin(perm, val_joint_hyperedges)]
+    assert perm.numel() > 0
+
+    # Put all remaining nodes into the test set, and find corresponding hyperedges
+    test_mask[train_mask == 1] = 0
+    test_mask[val_mask == 1] = 0
+    test_joint_hyperedges = hyperedge_index[1, test_mask[hyperedge_index[0, :]] == 1].unique()
+    test_joint_hyperedge_mask[test_joint_hyperedges] = 1
+    test_hyperedge_mask[test_joint_hyperedges] = 1
+    test_hyperedge_mask[train_hyperedge_mask == 1] = 0
+    test_hyperedge_mask[val_hyperedge_mask == 1] = 0
+
+    # output masks
+    data.train_mask = train_mask.type(torch.bool)
+    data.val_mask = val_mask.type(torch.bool)
+    data.test_mask = test_mask.type(torch.bool)
+    if keep_joint_hyperedges:
+        data.train_hyperedge_mask = train_joint_hyperedge_mask.type(torch.bool)
+        data.val_hyperedge_mask = val_joint_hyperedge_mask.type(torch.bool)
+        data.test_hyperedge_mask = test_joint_hyperedge_mask.type(torch.bool)
+    else:
+        data.train_hyperedge_mask = train_hyperedge_mask.type(torch.bool)
+        data.val_hyperedge_mask = val_hyperedge_mask.type(torch.bool)
+        data.test_hyperedge_mask = test_hyperedge_mask.type(torch.bool)
+    return data
+
