@@ -24,6 +24,11 @@ class ModelWrapper(pl.LightningModule):
             self.train_acc = MeanAbsoluteError()
             self.val_acc = MeanAbsoluteError()
             self.test_acc = MeanAbsoluteError()
+        elif dataset_info["is_edge_pred"]:
+            self.loss = torch.nn.BCEWithLogitsLoss()
+            self.train_acc = Accuracy(task='binary')
+            self.val_acc = Accuracy(task='binary')
+            self.test_acc = Accuracy(task='binary')
         else:
             self.train_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
             self.val_acc = Accuracy(task='multiclass',top_k=1,num_classes=dataset_info["num_classes"])
@@ -35,16 +40,18 @@ class ModelWrapper(pl.LightningModule):
         self.val_losses = []
         self.dataset_info = dataset_info
 
-    def forward(self, x):
-        return self.model(x)
+    def forward(self, x, *args, **kwargs):
+        return self.model(x, args, kwargs)
 
     def training_step(self, batch, batch_idx):
         x, y = batch, batch.y
+        y = batch.train_label.float() if self.dataset_info["is_edge_pred"] else y
         mask = batch.train_mask
-        y_hat = self.forward(x)
-        loss = self.loss(y_hat[mask], y[mask])
+        args = [batch.train_edge_index, batch.train_edge_label_index] if self.dataset_info["is_edge_pred"] else []
+        y_hat = self.forward(x,*args)
+        loss = self.loss(y_hat,y) if self.dataset_info["is_edge_pred"] else self.loss(y_hat[mask], y[mask])
         #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.train_acc(y_hat[mask], y[mask])
-        acc = self.train_acc(y_hat[mask], y[mask])
+        acc = self.train_acc(y_hat, y) if self.dataset_info["is_edge_pred"] else self.train_acc(y_hat[mask], y[mask])
         # loss
         self.log_dict(
             {"loss": loss},
@@ -57,11 +64,14 @@ class ModelWrapper(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         x, y = batch, batch.y
+        y = batch.val_label.float() if self.dataset_info["is_edge_pred"] else y
         mask = batch.val_mask
-        y_hat = self.forward(x)
-        loss = self.loss(y_hat[mask], y[mask])
+        args = [batch.val_edge_index, batch.val_edge_label_index] if self.dataset_info["is_edge_pred"] else []
+        y_hat = self.forward(x,*args)
+        #print(f"y_hat shape: {y_hat.shape}; y shape: {y.shape}")
+        loss = self.loss(y_hat,y) if self.dataset_info["is_edge_pred"] else self.loss(y_hat[mask], y[mask])
         #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.val_acc(y_hat[mask], y[mask])
-        acc = self.val_acc(y_hat[mask], y[mask])
+        acc = self.train_acc(y_hat, y) if self.dataset_info["is_edge_pred"] else self.train_acc(y_hat[mask], y[mask])
         # val_loss
         self.log_dict(
             {"val_loss": loss},
@@ -74,11 +84,13 @@ class ModelWrapper(pl.LightningModule):
 
     def test_step(self, batch, batch_idx):
         x, y = batch, batch.y
+        y = batch.test_label.float() if self.dataset_info["is_edge_pred"] else y
         mask = batch.test_mask
-        y_hat = self.forward(x)
-        loss = self.loss(y_hat[mask], y[mask])
+        args = [batch.test_edge_index, batch.test_edge_label_index] if self.dataset_info["is_edge_pred"] else []
+        y_hat = self.forward(x,*args)
+        loss = self.loss(y_hat,y) if self.dataset_info["is_edge_pred"] else self.loss(y_hat[mask], y[mask])
         #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.test_acc(y_hat[mask], y[mask])
-        acc = self.test_acc(y_hat[mask], y[mask])
+        acc = self.train_acc(y_hat, y) if self.dataset_info["is_edge_pred"] else self.train_acc(y_hat[mask], y[mask])
         # val_loss
         self.log_dict(
             {"test_loss": loss},

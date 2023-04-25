@@ -34,6 +34,7 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+                'is_edge_pred': True,
                }
 
     },
@@ -156,6 +157,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': True,
         }
     },
     'musae_Twitch_EN':{
@@ -339,6 +341,8 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
     if single_graph:
         original_mask = dataset_info.pop('original_mask')
         Loader = functools.partial(DataLoader, **kwargs)
+        if dataset_info['is_edge_pred']:
+            dataset = create_edge_label(dataset)
         dataset, masks = mask_split(dataset, original_mask)
         # take one sample mask out
         train_mask, eval_mask, test_mask = masks[0]
@@ -346,6 +350,7 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         dataset.train_mask = train_mask
         dataset.val_mask = eval_mask
         dataset.test_mask = test_mask
+        print(dataset)
         # dataloader requires a list of dataset
         dataset = [dataset]
         #logging.info(
@@ -419,20 +424,43 @@ def mask_split(
     return dataset, masks
 
 def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
-        # Convert to undirected graph
-        edge_index = utils.to_undirected(data.edge_index)
-
+        edge_index = data.edge_index
         num_edges = edge_index.size(1)
         num_train = int(train_ratio * num_edges)
         num_val = int(val_ratio * num_edges)
-
         perm = torch.randperm(num_edges)
         train_edges = edge_index[:, perm[:num_train]]
         val_edges = edge_index[:, perm[num_train:num_train + num_val]]
         test_edges = edge_index[:, perm[num_train + num_val:]]
+        return train_edges, val_edges, test_edges
 
-        data.train_pos_edge_index = train_edges
-        data.val_pos_edge_index = val_edges
-        data.test_pos_edge_index = test_edges
+def create_edge_label(datasets,train_ratio=0.6, val_ratio=0.2):
+        r"""This is used for edge prediction tasks
+        Creates edge labels :obj:`data.edge_label` based on node labels
+        :obj:`data.y`.
 
-        return data
+        Args:
+            data (torch_geometric.data.Data): The graph data object.
+
+        :rtype: :class:`torch_geometric.data.Data`
+        """
+        def edge_label(data):
+            # we split the edge_index with all mode
+            # get the edge index for train_message_ps = eval_mp,
+            # train_supervision + eval_supervision + test_supervision = whole graph
+            # test_mp = train_supervision + eval_supervision
+            train_pos_edge_index, val_pos_edge_index, test_pos_edge_index  = random_edge_split(data,train_ratio, val_ratio)
+            data.train_edge_index = data.val_edge_index = train_pos_edge_index
+            data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
+            data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
+            data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
+            data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
+            return data
+        def helper(edge_index):
+            neg_edge_index = utils.negative_sampling(edge_index)
+            # create edge_label
+            pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
+            neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
+            edge_label = torch.cat([pos_label, neg_label], dim=0)
+            return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
+        return [edge_label(data) for data in datasets]
