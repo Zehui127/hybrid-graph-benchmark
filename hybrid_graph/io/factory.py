@@ -17,7 +17,7 @@ import pathlib
 torch.multiprocessing.set_sharing_strategy('file_system')
 
 # Add the dataset directory to sys.path
-dataset_dir = os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(),'datasets')
+dataset_dir = os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(), 'datasets')
 if dataset_dir not in sys.path:
     sys.path.append(dataset_dir)
 
@@ -147,12 +147,12 @@ DATASET_INFO = {
             'is_regression': False,
                }
     },
-    'musae_Twitch_DE':{
+    'musae_Twitch_DE': {
         'type': 'Twitch',
         'name': 'DE',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
@@ -160,82 +160,82 @@ DATASET_INFO = {
             'is_edge_pred': True,
         }
     },
-    'musae_Twitch_EN':{
+    'musae_Twitch_EN': {
         'type': 'Twitch',
         'name': 'EN',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
         }
     },
-     'musae_Twitch_ES':{
+    'musae_Twitch_ES': {
         'type': 'Twitch',
         'name': 'ES',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
         }
     },
-        'musae_Twitch_FR':{
+    'musae_Twitch_FR': {
         'type': 'Twitch',
         'name': 'FR',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
         }
     },
-    'musae_Twitch_PT':{
+    'musae_Twitch_PT': {
         'type': 'Twitch',
         'name': 'PT',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
         }
     },
-     'musae_Twitch_RU':{
+    'musae_Twitch_RU': {
         'type': 'Twitch',
         'name': 'RU',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
         }
     },
-    'musae_Facebook':{
+    'musae_Facebook': {
         'type': 'Facebook',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
         }
     },
-    'musae_Github':{
+    'musae_Github': {
         'type': 'GitHub',
         'root': 'data/musae',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
@@ -276,11 +276,12 @@ DATASET_INFO = {
         }
     },
 
-    'amazon':{
+    'amazon': {
         'type': 'Amazon-place-holder',
         'name': 'place-holder'
     }
 }
+
 
 class DataLoader(torch_geometric.loader.DataLoader):
     pin_memory = True
@@ -297,14 +298,15 @@ class DataLoader(torch_geometric.loader.DataLoader):
         self.masks = masks
         self.onehot = onehot
         self.workers = workers
-        #TODO sampler is potentially needed
+        # TODO sampler is potentially needed
         # self.sampler = None
         # self.batch_sampler = None
 
     @staticmethod
     def worker_init(x):
         signal.signal(signal.SIGINT, signal.SIG_IGN)
-    #TODO implemetn hyper-graph partition
+
+    # TODO implement hyper-graph partition
     def __iter__(self):
         if self.single_graph:
             for i, item in enumerate(super().__iter__()):
@@ -313,6 +315,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
             if self.onehot:
                 item.y = torch.argmax(item.y, dim=1)
             yield (item.to(device), None)
+
 
 def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
     # fix random seeds
@@ -353,7 +356,7 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         print(dataset)
         # dataloader requires a list of dataset
         dataset = [dataset]
-        #logging.info(
+        # logging.info(
         print(
             f"Search with a partition of {train_mask.sum()} train data, "
             f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
@@ -386,9 +389,9 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         info)
     """
 
-def mask_split(
-        dataset, original_mask=True,
-        train_portion=0.6, eval_portion=0.2, test_portion=0.2):
+
+def mask_split(dataset, original_mask=True,
+               train_portion=0.6, eval_portion=0.2, test_portion=0.2):
     # re split to the train, eval and test mask to 60:20:20
     # only suppose to work with cora
     masks = []
@@ -422,6 +425,146 @@ def mask_split(
 
         masks.append((train_mask, val_mask, test_mask))
     return dataset, masks
+
+
+
+def random_node_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
+    num_nodes = data.num_nodes
+    num_train = int(train_ratio * num_nodes)
+    num_val = int(val_ratio * num_nodes)
+
+    train_mask = torch.zeros(num_nodes)
+    val_mask = torch.zeros(num_nodes)
+    test_mask = torch.zeros(num_nodes)
+
+    perm = torch.randperm(num_nodes)
+    train_mask[perm[:num_train]] = 1
+    val_mask[perm[num_train:num_train + num_val]] = 1
+    test_mask[perm[num_train + num_val:]] = 1
+
+    data.train_mask = train_mask.type(torch.bool)
+    data.val_mask = val_mask.type(torch.bool)
+    data.test_mask = test_mask.type(torch.bool)
+
+    if keep_joint_hyperedges:
+        # If keep_joint_hyperedges is set to True, then a hyperedge is included in a split dataset
+        # as long as it contains a node in that split dataset.
+        data.train_hyperedge_index = data.hyperedge_index[:, data.train_mask[data.hyperedge_index[0, :]]]
+        data.val_hyperedge_index = data.hyperedge_index[:, data.val_mask[data.hyperedge_index[0, :]]]
+        data.test_hyperedge_index = data.hyperedge_index[:, data.test_mask[data.hyperedge_index[0, :]]]
+        data.num_train_hyperedges = data.train_hyperedge_index[1].unique().numel()
+        data.num_val_hyperedges = data.val_hyperedge_index[1].unique().numel()
+        data.num_test_hyperedges = data.test_hyperedge_index[1].unique().numel()
+    else:
+        # If keep_joint_hyperedges is set to False, then a hyperedge is included in a split dataset
+        # only if every node in that hyperedge belong to that split dataset. This would drastically
+        # reduce the number of total hyperedges in all splits.
+        hyperedge_index = data.hyperedge_index
+        train_node_in_hyperedge_mask = torch.isin(hyperedge_index[0, :], perm[:num_train])
+        val_node_in_hyperedge_mask = torch.isin(hyperedge_index[0, :], perm[num_train:num_train + num_val])
+        test_node_in_hyperedge_mask = torch.isin(hyperedge_index[0, :], perm[num_train + num_val:])
+
+        train_hyperedge_to_exclude_mask = hyperedge_index[1, ~train_node_in_hyperedge_mask].unique()
+        val_hyperedge_to_exclude_mask = hyperedge_index[1, ~val_node_in_hyperedge_mask].unique()
+        test_hyperedge_to_exclude_mask = hyperedge_index[1, ~test_node_in_hyperedge_mask].unique()
+
+        train_hyperedge_mask = ~torch.isin(hyperedge_index[1, :], train_hyperedge_to_exclude_mask)
+        val_hyperedge_mask = ~torch.isin(hyperedge_index[1, :], val_hyperedge_to_exclude_mask)
+        test_hyperedge_mask = ~torch.isin(hyperedge_index[1, :], test_hyperedge_to_exclude_mask)
+
+        data.train_hyperedge_index = hyperedge_index[:, train_hyperedge_mask]
+        data.val_hyperedge_index = hyperedge_index[:, val_hyperedge_mask]
+        data.test_hyperedge_index = hyperedge_index[:, test_hyperedge_mask]
+        data.num_train_hyperedges = data.num_hyperedges - train_hyperedge_to_exclude_mask.numel()
+        data.num_val_hyperedges = data.num_hyperedges - val_hyperedge_to_exclude_mask.numel()
+        data.num_test_hyperedges = data.num_hyperedges - test_hyperedge_to_exclude_mask.numel()
+
+    return data
+
+
+def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
+    # Split the dataset by sampling hyperedges and putting all nodes
+    # within the sampled hyperedges in the same split dataset.
+    # WARNING: THIS ONLY WORKS IN THEORY. DO NOT USE.
+    num_nodes = data.num_nodes
+    num_hyperedges = data.num_hyperedges
+    hyperedge_index = data.hyperedge_index
+
+    num_train_expected = int(train_ratio * num_nodes)
+    num_val_expected = int(val_ratio * num_nodes)
+
+    train_mask = torch.zeros(num_nodes)
+    val_mask = torch.zeros(num_nodes)
+    test_mask = torch.ones(num_nodes)
+    train_hyperedge_mask = torch.zeros(num_hyperedges)
+    val_hyperedge_mask = torch.zeros(num_hyperedges)
+    test_hyperedge_mask = torch.zeros(num_hyperedges)
+    train_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+    val_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+    test_joint_hyperedge_mask = torch.zeros(num_hyperedges)
+
+    # Sample hyperedges into the training set until it contains at least num_train_expected nodes
+    perm = torch.randperm(num_hyperedges)
+    i = 0
+    while int(torch.sum(train_mask)) <= num_train_expected:
+        sample = perm[i]
+        train_hyperedge_mask[sample] = 1
+        train_mask[hyperedge_index[0, hyperedge_index[1, :] == sample]] = 1
+        i += 1
+
+    # Remove hyperedges containing nodes in the traning set from the remaining hyperedges
+    # WARNING: THIS MAY NOT LEAVE ENOUGH HYPEREDGES FOR THE REMAINING SPLITS, OR EVEN
+    # REMOVE ALL REMAINING HYPEREDGES.
+    perm = perm[i:]
+    train_joint_hyperedges = hyperedge_index[1, train_mask[hyperedge_index[0, :]] == 1].unique()
+    train_joint_hyperedge_mask[train_joint_hyperedges] = 1
+    perm = perm[~torch.isin(perm, train_joint_hyperedges)]
+    assert perm.numel() > 0
+
+    # Sample hyperedges into the validation set until the combination of training and validation sets
+    # contain at least num_train_expected + num_val_expected nodes, or all remaining hyperedges
+    # have been sampled.
+    num_train_actual = int(torch.sum(train_mask))
+    i = 0
+    while num_train_actual + int(torch.sum(val_mask)) <= num_train_expected + num_val_expected \
+            or i == perm.numel():
+        sample = perm[i]
+        val_hyperedge_mask[sample] = 1
+        val_mask[hyperedge_index[1, :] == sample] = 1
+        i += 1
+
+    # Remove hyperedges containing nodes in the validation set from the remaining hyperedges
+    # WARNING: THIS MAY NOT LEAVE ENOUGH HYPEREDGES FOR THE TEST SET, OR EVEN
+    # REMOVE ALL REMAINING HYPEREDGES.
+    perm = perm[i:]
+    assert perm.numel() > 0
+    val_joint_hyperedges = hyperedge_index[1, val_mask[hyperedge_index[0, :]] == 1].unique()
+    val_joint_hyperedge_mask[val_joint_hyperedges] = 1
+    perm = perm[~torch.isin(perm, val_joint_hyperedges)]
+    assert perm.numel() > 0
+
+    # Put all remaining nodes into the test set, and find corresponding hyperedges
+    test_mask[train_mask == 1] = 0
+    test_mask[val_mask == 1] = 0
+    test_joint_hyperedges = hyperedge_index[1, test_mask[hyperedge_index[0, :]] == 1].unique()
+    test_joint_hyperedge_mask[test_joint_hyperedges] = 1
+    test_hyperedge_mask[test_joint_hyperedges] = 1
+    test_hyperedge_mask[train_hyperedge_mask == 1] = 0
+    test_hyperedge_mask[val_hyperedge_mask == 1] = 0
+
+    # output masks
+    data.train_mask = train_mask.type(torch.bool)
+    data.val_mask = val_mask.type(torch.bool)
+    data.test_mask = test_mask.type(torch.bool)
+    if keep_joint_hyperedges:
+        data.train_hyperedge_mask = train_joint_hyperedge_mask.type(torch.bool)
+        data.val_hyperedge_mask = val_joint_hyperedge_mask.type(torch.bool)
+        data.test_hyperedge_mask = test_joint_hyperedge_mask.type(torch.bool)
+    else:
+        data.train_hyperedge_mask = train_hyperedge_mask.type(torch.bool)
+        data.val_hyperedge_mask = val_hyperedge_mask.type(torch.bool)
+        data.test_hyperedge_mask = test_hyperedge_mask.type(torch.bool)
+    return data
 
 def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
         edge_index = data.edge_index
