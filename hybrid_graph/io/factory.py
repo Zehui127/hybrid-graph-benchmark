@@ -29,11 +29,13 @@ DATASET_INFO = {
         'name': 'Artery_Aorta',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+                'is_edge_pred': True,
+               }
 
     },
     'grand_Breast': {
@@ -41,11 +43,12 @@ DATASET_INFO = {
         'name': 'Breast',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
 
     },
     'grand_Vagina': {
@@ -53,88 +56,96 @@ DATASET_INFO = {
         'name': 'Vagina',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_ArteryCoronary': {
         'type': 'Grand',
         'name': 'Artery_Coronary',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_ColonAdenocarcinoma': {
         'type': 'Grand',
         'name': 'Colon_adenocarcinoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_Sarcoma': {
         'type': 'Grand',
         'name': 'Sarcoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_Liver': {
         'type': 'Grand',
         'name': 'Liver',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_TibialNerve': {
         'type': 'Grand',
         'name': 'Tibial_Nerve',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+        'info':{
+                'original_mask': False,
+                'num_node_features': 340,
+                'num_classes': 3,
+                'is_regression': False,
+               }
     },
     'grand_KidneyCarcinoma': {
         'type': 'Grand',
         'name': 'Kidney_renal_papillary_cell_carcinoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
+        'info':{
             'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-        }
+             'num_node_features': 340,
+             'num_classes': 3,
+             'is_regression': False,
+               }
     },
     'grand_Spleen': {
         'type': 'Grand',
         'name': 'Spleen',
         'root': 'data/grand',
         'single_graph': True,
-        'info': {
+        'info':{
             'original_mask': False,
             'num_node_features': 340,
             'num_classes': 3,
-        }
+            'is_regression': False,
+               }
     },
     'musae_Twitch_DE': {
         'type': 'Twitch',
@@ -145,6 +156,8 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
+            'is_edge_pred': True,
         }
     },
     'musae_Twitch_EN': {
@@ -156,6 +169,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_ES': {
@@ -167,6 +181,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_FR': {
@@ -178,6 +193,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_PT': {
@@ -189,6 +205,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Twitch_RU': {
@@ -200,6 +217,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 2,
+            'is_regression': False,
         }
     },
     'musae_Facebook': {
@@ -210,6 +228,7 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
+            'is_regression': False,
         }
     },
     'musae_Github': {
@@ -219,7 +238,41 @@ DATASET_INFO = {
         'info': {
             'original_mask': False,
             'num_node_features': 128,
-            'num_classes': 2,
+            'num_classes': 4,
+            'is_regression': False,
+        }
+    },
+    'musae_Wiki_chameleon':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'chameleon',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
+        }
+    },
+    'musae_Wiki_crocodile':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'crocodile',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
+        }
+    },
+    'musae_Wiki_squirrel':{
+        'type': 'Wikipedia',
+        'root': 'data/musae',
+        'name':'squirrel',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'is_regression': True,
         }
     },
 
@@ -291,6 +344,8 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
     if single_graph:
         original_mask = dataset_info.pop('original_mask')
         Loader = functools.partial(DataLoader, **kwargs)
+        if dataset_info['is_edge_pred']:
+            dataset = create_edge_label(dataset)
         dataset, masks = mask_split(dataset, original_mask)
         # take one sample mask out
         train_mask, eval_mask, test_mask = masks[0]
@@ -298,13 +353,13 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
         dataset.train_mask = train_mask
         dataset.val_mask = eval_mask
         dataset.test_mask = test_mask
+        print(dataset)
         # dataloader requires a list of dataset
         dataset = [dataset]
         # logging.info(
         print(
             f"Search with a partition of {train_mask.sum()} train data, "
             f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
-        print(dataset, train_mask.shape, eval_mask.shape, test_mask.shape)
         # for single graph the masks is of no use
         print(dataset_info)
         return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
@@ -371,25 +426,6 @@ def mask_split(dataset, original_mask=True,
         masks.append((train_mask, val_mask, test_mask))
     return dataset, masks
 
-
-def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
-    # Convert to undirected graph
-    edge_index = utils.to_undirected(data.edge_index)
-
-    num_edges = edge_index.size(1)
-    num_train = int(train_ratio * num_edges)
-    num_val = int(val_ratio * num_edges)
-
-    perm = torch.randperm(num_edges)
-    train_edges = edge_index[:, perm[:num_train]]
-    val_edges = edge_index[:, perm[num_train:num_train + num_val]]
-    test_edges = edge_index[:, perm[num_train + num_val:]]
-
-    data.train_pos_edge_index = train_edges
-    data.val_pos_edge_index = val_edges
-    data.test_pos_edge_index = test_edges
-
-    return data
 
 
 def random_node_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
@@ -530,3 +566,44 @@ def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hype
         data.test_hyperedge_mask = test_hyperedge_mask.type(torch.bool)
     return data
 
+def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
+        edge_index = data.edge_index
+        num_edges = edge_index.size(1)
+        num_train = int(train_ratio * num_edges)
+        num_val = int(val_ratio * num_edges)
+        perm = torch.randperm(num_edges)
+        train_edges = edge_index[:, perm[:num_train]]
+        val_edges = edge_index[:, perm[num_train:num_train + num_val]]
+        test_edges = edge_index[:, perm[num_train + num_val:]]
+        return train_edges, val_edges, test_edges
+
+def create_edge_label(datasets,train_ratio=0.6, val_ratio=0.2):
+        r"""This is used for edge prediction tasks
+        Creates edge labels :obj:`data.edge_label` based on node labels
+        :obj:`data.y`.
+
+        Args:
+            data (torch_geometric.data.Data): The graph data object.
+
+        :rtype: :class:`torch_geometric.data.Data`
+        """
+        def edge_label(data):
+            # we split the edge_index with all mode
+            # get the edge index for train_message_ps = eval_mp,
+            # train_supervision + eval_supervision + test_supervision = whole graph
+            # test_mp = train_supervision + eval_supervision
+            train_pos_edge_index, val_pos_edge_index, test_pos_edge_index  = random_edge_split(data,train_ratio, val_ratio)
+            data.train_edge_index = data.val_edge_index = train_pos_edge_index
+            data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
+            data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
+            data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
+            data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
+            return data
+        def helper(edge_index):
+            neg_edge_index = utils.negative_sampling(edge_index)
+            # create edge_label
+            pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
+            neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
+            edge_label = torch.cat([pos_label, neg_label], dim=0)
+            return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
+        return [edge_label(data) for data in datasets]

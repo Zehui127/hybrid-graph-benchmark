@@ -150,3 +150,5 @@ data
 data/
 
 /lightning_logs
+/checkpoints
+slurm*
