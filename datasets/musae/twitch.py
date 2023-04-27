@@ -80,7 +80,7 @@ class Twitch(InMemoryDataset):
           - 2
     """
 
-    url = 'https://drive.google.com/uc?export=download&id={}'
+    url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
     file_id = {
         'DE': '148A6DhddSz2qeWnlHwyTBJl8eLkhoPzv',
         'EN': '1vb8KrwvZvBHdT_dll6oe62HNk0EQfSOb',

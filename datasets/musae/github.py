@@ -46,7 +46,7 @@ class GitHub(InMemoryDataset):
     """
 
     url_data = 'https://graphmining.ai/datasets/ptg/github.npz'
-    url_preprocessed = 'https://drive.google.com/uc?export=download&id=1XfPUyxriHBI0s6UQeQ34BDnqdaQvKR7l'
+    url_preprocessed = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1XfPUyxriHBI0s6UQeQ34BDnqdaQvKR7l'
 
     NUM_HYPEREDGES = 223672
 
