@@ -2,7 +2,7 @@ import subprocess
 import argparse
 import itertools
 
-Models = ['gcn','sage','gat','gatv2','hybrid-gcn','hybrid-sage','hyper-gcn','hyper-gat']
+Models = ['gcn','sage','gat','gatv2','hyper-gcn','hyper-gat'] # 'hybrid-gcn','hybrid-sage' have to be used with graph sampling
 Datasets = ["grand_ArteryAorta","grand_Breast","grand_Vagina",
             "grand_ArteryCoronary","grand_ColonAdenocarcinoma",
             "grand_Sarcoma","grand_Liver","grand_TibialNerve",
@@ -11,6 +11,7 @@ Datasets = ["grand_ArteryAorta","grand_Breast","grand_Vagina",
             "musae_Twitch_EN","musae_Twitch_PT","musae_Twitch_RU",
             "musae_Facebook","musae_Github","musae_Wiki_chameleon",
             "musae_Wiki_crocodile","musae_Wiki_squirrel"]
+# the total number of experiment: model num * datasets num * task type = 6 (+4) * 19 * 2
 
 def run_train(*args):
     content = ['python', 'hg.py', 'train']
