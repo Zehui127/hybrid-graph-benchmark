@@ -240,6 +240,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
+            'is_edge_pred': False,
         }
     },
     'musae_Wiki_chameleon':{

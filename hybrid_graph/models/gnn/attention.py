@@ -9,8 +9,8 @@ class Residual(nn.Module):
         super().__init__()
         self.fn = fn
 
-    def forward(self, x, **kwargs):
-        return self.fn(x, **kwargs) + x
+    def forward(self, x, *args):
+        return self.fn(x, *args) + x
 
 
 class MultiHeadAttention(nn.Module):
@@ -67,7 +67,7 @@ class AttentionLayer(nn.Module):
     def __init__(self, dim, num_heads, attn_dropout, dropout):
         super().__init__()
         self.norm = nn.LayerNorm(dim)
-        self.mha = MultiHeadAttention(dim, num_heads=num_heads, dropout_rate=attn_dropout)
+        self.mha = MultiHeadAttention(dim, num_heads=num_heads, attn_dropout=attn_dropout)
         self.dropout = nn.Dropout(dropout)
         self.norm_hyper = nn.LayerNorm(dim)
     def forward(self, x, x_hyper):
@@ -77,26 +77,42 @@ class AttentionLayer(nn.Module):
         attn_output, _ = self.mha(x, x_hyper, x)
         return self.dropout(attn_output)
 
+class FeedForwardLayer(nn.Module):
+    def __init__(self, dim, dropout_rate):
+        super().__init__()
+        self.norm = nn.LayerNorm(dim)
+        self.linear1 = nn.Linear(dim, dim * 2)
+        self.dropout1 = nn.Dropout(dropout_rate)
+        self.relu = nn.ReLU()
+        self.linear2 = nn.Linear(dim * 2, dim)
+        self.dropout2 = nn.Dropout(dropout_rate)
+
+    def forward(self, x):
+        x_norm = self.norm(x)
+        out = self.linear1(x_norm)
+        out = self.dropout1(out)
+        out = self.relu(out)
+        out = self.linear2(out)
+        return self.dropout2(out)
+
+class TransformerBlock(nn.Module):
+    def __init__(self, dim, head, attn_dropout, dropout_rate):
+        super().__init__()
+        self.attention = Residual(AttentionLayer(dim, head, attn_dropout, dropout_rate))
+        #self.feedforward = Residual(FeedForwardLayer(dim, dropout_rate))
+
+    def forward(self, x, x_hyper):
+        x = self.attention(x, x_hyper)
+        #x = self.feedforward(x)
+        return x
+
 
 class Attention(torch.nn.Module):
-    def __init__(self, dim, head, dropout_rate=0.2, attn_dropout=0.2,depth=1):
+    def __init__(self, dim, head=8, dropout_rate=0.2, attn_dropout=0.2, depth=1):
         super().__init__()
-        transformer = []
-        for _ in range(depth):
-            transformer.append(
-                Residual(AttentionLayer(dim, head, attn_dropout, dropout_rate)),
-                Residual(
-                    nn.Sequential(
-                        nn.LayerNorm(dim),
-                        nn.Linear(dim, dim * 2),
-                        nn.Dropout(dropout_rate),
-                        nn.ReLU(),
-                        nn.Linear(dim * 2, dim),
-                        nn.Dropout(dropout_rate),
-                    )
-                ),
-            )
-        self.transformer = nn.Sequential(*transformer)
+        self.transformer = nn.Sequential(*[TransformerBlock(dim, head, attn_dropout, dropout_rate) for _ in range(depth)])
 
-    def forward(self,x,x_hyper):
-        return self.transformer(x,x_hyper)
+    def forward(self, x, x_hyper):
+        for layer in self.transformer:
+            x = layer(x, x_hyper)
+        return x
