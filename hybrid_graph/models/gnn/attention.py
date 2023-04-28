@@ -99,11 +99,11 @@ class TransformerBlock(nn.Module):
     def __init__(self, dim, head, attn_dropout, dropout_rate):
         super().__init__()
         self.attention = Residual(AttentionLayer(dim, head, attn_dropout, dropout_rate))
-        #self.feedforward = Residual(FeedForwardLayer(dim, dropout_rate))
+        self.feedforward = Residual(FeedForwardLayer(dim, dropout_rate))
 
     def forward(self, x, x_hyper):
         x = self.attention(x, x_hyper)
-        #x = self.feedforward(x)
+        x = self.feedforward(x)
         return x
 
 

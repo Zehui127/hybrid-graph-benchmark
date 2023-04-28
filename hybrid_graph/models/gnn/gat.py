@@ -15,15 +15,15 @@ class GATNet(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 64
-        self.conv1 = GAT(info["num_node_features"], dim)
+        dim = 16
+        self.conv1 = GAT(info["num_node_features"], dim, num_layers=1)
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if info["is_regression"]:
-            self.conv2 = GAT(dim, dim, )
+            self.conv2 = GAT(dim, dim,num_layers=1 )
             self.head = nn.Linear(dim, 1)
         else:
-            self.conv2 = GAT(dim, info["num_classes"])
+            self.conv2 = GAT(dim, info["num_classes"], num_layers=1)
 
     def forward(self, data, *args, **kargs):
         x, edge_index = data.x, data.edge_index
@@ -54,13 +54,13 @@ class GATV2Net(torch.nn.Module):
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if self.is_regression:
-            self.conv2 = GAT(dim, dim, v2=True)
+            self.conv2 = GAT(dim, dim, v2=True,num_layers=1)
             self.head = nn.Linear(dim, 1)
         else:
-            self.conv2 = GAT(dim, info["num_classes"], v2=True)
+            self.conv2 = GAT(dim, info["num_classes"], v2=True,num_layers=1)
 
         self.conv1 = GAT(
-            info["num_node_features"], dim, v2=True)
+            info["num_node_features"], dim, v2=True, num_layers=1)
 
     def forward(self, data, *args, **kargs):
         x, edge_index = data.x, data.edge_index
