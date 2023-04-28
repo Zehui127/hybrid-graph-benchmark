@@ -1,2 +1,0 @@
-salloc -p devel -N 1 -n 1 -c 15 --gres=gpu:1 --time=00:60:00
-srun --jobid=472100 --pty bash
