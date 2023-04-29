@@ -86,11 +86,27 @@ class GitHub(InMemoryDataset):
         edge_index = torch.from_numpy(data['edges']).to(torch.long)
         edge_index = edge_index.t().contiguous()
         hyperedge_index = torch.from_numpy(preprocessed['hyperedges']).to(torch.long)
-
+        # Create hyperedge_attr
+        hyperedge_attr = self.hyperedge_representation(x,y,edge_index,hyperedge_index)
         data = Data(x=x, y=y, edge_index=edge_index, hyperedge_index=hyperedge_index,
-                    num_hyperedges=self.NUM_HYPEREDGES)
+                    num_hyperedges=self.NUM_HYPEREDGES,hyperedge_attr=hyperedge_attr)
 
         if self.pre_transform is not None:
             data = self.pre_transform(data)
 
         torch.save(self.collate([data]), self.processed_paths[0])
+
+    def hyperedge_representation(self, x, y, edge_index, hyperedge_index):
+        # Assuming x is a NumPy array, if not, convert it to a NumPy array
+        # Initialize a placeholder array with the length of the maximum hyperedge index + 1
+        max_hyperedge_index = torch.max(hyperedge_index[1])
+        hyperedge_representations = torcg.zeros((max_hyperedge_index + 1, x.shape[1]))
+
+        # Iterate through hyperedge_index
+        for i in range(hyperedge_index.shape[1]):
+            source, target = hyperedge_index[:, i]
+
+            # Sum the node values for each hyperedge
+            hyperedge_representations[target] += x[source]
+
+        return hyperedge_representations

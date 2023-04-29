@@ -10,7 +10,7 @@ class HybridGCN(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 1
+        dim = 32
         self.hyper1 = HypergraphConv(info["num_node_features"], dim)
         self.conv1 = GCNConv(info["num_node_features"], dim)
         self.attn1 = Attention(dim) # TODO: cross attention between q = hyper1(x) and k = conv1(x)
@@ -24,7 +24,7 @@ class HybridGCN(torch.nn.Module):
         else:
             self.conv2 = GCNConv(dim, info["num_classes"])
             self.hyper2 = HypergraphConv(dim, info["num_classes"])
-            self.attn2 = Attention(dim,1) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
+            self.attn2 = Attention(info["num_classes"],head=1) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
     def forward(self, data, *args, **kargs):
         x, edge_index,hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         if self.is_edge_pred:
@@ -32,12 +32,11 @@ class HybridGCN(torch.nn.Module):
         x_gcn = F.relu(self.conv1(x, edge_index))
         #print(f"!!!!!!x shape is:{x.shape}")
         x_hyper = F.relu(self.hyper1(x, hyperedge_index))
-        x = self.attn1(x_gcn, x_hyper)
-
+        x = self.attn1(x_gcn.unsqueeze(0), x_hyper.unsqueeze(0)).squeeze(0)
         x = F.dropout(x, training=self.training)
         x_gcn = self.conv2(x, edge_index)
         x_hyper = self.hyper2(x_hyper, hyperedge_index)
-        x = self.attn2(x_gcn, x_hyper)
+        x = self.attn2(x_gcn.unsqueeze(0), x_hyper.unsqueeze(0)).squeeze(0)
 
         if self.is_regression:
             x = self.head(x).squeeze()
@@ -54,10 +53,10 @@ class HybridSAGE(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 64
+        dim = 32
         self.hyper1 = HypergraphConv(info["num_node_features"], dim)
         self.conv1 = SAGEConv(info["num_node_features"], dim, normalize=False)
-        self.attn1 = Attention() # TODO: cross attention between q = hyper1(x) and k = conv1(x)
+        self.attn1 = Attention(dim) # TODO: cross attention between q = hyper1(x) and k = conv1(x)
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if info["is_regression"]:
@@ -68,18 +67,18 @@ class HybridSAGE(torch.nn.Module):
         else:
             self.conv2 = SAGEConv(dim, info["num_classes"], normalize=False)
             self.hyper2 = HypergraphConv(dim, info["num_classes"])
-            self.attn2 = Attention(dim) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
+            self.attn2 = Attention(info["num_classes"],head=1) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
     def forward(self, data, *args, **kargs):
         x, edge_index,hyperedge_index = data.x, data.edge_index, data.hyperedge_index
         if self.is_edge_pred:
             edge_index = args[0][0] # the message passing edge index
         x_sage = F.relu(self.conv1(x, edge_index))
         x_hyper = F.relu(self.hyper1(x, hyperedge_index))
-        x = self.attn1(x_sage, x_hyper)
+        x = self.attn1(x_sage.unsqueeze(0), x_hyper.unsqueeze(0)).squeeze(0)
         x = F.dropout(x, training=self.training)
         x_sage = self.conv2(x, edge_index)
         x_hyper = self.hyper2(x_hyper, hyperedge_index)
-        x = self.attn2(x_sage, x_hyper)
+        x = self.attn2(x_sage.unsqueeze(0), x_hyper.unsqueeze(0)).squeeze(0)
 
         if self.is_regression:
             x = self.head(x).squeeze()

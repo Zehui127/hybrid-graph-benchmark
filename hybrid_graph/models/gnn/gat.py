@@ -15,7 +15,7 @@ class GATNet(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 16
+        dim = 32
         self.conv1 = GAT(info["num_node_features"], dim, num_layers=1)
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
@@ -50,7 +50,7 @@ class GATV2Net(torch.nn.Module):
     def __init__(
             self, info, mixture_cls=None, load_config=None, *args, **kwargs):
         super().__init__()
-        dim = 16
+        dim = 32
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if self.is_regression:
