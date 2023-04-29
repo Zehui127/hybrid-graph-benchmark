@@ -2,8 +2,8 @@ import subprocess
 import argparse
 import itertools
 
-Models = ['hybrid-sage'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat',
-Datasets = ["musae_Github"]
+Models = ['hybrid-gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage'
+Datasets = ["musae_Facebook","musae_Github"]
 
 """["grand_ArteryAorta","grand_Breast","grand_Vagina",
             "grand_ArteryCoronary","grand_ColonAdenocarcinoma",
