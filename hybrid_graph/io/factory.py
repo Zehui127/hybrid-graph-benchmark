@@ -252,7 +252,7 @@ DATASET_INFO = {
     },
     'musae_Facebook': {
         'type': 'Facebook',
-        'root': 'data/musae',
+        'root': 'data/musae/facebook',
         'single_graph': True,
         'info': {
             'original_mask': False,
@@ -265,7 +265,7 @@ DATASET_INFO = {
     },
     'musae_Github': {
         'type': 'GitHub',
-        'root': 'data/musae',
+        'root': 'data/musae/github',
         'single_graph': True,
         'info': {
             'original_mask': False,

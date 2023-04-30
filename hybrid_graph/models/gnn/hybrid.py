@@ -53,7 +53,7 @@ class HybridSAGE(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 32
+        dim = 64
         self.hyper1 = HypergraphConv(info["num_node_features"], dim)
         self.conv1 = SAGEConv(info["num_node_features"], dim, normalize=False)
         self.attn1 = Attention(dim) # TODO: cross attention between q = hyper1(x) and k = conv1(x)

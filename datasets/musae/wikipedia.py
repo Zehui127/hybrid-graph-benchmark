@@ -55,7 +55,6 @@ class Wikipedia(InMemoryDataset):
           - 220,678
           - 128 or 3,148
     """
-
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
     file_id = {
         'chameleon': '1qLV8dMIhw-pe4ym16moOS9rl5rLD0FQr',
