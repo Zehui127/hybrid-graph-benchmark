@@ -17,3 +17,4 @@ source activate torch
 cd /jmain02/home/J2AD015/axf03/zxl79-axf03/repository/hypergraph-benchmarks
 
 CUDA_VISIBLE_DEVICES=0 python train_all.py -t train
+#CUDA_VISIBLE_DEVICES=0 python hg.py train musae_Facebook hybrid-sage

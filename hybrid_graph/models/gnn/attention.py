@@ -73,7 +73,7 @@ class AttentionLayer(nn.Module):
         x = self.norm(x)
         x_hyper = self.norm_hyper(x_hyper)
         #TODO: potential other design choices e.g. mha(x, x_hyper, x_hyper)
-        attn_output, _ = self.mha(x, x_hyper, x)
+        attn_output, _ = self.mha(x_hyper, x, x)
         return self.dropout(attn_output)
 
 class FeedForwardLayer(nn.Module):

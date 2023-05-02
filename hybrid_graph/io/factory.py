@@ -48,7 +48,7 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
                }
 
@@ -77,7 +77,7 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
                }
     },
