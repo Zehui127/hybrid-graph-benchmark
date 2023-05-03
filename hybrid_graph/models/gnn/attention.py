@@ -2,6 +2,7 @@ import yaml
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
+from torch.nn.init import trunc_normal_
 
 
 class Residual(nn.Module):
