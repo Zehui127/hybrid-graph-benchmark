@@ -316,6 +316,46 @@ DATASET_INFO = {
 
         }
     },
+    'benchmark_Cora': {
+    'type': 'Benchmark',
+    'name': 'Cora',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 1433,
+            'num_classes': 7,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+    'benchmark_Citeseer': {
+    'type': 'Benchmark',
+    'name': 'CiteSeer',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 3703,
+            'num_classes': 6,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+    'benchmark_PubMed': {
+    'type': 'Benchmark',
+    'name': 'PubMed',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 500,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+
 
     'amazon': {
         'type': 'Amazon-place-holder',
