@@ -29,6 +29,37 @@ class MultiHeadAttention(nn.Module):
         self.fc = nn.Linear(d_model, d_model)
 
         self.attn_dropout = nn.Dropout(attn_dropout)
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, torch.nn.Linear):
+            trunc_normal_(m.weight, std=0.02)
+            if isinstance(m, torch.nn.Linear) and m.bias is not None:
+                torch.nn.init.constant_(m.bias, 0)
+        elif isinstance(m, torch.nn.LayerNorm):
+            torch.nn.init.constant_(m.bias, 0)
+            torch.nn.init.constant_(m.weight, 1.0)
+        elif isinstance(m, torch.nn.Conv2d):
+            fan_out = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
+            fan_out //= m.groups
+            m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
+            if m.bias is not None:
+                m.bias.data.zero_()
+        elif isinstance(m, torch.nn.Conv1d):
+            fan_out = m.kernel_size[0] * m.out_channels
+            fan_out //= m.groups
+            m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
+            if m.bias is not None:
+                m.bias.data.zero_()
+        elif isinstance(m, nn.GroupNorm):
+            nn.init.constant_(m.bias, 0)
+            nn.init.constant_(m.weight, 1.0)
+        elif isinstance(m, nn.Sequential):
+            for submodule in m.children():
+                self._init_weights(submodule)
+        elif isinstance(m, nn.ModuleList):
+            for submodule in m:
+                self._init_weights(submodule)
 
     def split_heads(self, x, batch_size):
         x = x.view(batch_size, -1, self.num_heads, self.depth)
@@ -85,6 +116,37 @@ class FeedForwardLayer(nn.Module):
         self.relu = nn.ReLU()
         self.linear2 = nn.Linear(dim * 2, dim)
         self.dropout2 = nn.Dropout(dropout_rate)
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, torch.nn.Linear):
+            trunc_normal_(m.weight, std=0.02)
+            if isinstance(m, torch.nn.Linear) and m.bias is not None:
+                torch.nn.init.constant_(m.bias, 0)
+        elif isinstance(m, torch.nn.LayerNorm):
+            torch.nn.init.constant_(m.bias, 0)
+            torch.nn.init.constant_(m.weight, 1.0)
+        elif isinstance(m, torch.nn.Conv2d):
+            fan_out = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
+            fan_out //= m.groups
+            m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
+            if m.bias is not None:
+                m.bias.data.zero_()
+        elif isinstance(m, torch.nn.Conv1d):
+            fan_out = m.kernel_size[0] * m.out_channels
+            fan_out //= m.groups
+            m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
+            if m.bias is not None:
+                m.bias.data.zero_()
+        elif isinstance(m, nn.GroupNorm):
+            nn.init.constant_(m.bias, 0)
+            nn.init.constant_(m.weight, 1.0)
+        elif isinstance(m, nn.Sequential):
+            for submodule in m.children():
+                self._init_weights(submodule)
+        elif isinstance(m, nn.ModuleList):
+            for submodule in m:
+                self._init_weights(submodule)
 
     def forward(self, x):
         x_norm = self.norm(x)
