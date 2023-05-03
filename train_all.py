@@ -2,10 +2,8 @@ import subprocess
 import argparse
 import itertools
 
-Models = ['hybrid-sage','hybrid-gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
-Datasets = ["musae_Twitch_ES","musae_Twitch_FR",
-            "musae_Facebook","musae_Github","musae_Wiki_chameleon",
-            "musae_Wiki_crocodile","musae_Wiki_squirrel"]
+Models = ['gcn','sage','gat','gatv2','hybrid-sage','hybrid-gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
+Datasets = ["benchmark_PubMed"]
 
 """["grand_ArteryAorta","grand_Breast","grand_Vagina",
             "grand_ArteryCoronary","grand_ColonAdenocarcinoma",

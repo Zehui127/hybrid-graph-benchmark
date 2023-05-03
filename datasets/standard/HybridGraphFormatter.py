@@ -2,6 +2,7 @@ import torch
 import torch_geometric
 from torch_geometric.data import Data
 from torch_geometric.nn import knn_graph
+from torch_geometric.utils import degree
 
 
 class GraphFormatter(object):
@@ -10,15 +11,18 @@ class GraphFormatter(object):
     based on the distance between the node embeddings.
     """
 
-    def __init__(self, k, percentile=90):
+    def __init__(self, k, percentile=80):
         self.k = k
         self.percentile = percentile
 
     def __call__(self, data):
+        self.k = self.k if self.k is not None else degree(data.edge_index[0]).float().mean().item()
+        self.k = int(self.k)
         x, y = data.x, data.y
         if hasattr(data, "emb"):
             x = data.emb
         hyper_edge_index = get_hyper_edge_index(x, self.k, self.percentile)
+
         new_data = Data(
             x=x,
             edge_index=data.edge_index,
@@ -64,6 +68,7 @@ def create_point_clouds(x, k, threshold=None):
         point_clouds (list): A list of point clouds as torch.Tensor.
     """
     edge_index = compute_pairwise_distances(x, k)
+
     if threshold is not None:
         edge_distances = torch.norm(x[edge_index[0]] - x[edge_index[1]], dim=1)
         mask = edge_distances < threshold
@@ -72,7 +77,6 @@ def create_point_clouds(x, k, threshold=None):
         thresholded_edge_index = edge_index
 
     return thresholded_edge_index, edge_index
-
 
 def find_threshold(x, k, percentile):
     """
