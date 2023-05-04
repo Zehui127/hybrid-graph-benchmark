@@ -46,7 +46,7 @@ class Facebook(InMemoryDataset):
     """
 
     url_data = 'https://graphmining.ai/datasets/ptg/facebook.npz'
-    url_preprocessed = 'https://drive.google.com/uc?export=download&id=1uOw9eR_ax8REizC4sghrvBT7sVAZph5_'
+    url_preprocessed = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1uOw9eR_ax8REizC4sghrvBT7sVAZph5_'
 
     NUM_HYPEREDGES = 236663
 

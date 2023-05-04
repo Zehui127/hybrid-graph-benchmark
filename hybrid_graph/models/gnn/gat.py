@@ -2,7 +2,7 @@ import yaml
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
-from torch_geometric.nn import GCNConv, SAGEConv
+from torch_geometric.nn import GAT
 
 """
 for baseline method:
@@ -11,19 +11,19 @@ for baseline method:
 # x,x2
 # potential 2 impelmentations
 """
-class GCNNet(torch.nn.Module):
+class GATNet(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
         dim = 32
-        self.conv1 = GCNConv(info["num_node_features"], dim)
+        self.conv1 = GAT(info["num_node_features"], dim, num_layers=1)
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if info["is_regression"]:
-            self.conv2 = GCNConv(dim, dim)
+            self.conv2 = GAT(dim, dim,num_layers=1 )
             self.head = nn.Linear(dim, 1)
         else:
-            self.conv2 = GCNConv(dim, info["num_classes"])
+            self.conv2 = GAT(dim, info["num_classes"], num_layers=1)
 
     def forward(self, data, *args, **kargs):
         x, edge_index = data.x, data.edge_index
@@ -46,21 +46,21 @@ class GCNNet(torch.nn.Module):
         return x
 
 
-class SAGENet(torch.nn.Module):
+class GATV2Net(torch.nn.Module):
     def __init__(
             self, info, mixture_cls=None, load_config=None, *args, **kwargs):
-        super(SAGENet, self).__init__()
+        super().__init__()
         dim = 32
         self.is_regression = info["is_regression"]
         self.is_edge_pred = info["is_edge_pred"]
         if self.is_regression:
-            self.conv2 = SAGEConv(dim, dim, normalize=False)
+            self.conv2 = GAT(dim, dim, v2=True,num_layers=1)
             self.head = nn.Linear(dim, 1)
         else:
-            self.conv2 = SAGEConv(dim, info["num_classes"], normalize=False)
+            self.conv2 = GAT(dim, info["num_classes"], v2=True,num_layers=1)
 
-        self.conv1 = SAGEConv(
-            info["num_node_features"], dim, normalize=False)
+        self.conv1 = GAT(
+            info["num_node_features"], dim, v2=True, num_layers=1)
 
     def forward(self, data, *args, **kargs):
         x, edge_index = data.x, data.edge_index

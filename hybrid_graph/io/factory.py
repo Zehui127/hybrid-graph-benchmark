@@ -48,6 +48,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
 
     },
@@ -61,6 +63,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_ArteryCoronary': {
@@ -73,6 +77,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_ColonAdenocarcinoma': {
@@ -85,6 +91,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_Sarcoma': {
@@ -97,6 +105,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_Liver': {
@@ -109,6 +119,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred':True,
+
                }
     },
     'grand_TibialNerve': {
@@ -121,6 +133,8 @@ DATASET_INFO = {
                 'num_node_features': 340,
                 'num_classes': 3,
                 'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_KidneyCarcinoma': {
@@ -133,6 +147,8 @@ DATASET_INFO = {
              'num_node_features': 340,
              'num_classes': 3,
              'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'grand_Spleen': {
@@ -145,6 +161,8 @@ DATASET_INFO = {
             'num_node_features': 340,
             'num_classes': 3,
             'is_regression': False,
+            'is_edge_pred': True,
+
                }
     },
     'musae_Twitch_DE': {
@@ -158,6 +176,8 @@ DATASET_INFO = {
             'num_classes': 2,
             'is_regression': False,
             'is_edge_pred': True,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Twitch_EN': {
@@ -170,6 +190,8 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Twitch_ES': {
@@ -182,6 +204,8 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Twitch_FR': {
@@ -194,6 +218,8 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Twitch_PT': {
@@ -206,6 +232,8 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Twitch_RU': {
@@ -218,28 +246,35 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Facebook': {
         'type': 'Facebook',
-        'root': 'data/musae',
+        'root': 'data/musae/facebook',
         'single_graph': True,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Github': {
         'type': 'GitHub',
-        'root': 'data/musae',
+        'root': 'data/musae/github',
         'single_graph': True,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
+            'is_edge_pred': False,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Wiki_chameleon':{
@@ -251,6 +286,8 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Wiki_crocodile':{
@@ -262,6 +299,8 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
+            'is_edge_pred': False,
+
         }
     },
     'musae_Wiki_squirrel':{
@@ -273,8 +312,50 @@ DATASET_INFO = {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
+            'is_edge_pred': False,
+
         }
     },
+    'benchmark_Cora': {
+    'type': 'Benchmark',
+    'name': 'Cora',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 1433,
+            'num_classes': 7,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+    'benchmark_Citeseer': {
+    'type': 'Benchmark',
+    'name': 'CiteSeer',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 3703,
+            'num_classes': 6,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+    'benchmark_PubMed': {
+    'type': 'Benchmark',
+    'name': 'PubMed',
+    'root': 'data/benchmark',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 500,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
+
 
     'amazon': {
         'type': 'Amazon-place-holder',

@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=30
+#SBATCH --cpus-per-task=128
 #SBATCH --mem-per-cpu=3850
 #SBATCH --gres=gpu:ampere_a100:1
 #SBATCH --ntasks-per-node=1
 #SBATCH --partition=gpu
-#SBATCH --time=4:00:00
+#SBATCH --time=48:00:00
 #SBATCH --account=su114-gpu
 
 

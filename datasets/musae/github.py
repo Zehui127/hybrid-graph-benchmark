@@ -46,7 +46,7 @@ class GitHub(InMemoryDataset):
     """
 
     url_data = 'https://graphmining.ai/datasets/ptg/github.npz'
-    url_preprocessed = 'https://drive.google.com/uc?export=download&id=1XfPUyxriHBI0s6UQeQ34BDnqdaQvKR7l'
+    url_preprocessed = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1XfPUyxriHBI0s6UQeQ34BDnqdaQvKR7l'
 
     NUM_HYPEREDGES = 223672
 
@@ -86,7 +86,7 @@ class GitHub(InMemoryDataset):
         edge_index = torch.from_numpy(data['edges']).to(torch.long)
         edge_index = edge_index.t().contiguous()
         hyperedge_index = torch.from_numpy(preprocessed['hyperedges']).to(torch.long)
-
+        # Create hyperedge_attr
         data = Data(x=x, y=y, edge_index=edge_index, hyperedge_index=hyperedge_index,
                     num_hyperedges=self.NUM_HYPEREDGES)
 
