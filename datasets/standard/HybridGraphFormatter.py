@@ -11,7 +11,7 @@ class GraphFormatter(object):
     based on the distance between the node embeddings.
     """
 
-    def __init__(self, k, percentile=80):
+    def __init__(self, k=None, percentile=80):
         self.k = k
         self.percentile = percentile
 
