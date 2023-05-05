@@ -22,6 +22,8 @@ class GCNNet(torch.nn.Module):
         if info["is_regression"]:
             self.conv2 = GCNConv(dim, dim)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = GCNConv(dim, dim)
         else:
             self.conv2 = GCNConv(dim, info["num_classes"])
 
@@ -56,6 +58,8 @@ class SAGENet(torch.nn.Module):
         if self.is_regression:
             self.conv2 = SAGEConv(dim, dim, normalize=False)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = GCNConv(dim, dim)
         else:
             self.conv2 = SAGEConv(dim, info["num_classes"], normalize=False)
 

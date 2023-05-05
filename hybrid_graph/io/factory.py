@@ -176,7 +176,6 @@ DATASET_INFO = {
             'num_classes': 2,
             'is_regression': False,
             'is_edge_pred': True,
-            'is_edge_pred': False,
 
         }
     },
@@ -190,7 +189,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -204,7 +203,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -218,7 +217,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -232,7 +231,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -246,7 +245,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -259,7 +258,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -272,8 +271,7 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
-            'is_edge_pred': False,
-            'is_edge_pred': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -285,8 +283,8 @@ DATASET_INFO = {
         'info':{
             'original_mask': False,
             'num_node_features': 128,
-            'is_regression': True,
-            'is_edge_pred': False,
+            'is_regression': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -298,8 +296,8 @@ DATASET_INFO = {
         'info':{
             'original_mask': False,
             'num_node_features': 128,
-            'is_regression': True,
-            'is_edge_pred': False,
+            'is_regression': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -311,8 +309,8 @@ DATASET_INFO = {
         'info':{
             'original_mask': False,
             'num_node_features': 128,
-            'is_regression': True,
-            'is_edge_pred': False,
+            'is_regression': False,
+            'is_edge_pred': True,
 
         }
     },

@@ -149,7 +149,7 @@ playground.*
 data
 data/
 
-/lightning_logs
-/checkpoints
+/lightning_logs*
+/checkpoints*
 slurm*
 temp.py

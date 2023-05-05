@@ -22,6 +22,8 @@ class HyperGCN(torch.nn.Module):
         if info["is_regression"]:
             self.conv2 = HypergraphConv(dim, dim, )
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = HypergraphConv(dim, dim, )
         else:
             self.conv2 = HypergraphConv(dim, info["num_classes"])
 
@@ -57,6 +59,8 @@ class HyperGAT(torch.nn.Module):
         if self.is_regression:
             self.conv2 = HypergraphConv(dim*heads, dim, use_attention=True)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = HypergraphConv(dim*heads, dim, use_attention=True)
         else:
             self.conv2 = HypergraphConv(dim*heads, info["num_classes"], use_attention=True)
 
