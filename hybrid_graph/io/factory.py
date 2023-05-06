@@ -353,6 +353,19 @@ DATASET_INFO = {
             'is_edge_pred': False,
             }
     },
+    'benchmark_ogbn-arxiv': {
+    'type': 'Benchmark',
+    'name': 'ogbn-arxiv',
+    'root': 'data/ogbn-arxiv.pt',
+    'single_graph': True,
+    'info':{
+            'original_mask': True,
+            'num_node_features': 128,
+            'num_classes': 40,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
 
 
     'amazon': {
