@@ -36,6 +36,8 @@ class Grand(InMemoryDataset):
         'Tibial_Nerve': '1lHvtRo7IF9BUPGaJL_eBL0aQD7IE3wvZ',
         'Kidney_renal_papillary_cell_carcinoma': '1Hj5zZFOon3YW3MTR0vzDrfS0IqgkwcNH',
         'Spleen': '1FRIb0moyq-L7eP5zUxINLmnZfqQ2qTDD',
+        'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
+        'Leukemia': '1ztRJcNXG4O6OY106JFyZ8MF1EyV55n1_',
     }
     # a help function used to evaluate the property of graphs.
     def split_rows(tensor):
@@ -57,7 +59,7 @@ class Grand(InMemoryDataset):
         self.name = name
         assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Colon_adenocarcinoma',
                              'Sarcoma','Liver','Tibial_Nerve','Kidney_renal_papillary_cell_carcinoma',
-                             'Spleen']
+                             'Spleen','Lung_cancer','Leukemia']
         super().__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 

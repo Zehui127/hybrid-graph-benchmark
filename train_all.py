@@ -2,12 +2,18 @@ import subprocess
 import argparse
 import itertools
 
-Models = ['gcn','sage','gat','gatv2','hyper-gcn', 'hybrid-sage','hybrid-gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
-Datasets = [ "grand_ArteryCoronary","grand_ColonAdenocarcinoma",
+Models = ['hybrid-gcn','gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
+Datasets = ["musae_Facebook","musae_Github","musae_Wiki_chameleon",
+            "grand_Lungcancer","grand_Leukemia","grand_ArteryAorta",
+            "grand_Breast","grand_Vagina",
+            "grand_ArteryCoronary","grand_ColonAdenocarcinoma",
             "grand_Sarcoma","grand_Liver","grand_TibialNerve",
-            "grand_KidneyCarcinoma","grand_Spleen"]
+            "grand_KidneyCarcinoma","grand_Spleen",
+            "musae_Twitch_ES","musae_Twitch_FR","musae_Twitch_DE",
+            "musae_Twitch_EN","musae_Twitch_PT","musae_Twitch_RU",
+            "musae_Wiki_crocodile","musae_Wiki_squirrel"]
 
-"""["grand_ArteryAorta","grand_Breast","grand_Vagina",
+"""["grand_Lungcancer","grand_Leukemia","grand_ArteryAorta","grand_Breast","grand_Vagina",
             "grand_ArteryCoronary","grand_ColonAdenocarcinoma",
             "grand_Sarcoma","grand_Liver","grand_TibialNerve",
             "grand_KidneyCarcinoma","grand_Spleen",
@@ -42,4 +48,6 @@ def main():
             run_test([dataset,model,f'-load=checkpoints/{dataset}_{model}/'])
 
 if __name__ == '__main__':
+    print(f"Models: {Models}")
+    print(f"Datasets: {Datasets}")
     main()

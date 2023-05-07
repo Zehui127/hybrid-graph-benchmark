@@ -91,7 +91,7 @@ class HyperGAT(torch.nn.Module):
         # Assuming x is a NumPy array, if not, convert it to a NumPy array
         # Initialize a placeholder array with the length of the maximum hyperedge index + 1
         max_hyperedge_index = torch.max(hyperedge_index[1])
-        hyperedge_representations = torch.zeros((max_hyperedge_index + 1, x.shape[1]))
+        hyperedge_representations = torch.zeros((max_hyperedge_index + 1, x.shape[1]),device=x.device)
          # Use torch_scatter's scatter_add to accumulate the node values for each hyperedge
         from torch_scatter import scatter_add
         hyperedge_representations = scatter_add(src=x[hyperedge_index[0]], index=hyperedge_index[1], dim=0, out=hyperedge_representations)

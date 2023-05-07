@@ -61,7 +61,7 @@ class Main:
             'type': int, 'default': 1, 'help': 'Number of GPU devices.',
         },
         ('-a', '--accelerator'): {
-            'type': str, 'default': None, 'help': 'Accelerator style.',
+            'type': str, 'default': 'gpu', 'help': 'Accelerator style.',
         },
         ('-s', '--strategy'): {
             'type': str, 'default': 'ddp', 'help': 'strategy style.',

@@ -162,6 +162,33 @@ DATASET_INFO = {
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': True,
+               }
+    },
+    'grand_Lungcancer': {
+        'type': 'Grand',
+        'name': 'Lung_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+               }
+    },
+    'grand_Leukemia': {
+        'type': 'Grand',
+        'name': 'Leukemia',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
 
                }
     },
@@ -359,7 +386,7 @@ DATASET_INFO = {
     'root': 'data/ogbn-arxiv.pt',
     'single_graph': True,
     'info':{
-            'original_mask': True,
+            'original_mask': False,
             'num_node_features': 128,
             'num_classes': 40,
             'is_regression': False,
@@ -684,6 +711,7 @@ def create_edge_label(datasets,train_ratio=0.6, val_ratio=0.2):
             # get the edge index for train_message_ps = eval_mp,
             # train_supervision + eval_supervision + test_supervision = whole graph
             # test_mp = train_supervision + eval_supervision
+            # data.edge_index = utils.to_undirected(data.edge_index)
             train_pos_edge_index, val_pos_edge_index, test_pos_edge_index  = random_edge_split(data,train_ratio, val_ratio)
             data.train_edge_index = data.val_edge_index = train_pos_edge_index
             data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
