@@ -31,6 +31,23 @@ def test(model, test_loader, plt_trainer_args, load_path, dataset_info):
                     "if it is a directory, if must end with /; if it is a file, it must end with .ckpt")
         plt_model = plt_model_load(plt_model, checkpoint)
         print(f"Loaded model from {checkpoint}")
-
+    #randomize_weights(plt_model)
     trainer = pl.Trainer(**plt_trainer_args)
     trainer.test(plt_model, test_loader)
+
+def randomize_weights(module, a=-1, b=1):
+    """
+    Randomize weights of a given PyTorch module using uniform distribution.
+
+    Args:
+        module (nn.Module): The PyTorch module whose weights will be randomized.
+        a (float, optional): Lower bound of the uniform distribution. Default is -1.
+        b (float, optional): Upper bound of the uniform distribution. Default is 1.
+    """
+    for name, param in module.named_parameters():
+        if param.requires_grad and 'weight' in name:
+            print(name)
+            torch.nn.init.uniform_(param.data, a=a, b=b)
+        elif param.requires_grad and 'bias' in name:
+            print(name)
+            torch.nn.init.zeros_(param.data)
