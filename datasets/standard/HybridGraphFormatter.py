@@ -20,8 +20,10 @@ class GraphFormatter(object):
         self.k = int(self.k)
         x, y = data.x, data.y
         if hasattr(data, "emb"):
-            x = data.emb
-        hyper_edge_index = get_hyper_edge_index(x, self.k, self.percentile)
+            hyper_x = data.emb
+        else:
+            hyper_x = x
+        hyper_edge_index = get_hyper_edge_index(hyper_x, self.k, self.percentile)
 
         new_data = Data(
             x=x,
