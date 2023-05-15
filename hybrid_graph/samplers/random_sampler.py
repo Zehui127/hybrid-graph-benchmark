@@ -96,8 +96,6 @@ class RandomHyperedgeSampler(torch.utils.data.DataLoader):
             if self.mask is not None:
                 sampled_nodes_mask = sampled_nodes_mask & self.mask
             i += 1
-            if i % 10000 == 0:
-                print(i)
         sampled_nodes = torch.arange(self.data.num_nodes)[sampled_nodes_mask.type(torch.bool)]
 
         # Get the subgraph induced by the sampled nodes
