@@ -29,13 +29,13 @@ DATASET_INFO = {
         'name': 'Artery_Aorta',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-                'is_edge_pred': True,
-               }
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+        }
 
     },
     'grand_Breast': {
@@ -43,14 +43,14 @@ DATASET_INFO = {
         'name': 'Breast',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
 
     },
     'grand_Vagina': {
@@ -58,112 +58,112 @@ DATASET_INFO = {
         'name': 'Vagina',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_ArteryCoronary': {
-        'type': 'Grand',
-        'name': 'Artery_Coronary',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_ColonAdenocarcinoma': {
-        'type': 'Grand',
-        'name': 'Colon_adenocarcinoma',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_Sarcoma': {
-        'type': 'Grand',
-        'name': 'Sarcoma',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_Liver': {
-        'type': 'Grand',
-        'name': 'Liver',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred':True,
-
-               }
-    },
-    'grand_TibialNerve': {
-        'type': 'Grand',
-        'name': 'Tibial_Nerve',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_KidneyCarcinoma': {
-        'type': 'Grand',
-        'name': 'Kidney_renal_papillary_cell_carcinoma',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-            'original_mask': False,
-             'num_node_features': 340,
-             'num_classes': 3,
-             'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_Spleen': {
-        'type': 'Grand',
-        'name': 'Spleen',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 340,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
+    },
+    'grand_ArteryCoronary': {
+        'type': 'Grand',
+        'name': 'Artery_Coronary',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_ColonAdenocarcinoma': {
+        'type': 'Grand',
+        'name': 'Colon_adenocarcinoma',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_Sarcoma': {
+        'type': 'Grand',
+        'name': 'Sarcoma',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_Liver': {
+        'type': 'Grand',
+        'name': 'Liver',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_TibialNerve': {
+        'type': 'Grand',
+        'name': 'Tibial_Nerve',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_KidneyCarcinoma': {
+        'type': 'Grand',
+        'name': 'Kidney_renal_papillary_cell_carcinoma',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_Spleen': {
+        'type': 'Grand',
+        'name': 'Spleen',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
     },
     'musae_Twitch_DE': {
         'type': 'Twitch',
@@ -277,12 +277,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_chameleon':{
+    'musae_Wiki_chameleon': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'chameleon',
+        'name': 'chameleon',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
@@ -290,12 +290,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_crocodile':{
+    'musae_Wiki_crocodile': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'crocodile',
+        'name': 'crocodile',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
@@ -303,12 +303,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_squirrel':{
+    'musae_Wiki_squirrel': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'squirrel',
+        'name': 'squirrel',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': True,
@@ -317,45 +317,44 @@ DATASET_INFO = {
         }
     },
     'benchmark_Cora': {
-    'type': 'Benchmark',
-    'name': 'Cora',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'Cora',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 1433,
             'num_classes': 7,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
     'benchmark_Citeseer': {
-    'type': 'Benchmark',
-    'name': 'CiteSeer',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'CiteSeer',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 3703,
             'num_classes': 6,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
     'benchmark_PubMed': {
-    'type': 'Benchmark',
-    'name': 'PubMed',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'PubMed',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 500,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
-
 
     'amazon': {
         'type': 'Amazon-place-holder',
@@ -508,7 +507,6 @@ def mask_split(dataset, original_mask=True,
     return dataset, masks
 
 
-
 def random_node_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
     num_nodes = data.num_nodes
     num_train = int(train_ratio * num_nodes)
@@ -647,44 +645,49 @@ def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hype
         data.test_hyperedge_mask = test_hyperedge_mask.type(torch.bool)
     return data
 
+
 def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
-        edge_index = data.edge_index
-        num_edges = edge_index.size(1)
-        num_train = int(train_ratio * num_edges)
-        num_val = int(val_ratio * num_edges)
-        perm = torch.randperm(num_edges)
-        train_edges = edge_index[:, perm[:num_train]]
-        val_edges = edge_index[:, perm[num_train:num_train + num_val]]
-        test_edges = edge_index[:, perm[num_train + num_val:]]
-        return train_edges, val_edges, test_edges
+    edge_index = data.edge_index
+    num_edges = edge_index.size(1)
+    num_train = int(train_ratio * num_edges)
+    num_val = int(val_ratio * num_edges)
+    perm = torch.randperm(num_edges)
+    train_edges = edge_index[:, perm[:num_train]]
+    val_edges = edge_index[:, perm[num_train:num_train + num_val]]
+    test_edges = edge_index[:, perm[num_train + num_val:]]
+    return train_edges, val_edges, test_edges
 
-def create_edge_label(datasets,train_ratio=0.6, val_ratio=0.2):
-        r"""This is used for edge prediction tasks
-        Creates edge labels :obj:`data.edge_label` based on node labels
-        :obj:`data.y`.
 
-        Args:
-            data (torch_geometric.data.Data): The graph data object.
+def create_edge_label(datasets, train_ratio=0.6, val_ratio=0.2):
+    r"""This is used for edge prediction tasks
+    Creates edge labels :obj:`data.edge_label` based on node labels
+    :obj:`data.y`.
 
-        :rtype: :class:`torch_geometric.data.Data`
-        """
-        def edge_label(data):
-            # we split the edge_index with all mode
-            # get the edge index for train_message_ps = eval_mp,
-            # train_supervision + eval_supervision + test_supervision = whole graph
-            # test_mp = train_supervision + eval_supervision
-            train_pos_edge_index, val_pos_edge_index, test_pos_edge_index  = random_edge_split(data,train_ratio, val_ratio)
-            data.train_edge_index = data.val_edge_index = train_pos_edge_index
-            data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
-            data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
-            data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
-            data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
-            return data
-        def helper(edge_index):
-            neg_edge_index = utils.negative_sampling(edge_index)
-            # create edge_label
-            pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
-            neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
-            edge_label = torch.cat([pos_label, neg_label], dim=0)
-            return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
-        return [edge_label(data) for data in datasets]
+    Args:
+        data (torch_geometric.data.Data): The graph data object.
+
+    :rtype: :class:`torch_geometric.data.Data`
+    """
+
+    def edge_label(data):
+        # we split the edge_index with all mode
+        # get the edge index for train_message_ps = eval_mp,
+        # train_supervision + eval_supervision + test_supervision = whole graph
+        # test_mp = train_supervision + eval_supervision
+        train_pos_edge_index, val_pos_edge_index, test_pos_edge_index = random_edge_split(data, train_ratio, val_ratio)
+        data.train_edge_index = data.val_edge_index = train_pos_edge_index
+        data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
+        data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
+        data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
+        data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
+        return data
+
+    def helper(edge_index):
+        neg_edge_index = utils.negative_sampling(edge_index)
+        # create edge_label
+        pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
+        neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
+        edge_label = torch.cat([pos_label, neg_label], dim=0)
+        return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
+
+    return [edge_label(data) for data in datasets]
