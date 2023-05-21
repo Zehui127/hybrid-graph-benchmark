@@ -153,4 +153,4 @@ data/
 /checkpoints*
 slurm*
 temp.py
-/temp_img_csv
+/temp_img_csv*
