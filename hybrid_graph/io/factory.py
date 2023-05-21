@@ -29,13 +29,13 @@ DATASET_INFO = {
         'name': 'Artery_Aorta',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-                'is_edge_pred': True,
-               }
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+        }
 
     },
     'grand_Breast': {
@@ -43,14 +43,14 @@ DATASET_INFO = {
         'name': 'Breast',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
 
     },
     'grand_Vagina': {
@@ -58,105 +58,105 @@ DATASET_INFO = {
         'name': 'Vagina',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_ArteryCoronary': {
         'type': 'Grand',
         'name': 'Artery_Coronary',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_ColonAdenocarcinoma': {
         'type': 'Grand',
         'name': 'Colon_adenocarcinoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_Sarcoma': {
         'type': 'Grand',
         'name': 'Sarcoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_Liver': {
         'type': 'Grand',
         'name': 'Liver',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
-            'is_edge_pred':True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_TibialNerve': {
         'type': 'Grand',
         'name': 'Tibial_Nerve',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
-                'original_mask': False,
-                'num_node_features': 340,
-                'num_classes': 3,
-                'is_regression': False,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_KidneyCarcinoma': {
         'type': 'Grand',
         'name': 'Kidney_renal_papillary_cell_carcinoma',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
-             'num_node_features': 340,
-             'num_classes': 3,
-             'is_regression': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'grand_Spleen': {
         'type': 'Grand',
         'name': 'Spleen',
         'root': 'data/grand',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 340,
             'num_classes': 3,
@@ -190,7 +190,7 @@ DATASET_INFO = {
             'is_regression': False,
             'is_edge_pred': True,
 
-               }
+        }
     },
     'musae_Twitch_DE': {
         'type': 'Twitch',
@@ -302,12 +302,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_chameleon':{
+    'musae_Wiki_chameleon': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'chameleon',
+        'name': 'chameleon',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': False,
@@ -315,12 +315,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_crocodile':{
+    'musae_Wiki_crocodile': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'crocodile',
+        'name': 'crocodile',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': False,
@@ -328,12 +328,12 @@ DATASET_INFO = {
 
         }
     },
-    'musae_Wiki_squirrel':{
+    'musae_Wiki_squirrel': {
         'type': 'Wikipedia',
         'root': 'data/musae',
-        'name':'squirrel',
+        'name': 'squirrel',
         'single_graph': True,
-        'info':{
+        'info': {
             'original_mask': False,
             'num_node_features': 128,
             'is_regression': False,
@@ -342,43 +342,43 @@ DATASET_INFO = {
         }
     },
     'benchmark_Cora': {
-    'type': 'Benchmark',
-    'name': 'Cora',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'Cora',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 1433,
             'num_classes': 7,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
     'benchmark_Citeseer': {
-    'type': 'Benchmark',
-    'name': 'CiteSeer',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'CiteSeer',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 3703,
             'num_classes': 6,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
     'benchmark_PubMed': {
-    'type': 'Benchmark',
-    'name': 'PubMed',
-    'root': 'data/benchmark',
-    'single_graph': True,
-    'info':{
+        'type': 'Benchmark',
+        'name': 'PubMed',
+        'root': 'data/benchmark',
+        'single_graph': True,
+        'info': {
             'original_mask': True,
             'num_node_features': 500,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': False,
-            }
+        }
     },
     'benchmark_ogbn-arxiv': {
     'type': 'Benchmark',
@@ -393,7 +393,6 @@ DATASET_INFO = {
             'is_edge_pred': False,
             }
     },
-
 
     'amazon': {
         'type': 'Amazon-place-holder',
@@ -546,7 +545,6 @@ def mask_split(dataset, original_mask=True,
     return dataset, masks
 
 
-
 def random_node_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hyperedges=True):
     num_nodes = data.num_nodes
     num_train = int(train_ratio * num_nodes)
@@ -684,6 +682,7 @@ def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hype
         data.val_hyperedge_mask = val_hyperedge_mask.type(torch.bool)
         data.test_hyperedge_mask = test_hyperedge_mask.type(torch.bool)
     return data
+
 
 def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
         edge_index = data.edge_index
