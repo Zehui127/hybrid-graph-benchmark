@@ -20,7 +20,7 @@ class Amazon(InMemoryDataset):
           - #classes
         * - 60
           - 340
-          - 3
+          - 9
         """
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
 
@@ -72,7 +72,7 @@ class Amazon(InMemoryDataset):
         print("Processing the data...")
         raw_data = torch.load(osp.join(self.raw_dir, self.raw_file_names))
         num_hyperedges = torch.unique(raw_data.hyperedge_index[1])
-        data = Data(x=raw_data.x, edge_index=raw_data.edge_index, y=raw_data.y,
+        data = Data(x=raw_data.x, edge_index=raw_data.edge_index, y=raw_data.y.long(),
                     hyperedge_index=raw_data.hyperedge_index, num_hyperedges=len(num_hyperedges))
 
         torch.save(self.collate([data]), self.processed_paths[0])

@@ -356,11 +356,19 @@ DATASET_INFO = {
             }
     },
 
-
-    'amazon': {
-        'type': 'Amazon-place-holder',
-        'name': 'place-holder'
-    }
+    'amazon_computer':  {
+        'type': 'Amazon',
+        'name': 'Computers',
+        'root': 'data/amazon',
+        'single_graph': True,
+        'info':{
+                'original_mask': False,
+                'num_node_features': 1000,
+                'num_classes': 10,
+                'is_regression': False,
+                'is_edge_pred': False,
+        }
+    },
 }
 
 
