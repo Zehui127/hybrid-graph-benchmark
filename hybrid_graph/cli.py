@@ -4,6 +4,7 @@ import argparse
 import functools
 import logging
 
+import os
 import torch
 import numpy as np
 
@@ -49,7 +50,7 @@ class Main:
             'action': 'store_true', 'help': 'Verbose debug',
         },
         ('-seed', '--seed'): {
-            'type': int, 'default': 0, 'help': 'Number of steps for model optimisation',
+            'type': int, 'default': 2, 'help': 'Number of steps for model optimisation',
         },
 
         # cpu gpu setup
@@ -133,6 +134,7 @@ class Main:
             "plt_trainer_args": plt_trainer_args,
             "save_path": a.save_name,
             "dataset_info": dataset_info,
+            "seed": a.seed,
         }
         train(**train_params)
 

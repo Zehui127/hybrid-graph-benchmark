@@ -59,7 +59,7 @@ class SAGENet(torch.nn.Module):
             self.conv2 = SAGEConv(dim, dim, normalize=False)
             self.head = nn.Linear(dim, 1)
         elif info["is_edge_pred"]:
-            self.conv2 = GCNConv(dim, dim)
+            self.conv2 = SAGEConv(dim, dim)
         else:
             self.conv2 = SAGEConv(dim, info["num_classes"], normalize=False)
 
