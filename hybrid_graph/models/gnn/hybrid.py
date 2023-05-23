@@ -10,7 +10,7 @@ class HybridGCN(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 64
+        dim = 32
         self.hyper1 = HypergraphConv(info["num_node_features"], dim)
         self.conv1 = GCNConv(info["num_node_features"], dim)
         self.attn1 = Attention(dim) # TODO: cross attention between q = hyper1(x) and k = conv1(x)
@@ -21,6 +21,10 @@ class HybridGCN(torch.nn.Module):
             self.conv2 = GCNConv(dim, dim)
             self.attn2 = Attention(dim) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.hyper2 = HypergraphConv(dim, dim)
+            self.conv2 = GCNConv(dim, dim)
+            self.attn2 = Attention(dim) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
         else:
             self.conv2 = GCNConv(dim, info["num_classes"])
             self.hyper2 = HypergraphConv(dim, info["num_classes"])
@@ -53,7 +57,7 @@ class HybridSAGE(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):
         super().__init__()
-        dim = 64
+        dim = 32
         self.hyper1 = HypergraphConv(info["num_node_features"], dim)
         self.conv1 = SAGEConv(info["num_node_features"], dim, normalize=False)
         self.attn1 = Attention(dim) # TODO: cross attention between q = hyper1(x) and k = conv1(x)
@@ -64,6 +68,10 @@ class HybridSAGE(torch.nn.Module):
             self.conv2 = SAGEConv(dim, dim, normalize=False)
             self.attn2 = Attention(dim) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.hyper2 = HypergraphConv(dim, dim)
+            self.conv2 = SAGEConv(dim, dim, normalize=False)
+            self.attn2 = Attention(dim) # TODO: cross attention between q = hyper2(x) and k = conv2(x)
         else:
             self.conv2 = SAGEConv(dim, info["num_classes"], normalize=False)
             self.hyper2 = HypergraphConv(dim, info["num_classes"])

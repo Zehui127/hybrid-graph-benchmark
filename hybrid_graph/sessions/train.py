@@ -10,8 +10,10 @@ def train(
         learning_rate,
         plt_trainer_args,
         save_path,
-        dataset_info
+        dataset_info,
+        seed
         ):
+    pl.seed_everything(seed, workers=True)
     checkpoint_callback = ModelCheckpoint(
         save_top_k=1,
         monitor="val_acc",

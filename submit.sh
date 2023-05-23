@@ -15,4 +15,10 @@ module purge
 module load CUDA/11.7.0 GCCcore/11.3.0 GCC/11.3.0 OpenMPI/4.1.4 Python/3.10.4
 source ~/torch_1_13_1/bin/activate
 cd ~/repositories/hypergraph-benchmarks
-srun python train_all.py -t train
+# srun python train_all.py -t train -s 144
+# srun python train_all.py -t test
+srun python train_all.py -t test -v=-v1
+srun python train_all.py -t test -v=-v2
+srun python train_all.py -t test -v=-v3
+srun python train_all.py -t test -v=-v4
+srun python train_all.py -t test -v=-v5

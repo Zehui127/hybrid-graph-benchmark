@@ -74,10 +74,10 @@ DATASET_INFO = {
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 340,
+            'num_node_features': 1,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
 
         }
     },
@@ -162,6 +162,33 @@ DATASET_INFO = {
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': True,
+               }
+    },
+    'grand_Lungcancer': {
+        'type': 'Grand',
+        'name': 'Lung_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+               }
+    },
+    'grand_Leukemia': {
+        'type': 'Grand',
+        'name': 'Leukemia',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 340,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
 
         }
     },
@@ -175,7 +202,6 @@ DATASET_INFO = {
             'num_node_features': 128,
             'num_classes': 2,
             'is_regression': False,
-            'is_edge_pred': True,
             'is_edge_pred': False,
 
         }
@@ -266,13 +292,12 @@ DATASET_INFO = {
     'musae_Github': {
         'type': 'GitHub',
         'root': 'data/musae/github',
-        'single_graph': True,
+        'single_graph': False,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
             'num_classes': 4,
             'is_regression': False,
-            'is_edge_pred': False,
             'is_edge_pred': False,
 
         }
@@ -355,6 +380,19 @@ DATASET_INFO = {
             'is_edge_pred': False,
         }
     },
+    'benchmark_ogbn-arxiv': {
+    'type': 'Benchmark',
+    'name': 'ogbn-arxiv',
+    'root': 'data/ogbn-arxiv.pt',
+    'single_graph': True,
+    'info':{
+            'original_mask': False,
+            'num_node_features': 128,
+            'num_classes': 40,
+            'is_regression': False,
+            'is_edge_pred': False,
+            }
+    },
 
     'amazon_computer':  {
         'type': 'Amazon',
@@ -369,7 +407,6 @@ DATASET_INFO = {
                 'is_edge_pred': False,
         }
     },
-
 }
 
 
@@ -383,11 +420,12 @@ class DataLoader(torch_geometric.loader.DataLoader):
             dataset, batch_size,
             pin_memory=self.pin_memory,
             num_workers=workers, worker_init_fn=self.worker_init,
-            shuffle=shuffle, sampler=sampler, batch_sampler=batch_sampler)
+            shuffle=shuffle, sampler=sampler, batch_sampler=None)
         self.single_graph = single_graph
         self.masks = masks
         self.onehot = onehot
         self.workers = workers
+        # self.sampler = sampler
         # TODO sampler is potentially needed
         # self.sampler = None
         # self.batch_sampler = None
@@ -401,13 +439,12 @@ class DataLoader(torch_geometric.loader.DataLoader):
         if self.single_graph:
             for i, item in enumerate(super().__iter__()):
                 yield item
-        for i, item in enumerate(super().__iter__()):
-            if self.onehot:
-                item.y = torch.argmax(item.y, dim=1)
-            yield (item.to(device), None)
+        else:
+            for i, item in enumerate(self.sampler.__iter__()):
+                yield item
 
 
-def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
+def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=5):
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)
@@ -417,69 +454,52 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=1, workers=2):
 
     single_graph = info.pop('single_graph', False)
     onehot = info.pop('onehot', False)
-    if not single_graph:
-        train_bsize = info.pop('train_batch_size', None)
-        eval_bsize = info.pop('eval_batch_size', None)
-        test_bsize = info.pop('test_batch_size', None)
 
     cls = getattr(datasets, info.pop('type'))
     print(info)
     dataset = cls(**info)
     kwargs = {
-        'batch_size': batch_size,
+        'batch_size': 1,
         'workers': workers,
         'single_graph': single_graph,
     }
 
+
+    original_mask = dataset_info.pop('original_mask')
+    Loader = functools.partial(DataLoader, **kwargs)
+    if dataset_info['is_edge_pred']:
+        dataset = create_edge_label(dataset)
+    dataset, masks = mask_split(dataset, original_mask)
+    # take one sample mask out
+    train_mask, eval_mask, test_mask = masks[0]
+    dataset = dataset[0]
+    dataset.train_mask = train_mask
+    dataset.val_mask = eval_mask
+    dataset.test_mask = test_mask
+    print(dataset)
+    # dataloader requires a list of dataset
+    dataset = [dataset]
+    # logging.info(
+    print(
+        f"Search with a partition of {train_mask.sum()} train data, "
+        f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
+    # for single graph the masks is of no use
+    print(dataset_info)
     if single_graph:
-        original_mask = dataset_info.pop('original_mask')
-        Loader = functools.partial(DataLoader, **kwargs)
-        if dataset_info['is_edge_pred']:
-            dataset = create_edge_label(dataset)
-        dataset, masks = mask_split(dataset, original_mask)
-        # take one sample mask out
-        train_mask, eval_mask, test_mask = masks[0]
-        dataset = dataset[0]
-        dataset.train_mask = train_mask
-        dataset.val_mask = eval_mask
-        dataset.test_mask = test_mask
-        print(dataset)
-        # dataloader requires a list of dataset
-        dataset = [dataset]
-        # logging.info(
-        print(
-            f"Search with a partition of {train_mask.sum()} train data, "
-            f"{eval_mask.sum()} val data and {test_mask.sum()} test data.")
-        # for single graph the masks is of no use
-        print(dataset_info)
         return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
-    """
-    train_set = dataset
-    eval_set = cls(path, split='val', **info)
-    test_set = cls(path, split='test', **info)
-    train_num, eval_num, test_num = len(train_set), len(eval_set), len(test_set)
-
-    kwargs['onehot'] = onehot
-    kwargs['batch_size'] = train_bsize
-    kwargs['shuffle'] = True
-    TrainLoader = functools.partial(DataLoader, **kwargs)
-    kwargs['batch_size'] = eval_bsize
-    EvalLoader = functools.partial(DataLoader, **kwargs)
-    kwargs['batch_size'] = test_bsize
-    TestLoader = functools.partial(DataLoader, **kwargs)
-
-    logging.info(
-        f"Multi-graph search, "
-        f"Search with a partition of {train_num} train graphs, "
-        f"{eval_num} val graphs and {test_num} test graphs.")
-    return (
-        TrainLoader(train_set, None),
-        EvalLoader(eval_set, None),
-        TestLoader(test_set, None),
-        info)
-    """
-
-
+    else:
+        kwargs = {
+            "batch_size": batch_size,
+            "num_steps": num_steps,
+            "num_workers": workers,
+        }
+        Sampler = functools.partial(datasets.HypergraphSAINTNodeSampler, **kwargs)
+        return (
+            Loader(dataset, masks, sampler=Sampler(dataset[0])),
+            Loader(dataset, masks, sampler=Sampler(dataset[0])),
+            Loader(dataset, masks, sampler=Sampler(dataset[0])),
+            dataset_info,
+        )
 def mask_split(dataset, original_mask=True,
                train_portion=0.6, eval_portion=0.2, test_portion=0.2):
     # re split to the train, eval and test mask to 60:20:20
@@ -657,47 +677,44 @@ def random_hyperedge_split(data, train_ratio=0.6, val_ratio=0.2, keep_joint_hype
 
 
 def random_edge_split(data, train_ratio=0.6, val_ratio=0.2):
-    edge_index = data.edge_index
-    num_edges = edge_index.size(1)
-    num_train = int(train_ratio * num_edges)
-    num_val = int(val_ratio * num_edges)
-    perm = torch.randperm(num_edges)
-    train_edges = edge_index[:, perm[:num_train]]
-    val_edges = edge_index[:, perm[num_train:num_train + num_val]]
-    test_edges = edge_index[:, perm[num_train + num_val:]]
-    return train_edges, val_edges, test_edges
+        edge_index = data.edge_index
+        num_edges = edge_index.size(1)
+        num_train = int(train_ratio * num_edges)
+        num_val = int(val_ratio * num_edges)
+        perm = torch.randperm(num_edges)
+        train_edges = edge_index[:, perm[:num_train]]
+        val_edges = edge_index[:, perm[num_train:num_train + num_val]]
+        test_edges = edge_index[:, perm[num_train + num_val:]]
+        return train_edges, val_edges, test_edges
 
+def create_edge_label(datasets,train_ratio=0.6, val_ratio=0.2):
+        r"""This is used for edge prediction tasks
+        Creates edge labels :obj:`data.edge_label` based on node labels
+        :obj:`data.y`.
 
-def create_edge_label(datasets, train_ratio=0.6, val_ratio=0.2):
-    r"""This is used for edge prediction tasks
-    Creates edge labels :obj:`data.edge_label` based on node labels
-    :obj:`data.y`.
+        Args:
+            data (torch_geometric.data.Data): The graph data object.
 
-    Args:
-        data (torch_geometric.data.Data): The graph data object.
-
-    :rtype: :class:`torch_geometric.data.Data`
-    """
-
-    def edge_label(data):
-        # we split the edge_index with all mode
-        # get the edge index for train_message_ps = eval_mp,
-        # train_supervision + eval_supervision + test_supervision = whole graph
-        # test_mp = train_supervision + eval_supervision
-        train_pos_edge_index, val_pos_edge_index, test_pos_edge_index = random_edge_split(data, train_ratio, val_ratio)
-        data.train_edge_index = data.val_edge_index = train_pos_edge_index
-        data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
-        data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
-        data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
-        data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
-        return data
-
-    def helper(edge_index):
-        neg_edge_index = utils.negative_sampling(edge_index)
-        # create edge_label
-        pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
-        neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
-        edge_label = torch.cat([pos_label, neg_label], dim=0)
-        return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
-
-    return [edge_label(data) for data in datasets]
+        :rtype: :class:`torch_geometric.data.Data`
+        """
+        def edge_label(data):
+            # we split the edge_index with all mode
+            # get the edge index for train_message_ps = eval_mp,
+            # train_supervision + eval_supervision + test_supervision = whole graph
+            # test_mp = train_supervision + eval_supervision
+            # data.edge_index = utils.to_undirected(data.edge_index)
+            train_pos_edge_index, val_pos_edge_index, test_pos_edge_index  = random_edge_split(data,train_ratio, val_ratio)
+            data.train_edge_index = data.val_edge_index = train_pos_edge_index
+            data.test_edge_index = torch.cat([train_pos_edge_index, val_pos_edge_index], dim=1)
+            data.train_label, data.train_edge_label_index = helper(train_pos_edge_index)
+            data.val_label, data.val_edge_label_index = helper(val_pos_edge_index)
+            data.test_label, data.test_edge_label_index = helper(test_pos_edge_index)
+            return data
+        def helper(edge_index):
+            neg_edge_index = utils.negative_sampling(edge_index)
+            # create edge_label
+            pos_label = torch.ones(edge_index.size(1), dtype=torch.int64)
+            neg_label = torch.zeros(neg_edge_index.size(1), dtype=torch.int64)
+            edge_label = torch.cat([pos_label, neg_label], dim=0)
+            return edge_label, torch.cat([edge_index, neg_edge_index], dim=1)
+        return [edge_label(data) for data in datasets]

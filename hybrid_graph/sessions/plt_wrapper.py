@@ -51,7 +51,7 @@ class ModelWrapper(pl.LightningModule):
         y_hat = self.forward(x,*args)
         loss = self.loss(y_hat,y) if self.dataset_info["is_edge_pred"] else self.loss(y_hat[mask], y[mask])
         #acc = accuracy(y_hat[mask], y[mask],task='multiclass',top_k=1,num_classes=self.dataset_info["num_classes"]) if not self.dataset_info["is_regression"] else self.train_acc(y_hat[mask], y[mask])
-        acc = self.train_acc(y_hat, y) if self.dataset_info["is_edge_pred"] else self.train_acc(y_hat[mask], y[mask])
+        acc = self.train_acc(y_hat[:10], y[:10]) if self.dataset_info["is_edge_pred"] else self.train_acc(y_hat[mask], y[mask])
         # loss
         self.log_dict(
             {"loss": loss},

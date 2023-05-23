@@ -2,7 +2,7 @@ import os.path as osp
 from typing import List, Callable, Optional
 import torch
 from torch_geometric.data import InMemoryDataset, download_url, Data
-
+import torch_geometric.utils as utils
 
 
 class Grand(InMemoryDataset):
@@ -36,6 +36,8 @@ class Grand(InMemoryDataset):
         'Tibial_Nerve': '1lHvtRo7IF9BUPGaJL_eBL0aQD7IE3wvZ',
         'Kidney_renal_papillary_cell_carcinoma': '1Hj5zZFOon3YW3MTR0vzDrfS0IqgkwcNH',
         'Spleen': '1FRIb0moyq-L7eP5zUxINLmnZfqQ2qTDD',
+        'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
+        'Leukemia': '1ztRJcNXG4O6OY106JFyZ8MF1EyV55n1_',
     }
     # a help function used to evaluate the property of graphs.
     def split_rows(tensor):
@@ -57,7 +59,7 @@ class Grand(InMemoryDataset):
         self.name = name
         assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Colon_adenocarcinoma',
                              'Sarcoma','Liver','Tibial_Nerve','Kidney_renal_papillary_cell_carcinoma',
-                             'Spleen']
+                             'Spleen','Lung_cancer','Leukemia']
         super().__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 
@@ -82,7 +84,18 @@ class Grand(InMemoryDataset):
         print("Processing the data...")
         raw_data = torch.load(osp.join(self.raw_dir, self.raw_file_names))
         num_hyperedges = torch.unique(raw_data.hyperedge_index[1])
-        data = Data(x=raw_data.x, edge_index=raw_data.adj, y=raw_data.y,
+        # torch.arange(30171).view(-1,1).float()
+        data = Data(x=torch.arange(30171).view(-1,1).float(), edge_index=raw_data.adj, y=raw_data.y,
                     hyperedge_index=raw_data.hyperedge_index, num_hyperedges=len(num_hyperedges))
 
         torch.save(self.collate([data]), self.processed_paths[0])
+
+    def to_undirected(self, edge_index):
+        # Given an edge_index tensor of shape [2, E], we first create a new tensor
+        # that includes both the original edges and their reverse.
+        undirected_edge_index = torch.cat([edge_index, torch.flip(edge_index, [0])], dim=1)
+
+        # In the new tensor, there may be duplicate edges, so we call unique to remove them.
+        undirected_edge_index = torch.unique(undirected_edge_index, dim=1)
+
+        return undirected_edge_index

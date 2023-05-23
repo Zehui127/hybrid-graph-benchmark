@@ -22,6 +22,8 @@ class GATNet(torch.nn.Module):
         if info["is_regression"]:
             self.conv2 = GAT(dim, dim,num_layers=1 )
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = GAT(dim, dim,num_layers=1 )
         else:
             self.conv2 = GAT(dim, info["num_classes"], num_layers=1)
 
@@ -56,6 +58,8 @@ class GATV2Net(torch.nn.Module):
         if self.is_regression:
             self.conv2 = GAT(dim, dim, v2=True,num_layers=1)
             self.head = nn.Linear(dim, 1)
+        elif info["is_edge_pred"]:
+            self.conv2 = GAT(dim, dim, v2=True,num_layers=1)
         else:
             self.conv2 = GAT(dim, info["num_classes"], v2=True,num_layers=1)
 

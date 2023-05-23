@@ -2,7 +2,7 @@
 # set the number of nodes
 #SBATCH --nodes=1
 # set max wallclock time
-#SBATCH --time=48:00:00
+#SBATCH --time=120:00:00
 # set name of job
 #SBATCH --job-name=jobzl432
 # set number of GPUs
