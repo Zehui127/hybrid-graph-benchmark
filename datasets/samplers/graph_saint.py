@@ -5,7 +5,8 @@ from torch_geometric.loader import GraphSAINTSampler
 
 
 class HypergraphSAINTSampler(GraphSAINTSampler):
-    def __collate__(self, data_list):
+    # def _collate(self, data_list):  # torch-geometric>=2.3.0
+    def __collate__(self, data_list):  # torch-geometric==2.2.0
         assert len(data_list) == 1
         node_idx, adj = data_list[0]
 
@@ -37,14 +38,16 @@ class HypergraphSAINTSampler(GraphSAINTSampler):
 
 
 class HypergraphSAINTNodeSampler(HypergraphSAINTSampler):
-    def __sample_nodes__(self, batch_size):
+    # def _sample_nodes(self, batch_size):  # torch-geometric>=2.3.0
+    def __sample_nodes__(self, batch_size):  # torch-geometric==2.2.0
         edge_sample = torch.randint(0, self.E, (batch_size, self.batch_size), dtype=torch.long)
 
         return self.adj.storage.row()[edge_sample]
 
 
 class HypergraphSAINTEdgeSampler(HypergraphSAINTSampler):
-    def __sample_nodes__(self, batch_size):
+    # def _sample_nodes(self, batch_size):  # torch-geometric>=2.3.0
+    def __sample_nodes__(self, batch_size):  # torch-geometric==2.2.0
         row, col, _ = self.adj.coo()
 
         deg_in = 1. / self.adj.storage.colcount()
@@ -71,11 +74,13 @@ class HypergraphSAINTRandomWalkSampler(HypergraphSAINTSampler):
                          save_dir, log, **kwargs)
 
     @property
-    def __filename__(self):
+    # def _filename(self):  # torch-geometric>=2.3.0
+    def __filename__(self):  # torch-geometric==2.2.0
         return (f'{self.__class__.__name__.lower()}_{self.walk_length}_'
                 f'{self.sample_coverage}.pt')
 
-    def __sample_nodes__(self, batch_size):
+    # def _sample_nodes(self, batch_size):  # torch-geometric>=2.3.0
+    def __sample_nodes__(self, batch_size):  # torch-geometric==2.2.0
         start = torch.randint(0, self.N, (batch_size,), dtype=torch.long)
         node_idx = self.adj.random_walk(start.flatten(), self.walk_length)
         return node_idx.view(-1)
