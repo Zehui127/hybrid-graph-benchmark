@@ -31,41 +31,12 @@ DATASET_INFO = {
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 340,
+            'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': True,
         }
 
-    },
-    'grand_Breast': {
-        'type': 'Grand',
-        'name': 'Breast',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
-
-    },
-    'grand_Vagina': {
-        'type': 'Grand',
-        'name': 'Vagina',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
     },
     'grand_ArteryCoronary': {
         'type': 'Grand',
@@ -74,16 +45,130 @@ DATASET_INFO = {
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 1,
+            'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': False,
 
         }
     },
-    'grand_ColonAdenocarcinoma': {
+    'grand_Breast': {
         'type': 'Grand',
-        'name': 'Colon_adenocarcinoma',
+        'name': 'Breast',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+
+    },
+    'grand_Brain': {
+        'type': 'Grand',
+        'name': 'Brain',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+
+    },
+   'grand_Lung': {
+        'type': 'Grand',
+        'name': 'Lung',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+   'grand_Stomach': {
+        'type': 'Grand',
+        'name': 'Stomach',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_Leukemia': {
+        'type': 'Grand',
+        'name': 'Leukemia',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_Lungcancer': {
+        'type': 'Grand',
+        'name': 'Lung_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_Stomachcancer': {
+        'type': 'Grand',
+        'name': 'Stomach_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_KidneyCancer': {
+        'type': 'Grand',
+        'name': 'Kidney_renal_papillary_cell_carcinoma',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': True,
+
+        }
+    },
+    'grand_Vagina': {
+        'type': 'Grand',
+        'name': 'Vagina',
         'root': 'data/grand',
         'single_graph': True,
         'info': {
@@ -137,20 +222,6 @@ DATASET_INFO = {
 
         }
     },
-    'grand_KidneyCarcinoma': {
-        'type': 'Grand',
-        'name': 'Kidney_renal_papillary_cell_carcinoma',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
-    },
     'grand_Spleen': {
         'type': 'Grand',
         'name': 'Spleen',
@@ -163,34 +234,6 @@ DATASET_INFO = {
             'is_regression': False,
             'is_edge_pred': True,
                }
-    },
-    'grand_Lungcancer': {
-        'type': 'Grand',
-        'name': 'Lung_cancer',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_Leukemia': {
-        'type': 'Grand',
-        'name': 'Leukemia',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
     },
     'musae_Twitch_DE': {
         'type': 'Twitch',
@@ -292,7 +335,7 @@ DATASET_INFO = {
     'musae_Github': {
         'type': 'GitHub',
         'root': 'data/musae/github',
-        'single_graph': False,
+        'single_graph': True,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
@@ -444,7 +487,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
                 yield item
 
 
-def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=5):
+def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=2):
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)
@@ -501,7 +544,7 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2
             dataset_info,
         )
 def mask_split(dataset, original_mask=True,
-               train_portion=0.6, eval_portion=0.2, test_portion=0.2):
+               train_portion=0.8, eval_portion=0.1, test_portion=0.1):
     # re split to the train, eval and test mask to 60:20:20
     # only suppose to work with cora
     masks = []
