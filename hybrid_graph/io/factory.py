@@ -34,7 +34,7 @@ DATASET_INFO = {
             'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
         }
 
     },
@@ -62,7 +62,7 @@ DATASET_INFO = {
             'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
 
         }
 
@@ -77,7 +77,7 @@ DATASET_INFO = {
             'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
 
         }
 
@@ -120,7 +120,7 @@ DATASET_INFO = {
             'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
 
         }
     },
@@ -162,7 +162,7 @@ DATASET_INFO = {
             'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
 
         }
     },
