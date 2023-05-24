@@ -3,15 +3,14 @@ import argparse
 import itertools
 
 Models = ['gcn','sage','gat','gatv2','hyper-gcn','hyper-gat'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
-Datasets = ["grand_ArteryAorta","grand_ArteryCoronary","grand_Breast",
+Datasets = ["amazon_Computer","amazon_Photo"]
+
+
+"""["grand_ArteryAorta","grand_ArteryCoronary","grand_Breast",
             "grand_Brain","grand_Lung","grand_Stomach",
             "grand_Leukemia","grand_Lungcancer",
-            "grand_Stomachcancer","grand_KidneyCancer"] #,"grand_Lung","grand_Lungcancer"
+            "grand_Stomachcancer","grand_KidneyCancer"]"""
 
-"""["musae_Twitch_ES","musae_Twitch_FR","musae_Twitch_DE",
-            "musae_Twitch_EN","musae_Twitch_PT","musae_Twitch_RU",
-            "musae_Facebook","musae_Github","musae_Wiki_chameleon",
-            "musae_Wiki_crocodile","musae_Wiki_squirrel"]"""
 
 """["grand_Lungcancer","grand_Leukemia","grand_ArteryAorta","grand_Breast","grand_Vagina",
             "grand_ArteryCoronary","grand_ColonAdenocarcinoma",

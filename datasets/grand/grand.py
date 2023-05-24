@@ -40,6 +40,7 @@ class Grand(InMemoryDataset):
         'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
         'Stomach_cancer':'1TF0rg3agGfI9ScZijcQgH6FhkZ6O6EsB',
         'Stomach':'1A7vTrlqkXOhn2RK9BUEnp8V3WhJSG0Q2',
+        "Blood":'1UA7ZOTcbOujyD4QdeF0BhXx6h4J_EXTP',
     }
     # a help function used to evaluate the property of graphs.
     def split_rows(tensor):

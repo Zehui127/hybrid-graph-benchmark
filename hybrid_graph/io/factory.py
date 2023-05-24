@@ -38,6 +38,20 @@ DATASET_INFO = {
         }
 
     },
+    'grand_Blood': {
+        'type': 'Grand',
+        'name': 'Blood',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+        }
+
+    },
     'grand_ArteryCoronary': {
         'type': 'Grand',
         'name': 'Artery_Coronary',
@@ -437,7 +451,7 @@ DATASET_INFO = {
             }
     },
 
-    'amazon_computer':  {
+    'amazon_Photo':  {
         'type': 'Amazon',
         'name': 'Photos',
         'root': 'data/amazon',
@@ -450,7 +464,7 @@ DATASET_INFO = {
                 'is_edge_pred': False,
         }
     },
-    'amazon_photos':  {
+    'amazon_Computer':  {
         'type': 'Amazon',
         'name': 'Computers',
         'root': 'data/amazon',
