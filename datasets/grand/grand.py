@@ -63,7 +63,7 @@ class Grand(InMemoryDataset):
         assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Stomach_cancer',
                              'Stomach', 'Brain','Lung',
                              'Sarcoma','Liver','Tibial_Nerve','Kidney_renal_papillary_cell_carcinoma',
-                             'Spleen','Lung_cancer','Leukemia']
+                             'Spleen','Lung_cancer','Leukemia','Blood']
         super().__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 
