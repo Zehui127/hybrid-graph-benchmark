@@ -20,6 +20,10 @@ class HypergraphSAINTSampler(GraphSAINTSampler):
         data.hyperedge_index[1] = inverse_indices
         data.num_hyperedges = data.hyperedge_index[1, -1] + 1
 
+        # Remap node indices in hyperedge_index to the range [0, sample_size - 1]
+        node_map = {node: i for i, node in enumerate(node_idx.tolist())}
+        data.hyperedge_index[0].apply_(lambda node: node_map[node])
+
         for key, item in self.data:
             if key in ['edge_index', 'hyperedge_index', 'num_nodes', 'num_hyperedges']:
                 continue
