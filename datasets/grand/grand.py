@@ -39,7 +39,7 @@ class Grand(InMemoryDataset):
         'Artery_Aorta': '1XjTRe4DJ2RU8SlqHkgUa6NTOdMLkGsd_',
         'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
         'Stomach_cancer':'1TF0rg3agGfI9ScZijcQgH6FhkZ6O6EsB',
-        'Stomach':'1A7vTrlqkXOhn2RK9BUEnp8V3WhJSG0Q2',
+        'Stomach':'1MWc_wINEogQHX5u6xvvOWyohtd_HIwoj',
         "Cholang":'1wUyd_MD0bWT-cd5vd31XuY9lMt6gPvu0',
     }
     # a help function used to evaluate the property of graphs.
@@ -87,10 +87,9 @@ class Grand(InMemoryDataset):
     def process(self):
         print("Processing the data...")
         raw_data = torch.load(osp.join(self.raw_dir, self.raw_file_names))
-        num_hyperedges = torch.unique(raw_data.hyperedge_index[1])
         # torch.arange(30171).view(-1,1).float()
-        data = Data(x=raw_data.x, edge_index=raw_data.adj, y=raw_data.y,
-                    hyperedge_index=raw_data.hyperedge_index, num_hyperedges=len(num_hyperedges))
+        data = Data(x=raw_data.x, edge_index=raw_data.edge_index, y=raw_data.y,
+                    hyperedge_index=raw_data.hyperedge_index, num_hyperedges=raw_data.num_hyperedges)
 
         torch.save(self.collate([data]), self.processed_paths[0])
 

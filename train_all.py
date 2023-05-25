@@ -3,7 +3,10 @@ import argparse
 import itertools
 
 Models = ['gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
-Datasets = ["amazon_Computer","amazon_Photo"]
+Datasets = ["grand_ArteryAorta","grand_ArteryCoronary","grand_Breast",
+            "grand_Brain","grand_Lung","grand_Stomach",
+            "grand_Leukemia","grand_Lungcancer",
+            "grand_Stomachcancer","grand_KidneyCancer"]
 
 
 """["grand_ArteryAorta","grand_ArteryCoronary","grand_Breast",
@@ -45,7 +48,7 @@ def main():
             run_train([dataset,model,f'-m={args.max_epoch}',
                        f'-save=checkpoints/{dataset}_{model}',
                        f'-seed={args.seed}',
-                       f"-b=1000"] # number of nodes in a batch
+                       f"-b=300"] # number of nodes in a batch
                      )
     elif args.type == 'test':
         for model, dataset in combinations:

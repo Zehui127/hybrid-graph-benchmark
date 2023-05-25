@@ -336,7 +336,7 @@ DATASET_INFO = {
     'musae_Facebook': {
         'type': 'Facebook',
         'root': 'data/musae/facebook',
-        'single_graph': True,
+        'single_graph': False,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
@@ -349,7 +349,7 @@ DATASET_INFO = {
     'musae_Github': {
         'type': 'GitHub',
         'root': 'data/musae/github',
-        'single_graph': True,
+        'single_graph': False,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
@@ -571,7 +571,7 @@ def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2
             dataset_info,
         )
 def mask_split(dataset, original_mask=True,
-               train_portion=0.8, eval_portion=0.1, test_portion=0.1):
+               train_portion=0.6, eval_portion=0.2, test_portion=0.2):
     # re split to the train, eval and test mask to 60:20:20
     # only suppose to work with cora
     masks = []
