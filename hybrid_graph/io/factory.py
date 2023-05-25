@@ -31,41 +31,26 @@ DATASET_INFO = {
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 340,
+            'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
+            'is_edge_pred': False,
         }
 
     },
-    'grand_Breast': {
+    'grand_Cholang': {
         'type': 'Grand',
-        'name': 'Breast',
+        'name': 'Cholang',
         'root': 'data/grand',
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 340,
+            'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
-            'is_edge_pred': True,
-
+            'is_edge_pred': False,
         }
 
-    },
-    'grand_Vagina': {
-        'type': 'Grand',
-        'name': 'Vagina',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
     },
     'grand_ArteryCoronary': {
         'type': 'Grand',
@@ -74,16 +59,130 @@ DATASET_INFO = {
         'single_graph': True,
         'info': {
             'original_mask': False,
-            'num_node_features': 1,
+            'num_node_features': 4608,
             'num_classes': 3,
             'is_regression': False,
             'is_edge_pred': False,
 
         }
     },
-    'grand_ColonAdenocarcinoma': {
+    'grand_Breast': {
         'type': 'Grand',
-        'name': 'Colon_adenocarcinoma',
+        'name': 'Breast',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+        }
+
+    },
+    'grand_Brain': {
+        'type': 'Grand',
+        'name': 'Brain',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+        }
+
+    },
+   'grand_Lung': {
+        'type': 'Grand',
+        'name': 'Lung',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+   'grand_Stomach': {
+        'type': 'Grand',
+        'name': 'Stomach',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_Leukemia': {
+        'type': 'Grand',
+        'name': 'Leukemia',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+        }
+    },
+    'grand_Lungcancer': {
+        'type': 'Grand',
+        'name': 'Lung_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_Stomachcancer': {
+        'type': 'Grand',
+        'name': 'Stomach_cancer',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info':{
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+               }
+    },
+    'grand_KidneyCancer': {
+        'type': 'Grand',
+        'name': 'Kidney_renal_papillary_cell_carcinoma',
+        'root': 'data/grand',
+        'single_graph': True,
+        'info': {
+            'original_mask': False,
+            'num_node_features': 4608,
+            'num_classes': 3,
+            'is_regression': False,
+            'is_edge_pred': False,
+
+        }
+    },
+    'grand_Vagina': {
+        'type': 'Grand',
+        'name': 'Vagina',
         'root': 'data/grand',
         'single_graph': True,
         'info': {
@@ -137,20 +236,6 @@ DATASET_INFO = {
 
         }
     },
-    'grand_KidneyCarcinoma': {
-        'type': 'Grand',
-        'name': 'Kidney_renal_papillary_cell_carcinoma',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info': {
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
-    },
     'grand_Spleen': {
         'type': 'Grand',
         'name': 'Spleen',
@@ -163,34 +248,6 @@ DATASET_INFO = {
             'is_regression': False,
             'is_edge_pred': True,
                }
-    },
-    'grand_Lungcancer': {
-        'type': 'Grand',
-        'name': 'Lung_cancer',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-               }
-    },
-    'grand_Leukemia': {
-        'type': 'Grand',
-        'name': 'Leukemia',
-        'root': 'data/grand',
-        'single_graph': True,
-        'info':{
-            'original_mask': False,
-            'num_node_features': 340,
-            'num_classes': 3,
-            'is_regression': False,
-            'is_edge_pred': True,
-
-        }
     },
     'musae_Twitch_DE': {
         'type': 'Twitch',
@@ -279,7 +336,7 @@ DATASET_INFO = {
     'musae_Facebook': {
         'type': 'Facebook',
         'root': 'data/musae/facebook',
-        'single_graph': True,
+        'single_graph': False,
         'info': {
             'original_mask': False,
             'num_node_features': 128,
@@ -394,7 +451,20 @@ DATASET_INFO = {
             }
     },
 
-    'amazon_computer':  {
+    'amazon_Photo':  {
+        'type': 'Amazon',
+        'name': 'Photos',
+        'root': 'data/amazon',
+        'single_graph': True,
+        'info':{
+                'original_mask': False,
+                'num_node_features': 1000,
+                'num_classes': 10,
+                'is_regression': False,
+                'is_edge_pred': False,
+        }
+    },
+    'amazon_Computer':  {
         'type': 'Amazon',
         'name': 'Computers',
         'root': 'data/amazon',

@@ -24,20 +24,23 @@ class Grand(InMemoryDataset):
           - 3
         """
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
-
     file_id = {
-        'Artery_Aorta': '1XjTRe4DJ2RU8SlqHkgUa6NTOdMLkGsd_',
-        'Breast': '1cinfmlomxkenscWZwTCaXy8pyGdx78gs',
-        'Vagina': '11tjAEuoeqDUfHVXt4cAIX_QPAOG-OD96',
-        'Artery_Coronary': '1LyvWdPGXMelvVmh2g_RS3iRnUgBIJNf-',
-        'Colon_adenocarcinoma': '1Ylngt1p_JgTKmP9GgyxZAA6eA1N4ST9c',
-        'Sarcoma': '1SBzDq_WeYQxEW1c9mYphjOkB0Zts6TYT',
-        'Liver': '1nbfLgOMEKqHy-o_XTvgqQ1p3s1X7uOtn',
-        'Tibial_Nerve': '1lHvtRo7IF9BUPGaJL_eBL0aQD7IE3wvZ',
-        'Kidney_renal_papillary_cell_carcinoma': '1Hj5zZFOon3YW3MTR0vzDrfS0IqgkwcNH',
-        'Spleen': '1FRIb0moyq-L7eP5zUxINLmnZfqQ2qTDD',
-        'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
         'Leukemia': '1ztRJcNXG4O6OY106JFyZ8MF1EyV55n1_',
+        'Brain': '1kBxVOj_H0FYRc159HypgvLw5zwsp-9Pv',
+        'Sarcoma': '1SBzDq_WeYQxEW1c9mYphjOkB0Zts6TYT',
+        'Vagina': '11tjAEuoeqDUfHVXt4cAIX_QPAOG-OD96',
+        'Tibial_Nerve': '1lHvtRo7IF9BUPGaJL_eBL0aQD7IE3wvZ',
+        'Spleen': '1FRIb0moyq-L7eP5zUxINLmnZfqQ2qTDD',
+        'Liver': '1nbfLgOMEKqHy-o_XTvgqQ1p3s1X7uOtn',
+        'Kidney_renal_papillary_cell_carcinoma': '1Hj5zZFOon3YW3MTR0vzDrfS0IqgkwcNH',
+        'Lung': '14g1wbCRbepZaniRdsCD-TP0p6SPTmvhS',
+        'Breast': '1cinfmlomxkenscWZwTCaXy8pyGdx78gs',
+        'Artery_Coronary': '1LyvWdPGXMelvVmh2g_RS3iRnUgBIJNf-',
+        'Artery_Aorta': '1XjTRe4DJ2RU8SlqHkgUa6NTOdMLkGsd_',
+        'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
+        'Stomach_cancer':'1TF0rg3agGfI9ScZijcQgH6FhkZ6O6EsB',
+        'Stomach':'1MWc_wINEogQHX5u6xvvOWyohtd_HIwoj',
+        "Cholang":'1wUyd_MD0bWT-cd5vd31XuY9lMt6gPvu0',
     }
     # a help function used to evaluate the property of graphs.
     def split_rows(tensor):
@@ -57,9 +60,10 @@ class Grand(InMemoryDataset):
     def __init__(self,  root: str, name: str,
                  transform: Optional[Callable] = None, pre_transform: Optional[Callable] = None):
         self.name = name
-        assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Colon_adenocarcinoma',
+        assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Stomach_cancer',
+                             'Stomach', 'Brain','Lung',
                              'Sarcoma','Liver','Tibial_Nerve','Kidney_renal_papillary_cell_carcinoma',
-                             'Spleen','Lung_cancer','Leukemia']
+                             'Spleen','Lung_cancer','Leukemia','Cholang']
         super().__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 
@@ -83,10 +87,9 @@ class Grand(InMemoryDataset):
     def process(self):
         print("Processing the data...")
         raw_data = torch.load(osp.join(self.raw_dir, self.raw_file_names))
-        num_hyperedges = torch.unique(raw_data.hyperedge_index[1])
         # torch.arange(30171).view(-1,1).float()
-        data = Data(x=torch.arange(30171).view(-1,1).float(), edge_index=raw_data.adj, y=raw_data.y,
-                    hyperedge_index=raw_data.hyperedge_index, num_hyperedges=len(num_hyperedges))
+        data = Data(x=raw_data.x, edge_index=raw_data.edge_index, y=raw_data.y,
+                    hyperedge_index=raw_data.hyperedge_index, num_hyperedges=raw_data.num_hyperedges)
 
         torch.save(self.collate([data]), self.processed_paths[0])
 
