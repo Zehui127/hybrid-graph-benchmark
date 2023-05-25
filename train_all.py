@@ -2,7 +2,7 @@ import subprocess
 import argparse
 import itertools
 
-Models = ['gcn','sage','gat','gatv2','hyper-gcn','hyper-gat'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
+Models = ['gcn'] # 'gcn','sage','gat','gatv2','hyper-gcn','hyper-gat','hybrid-sage','hybrid-gcn'
 Datasets = ["amazon_Computer","amazon_Photo"]
 
 

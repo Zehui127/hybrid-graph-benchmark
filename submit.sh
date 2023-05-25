@@ -25,8 +25,8 @@ cd ~/repositories/hypergraph-benchmarks
 # srun python train_all.py -t train -s 2304
 
 ## test
-srun python train_all.py -t test -v=''
-srun python train_all.py -t test -v=-v1
-srun python train_all.py -t test -v=-v2
-srun python train_all.py -t test -v=-v3
-srun python train_all.py -t test -v=-v4
+srun python train_all.py -t test -v=-v5
+srun python train_all.py -t test -v=-v6
+srun python train_all.py -t test -v=-v7
+srun python train_all.py -t test -v=-v8
+srun python train_all.py -t test -v=-v9

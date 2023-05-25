@@ -38,9 +38,9 @@ DATASET_INFO = {
         }
 
     },
-    'grand_Blood': {
+    'grand_Cholang': {
         'type': 'Grand',
-        'name': 'Blood',
+        'name': 'Cholang',
         'root': 'data/grand',
         'single_graph': True,
         'info': {
@@ -514,7 +514,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
                 yield item
 
 
-def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=2):
+def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=5):
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)
