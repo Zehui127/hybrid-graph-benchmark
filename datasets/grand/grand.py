@@ -13,25 +13,80 @@ class Grand(InMemoryDataset):
      **STATS:**
 
     .. list-table::
-        :widths: 10 10 10
+        :widths: 15 15 15 15 15
         :header-rows: 1
 
-        * - #Graphs
+        * - Name
+          - #nodes
+          - #edges
+          - #hyperedges
           - #features
           - #classes
-        * - 60
-          - 340
+        * - Leukemia
+          - 4,651
+          - 6,362
+          - 7,812
+          - 4608
+          - 3
+        * - Brain
+          - 6,196
+          - 6,245
+          - 11,878
+          - 4608
+          - 3
+        * - Kidney_renal_papillary_cell_carcinoma
+          - 4,319
+          - 5,599
+          - 7,369
+          - 4608
+          - 3
+        * - Lung
+          - 6,119
+          - 6,160
+          - 11,760
+          - 4608
+          - 3
+        * - Breast
+          - 5,921
+          - 5,910
+          - 11,400
+          - 4608
+          - 3
+        * - Artery_Coronary
+          - 5,755
+          - 5,722
+          - 11,222
+          - 4608
+          - 3
+        * - Artery_Aorta
+          - 5,848
+          - 5,823
+          - 11,368
+          - 4608
+          - 3
+        * - Lung_cancer
+          - 4,896
+          - 6,995
+          - 8,179
+          - 4608
+          - 3
+        * - Stomach_cancer
+          - 4,518
+          - 6,051
+          - 7,611
+          - 4608
+          - 3
+        * - Stomach
+          - 5,745
+          - 5,694
+          - 11,201
+          - 4608
           - 3
         """
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
     file_id = {
         'Leukemia': '1ztRJcNXG4O6OY106JFyZ8MF1EyV55n1_',
         'Brain': '1kBxVOj_H0FYRc159HypgvLw5zwsp-9Pv',
-        'Sarcoma': '1SBzDq_WeYQxEW1c9mYphjOkB0Zts6TYT',
-        'Vagina': '11tjAEuoeqDUfHVXt4cAIX_QPAOG-OD96',
-        'Tibial_Nerve': '1lHvtRo7IF9BUPGaJL_eBL0aQD7IE3wvZ',
-        'Spleen': '1FRIb0moyq-L7eP5zUxINLmnZfqQ2qTDD',
-        'Liver': '1nbfLgOMEKqHy-o_XTvgqQ1p3s1X7uOtn',
         'Kidney_renal_papillary_cell_carcinoma': '1Hj5zZFOon3YW3MTR0vzDrfS0IqgkwcNH',
         'Lung': '14g1wbCRbepZaniRdsCD-TP0p6SPTmvhS',
         'Breast': '1cinfmlomxkenscWZwTCaXy8pyGdx78gs',
@@ -40,30 +95,14 @@ class Grand(InMemoryDataset):
         'Lung_cancer': '1QLRHsyhssELyC4eJ9sH75E3QJ5lHUNrA',
         'Stomach_cancer':'1TF0rg3agGfI9ScZijcQgH6FhkZ6O6EsB',
         'Stomach':'1MWc_wINEogQHX5u6xvvOWyohtd_HIwoj',
-        "Cholang":'1wUyd_MD0bWT-cd5vd31XuY9lMt6gPvu0',
     }
-    # a help function used to evaluate the property of graphs.
-    def split_rows(tensor):
-        # Task 1: Split the first row into groups based on the second row
-        unique_second_row_values = torch.unique(tensor[1])
-        first_row_groups = {value.item(): [] for value in unique_second_row_values}
-        for i, value in enumerate(tensor[1]):
-            first_row_groups[value.item()].append(tensor[0][i].item())
-        # Task 2: Split the second row into groups based on the first row
-        unique_first_row_values = torch.unique(tensor[0])
-        second_row_groups = {value.item(): [] for value in unique_first_row_values}
-        for i, value in enumerate(tensor[0]):
-            second_row_groups[value.item()].append(tensor[1][i].item())
-        print(f"First row groups: {len(first_row_groups)}")
-        print(f"Second row groups: {len(second_row_groups)}")
-        return first_row_groups, second_row_groups
     def __init__(self,  root: str, name: str,
                  transform: Optional[Callable] = None, pre_transform: Optional[Callable] = None):
         self.name = name
-        assert self.name in ['Artery_Aorta','Breast','Vagina','Artery_Coronary','Stomach_cancer',
+        assert self.name in ['Artery_Aorta','Breast','Artery_Coronary','Stomach_cancer',
                              'Stomach', 'Brain','Lung',
-                             'Sarcoma','Liver','Tibial_Nerve','Kidney_renal_papillary_cell_carcinoma',
-                             'Spleen','Lung_cancer','Leukemia','Cholang']
+                             'Kidney_renal_papillary_cell_carcinoma',
+                             'Lung_cancer','Leukemia']
         super().__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 

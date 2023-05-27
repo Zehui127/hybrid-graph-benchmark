@@ -12,15 +12,27 @@ class Amazon(InMemoryDataset):
      **STATS:**
 
     .. list-table::
-        :widths: 10 10 10
+         :widths: 15 15 15 15 15
         :header-rows: 1
 
-        * - #Graphs
+        * - Name
+          - #nodes
+          - #edges
+          - #hyperedges
           - #features
           - #classes
-        * - 60
-          - 340
-          - 9
+        * - Photos
+          - 6,777
+          - 45,306
+          - 6,777
+          - 1000
+          - 10
+        * - Computers
+          - 10,226
+          - 55,324
+          - 10,226
+          - 1000
+          - 10
         """
     url = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id={}"
 
@@ -28,21 +40,6 @@ class Amazon(InMemoryDataset):
         'Computers': '1wGIKse1qpeldFZyRTdJGlItMCOpGdVG2',
         'Photos': '1twcjbZjZDhc6mzD8yBtLKc_JTlRojmMz',
     }
-    # a help function used to evaluate the property of graphs.
-    def split_rows(tensor):
-        # Task 1: Split the first row into groups based on the second row
-        unique_second_row_values = torch.unique(tensor[1])
-        first_row_groups = {value.item(): [] for value in unique_second_row_values}
-        for i, value in enumerate(tensor[1]):
-            first_row_groups[value.item()].append(tensor[0][i].item())
-        # Task 2: Split the second row into groups based on the first row
-        unique_first_row_values = torch.unique(tensor[0])
-        second_row_groups = {value.item(): [] for value in unique_first_row_values}
-        for i, value in enumerate(tensor[0]):
-            second_row_groups[value.item()].append(tensor[1][i].item())
-        print(f"First row groups: {len(first_row_groups)}")
-        print(f"Second row groups: {len(second_row_groups)}")
-        return first_row_groups, second_row_groups
 
     def __init__(self,  root: str, name: str,
                  transform: Optional[Callable] = None, pre_transform: Optional[Callable] = None):

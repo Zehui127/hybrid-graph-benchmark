@@ -305,15 +305,3 @@ benchmark_PubMed:
     num_classes: 3
     is_regression: false
     is_edge_pred: false
-
-benchmark_ogbn-arxiv:
-  type: Benchmark
-  name: ogbn-arxiv
-  root: data/ogbn-arxiv.pt
-  single_graph: true
-  info:
-    original_mask: false
-    num_node_features: 128
-    num_classes: 40
-    is_regression: false
-    is_edge_pred: false
