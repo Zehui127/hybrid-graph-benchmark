@@ -4,7 +4,7 @@
 <!-- [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html) -->
 
 <!-- ![]() -->
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/title.png?raw=true" width="250" height="150">
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/title.png?raw=true"style="width: 50%; height: auto;">
 
 This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hierarchical graph) learning algorithms. It contains:
  - 20+ middle-size hypergraphs from the domains of biology, social media, and wikipedia
@@ -12,7 +12,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
  - A framework to easily evaluate new learning algorithms
 # Architecture
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true" width="500" height="300">
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true" style="width: 100%; height: auto;">
 
 
 # Benchmarks
