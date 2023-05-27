@@ -11,19 +11,10 @@ import torch_geometric.utils as utils
 import logging
 
 from .utils import device
-import pathlib
 import yaml
 torch.multiprocessing.set_sharing_strategy('file_system')
 
-# Add the dataset directory to sys.path
-dataset_dir = os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(), 'datasets')
-if dataset_dir not in sys.path:
-    sys.path.append(dataset_dir)
 
-import datasets
-
-with open(os.path.join(dataset_dir, 'dataset_info.yaml')) as f:
-    DATASET_INFO = yaml.safe_load(f)
 class DataLoader(torch_geometric.loader.DataLoader):
     pin_memory = True
 
@@ -58,7 +49,14 @@ class DataLoader(torch_geometric.loader.DataLoader):
                 yield item
 
 
-def get_dataset(name, original_mask=False, split=0.9, batch_size=6000, workers=2, num_steps=5):
+def get_dataset(name, datasets_path ,original_mask=False, split=0.8, batch_size=6000, workers=2, num_steps=5):
+    if datasets_path not in sys.path:
+        sys.path.append(datasets_path)
+    import datasets
+
+    with open(os.path.join(datasets_path, 'dataset_info.yaml')) as f:
+        DATASET_INFO = yaml.safe_load(f)
+
     # fix random seeds
     np.random.seed(1)
     torch.manual_seed(1)

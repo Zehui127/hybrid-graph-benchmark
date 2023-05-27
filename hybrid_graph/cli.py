@@ -11,6 +11,7 @@ import numpy as np
 from .sessions import train, test
 from .models import factory
 from .io import get_dataset
+import pathlib
 
 
 class Main:
@@ -18,6 +19,11 @@ class Main:
         ('action', ): {'type': str, 'help': 'Name of the action to perform.'},
         ('dataset', ): {'type': str, 'help': 'Name of the dataset.'},
         ('model', ): {'type': str, 'help': 'Name of the model.'},
+
+        # dataset path
+        ('-dp', '--dataset-path'): {
+            'type': str, 'default': os.path.join(pathlib.Path(__file__).parent.parent.resolve(),'datasets'), 'help': 'Path to the dataset.',
+        },
 
         # checkpointing
         ('-load', '--load-name'): {
@@ -107,7 +113,9 @@ class Main:
     def setup_model_and_data(self, a):
         # get dataset
         train_loader, val_loader, test_loader, dataset_info = get_dataset(
-            name=a.dataset, batch_size=a.batch_size, workers=a.num_workers)
+            name=a.dataset, batch_size=a.batch_size, workers=a.num_workers,
+            datasets_path=a.dataset_path)
+        print(f"datasets path: {a.dataset_path}")
         # get model
         model_cls = factory[a.model]
         model = model_cls(info=dataset_info)
