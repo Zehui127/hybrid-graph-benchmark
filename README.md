@@ -3,12 +3,16 @@
 &nbsp;&nbsp;&nbsp;
 [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html)
 
-![](https://github.com/Zehui127/zehui127/blob/main/images/icon2.png?raw=true)
+![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/title.pdf?raw=true)
 
 This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hierarchical graph) learning algorithms. It contains:
  - 20+ middle-size hypergraphs from the domains of biology, social media, and wikipedia
  - Several large-size hypergraphs constructed from mutimodel data of e-commerce platform
  - A framework to easily evaluate new learning algorithms
+# Architecture
+![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.pdf?raw=true)
+
+
 
 # Benchmarks
 ## Gene regulatory networks
