@@ -18,6 +18,7 @@ cd ~/repositories/hypergraph-benchmarks
 # srun python train_all.py -t train -s 144
 # srun python train_all.py -t test
 ## train
+srun python hg.py train grand_ArteryAorta gcn
 # srun python train_all.py -t train -s 144
 # srun python train_all.py -t train -s 281
 # srun python train_all.py -t train -s 576
@@ -25,8 +26,8 @@ cd ~/repositories/hypergraph-benchmarks
 # srun python train_all.py -t train -s 2304
 
 ## test
-srun python train_all.py -t test -v=-v5
-srun python train_all.py -t test -v=-v6
-srun python train_all.py -t test -v=-v7
-srun python train_all.py -t test -v=-v8
-srun python train_all.py -t test -v=-v9
+# srun python train_all.py -t test -v=-v5
+# srun python train_all.py -t test -v=-v6
+# srun python train_all.py -t test -v=-v7
+# srun python train_all.py -t test -v=-v8
+# srun python train_all.py -t test -v=-v9
