@@ -5,13 +5,13 @@
 
 <!-- ![]() -->
 <img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/title.png?raw=true" style="width: 80%; height: auto;">
-
+[![paper](https://img.shields.io/badge/Download-Raw%20Data-green)]()
 This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hierarchical graph) learning algorithms. It contains:
  - 20+ middle-size hypergraphs from the domains of biology, social media, and wikipedia
  - Several large-size hypergraphs constructed from mutimodel data of e-commerce platform
  - A framework to easily evaluate new learning algorithms
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true" style="width: 100%; height: auto;">
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true" style="width: 90%; height: auto;">
 
 
 # Benchmarks
