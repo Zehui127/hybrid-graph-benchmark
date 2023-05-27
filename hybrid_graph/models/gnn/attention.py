@@ -171,7 +171,7 @@ class TransformerBlock(nn.Module):
 
 
 class Attention(torch.nn.Module):
-    def __init__(self, dim, head=8, dropout_rate=0.5, attn_dropout=0.5, depth=1):
+    def __init__(self, dim, head=8, dropout_rate=0.2, attn_dropout=0.2, depth=1):
         super().__init__()
         self.transformer = nn.Sequential(*[TransformerBlock(dim, head, attn_dropout, dropout_rate) for _ in range(depth)])
 
