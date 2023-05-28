@@ -29,7 +29,7 @@ python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+$
 python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 python -m pip install torch-geometric==2.2.0
 ```
-Once these dependencies are installed, you can install this package with:
+Once these dependencies are installed, you can install this package with one of the following:
 ## Pip install
 ```bash
 #pip install hybrid-graph
@@ -110,7 +110,8 @@ class CustomizeGNN(torch.nn.Module):
         return x
 ```
 Finally, you should register you model in ```hypergraph-benchmarks/hg/hybrid_graph/models/__init__.py```
-```pyhton
+
+```python
 from .gnn.customize_model import CustomizeGNN
 factory = {
             'sage': SAGENet,
