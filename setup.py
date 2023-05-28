@@ -21,7 +21,7 @@ setup(
         'torchmetrics==0.11.1'],
     entry_points={
         'console_scripts': [
-            'hybrid-graph = hg.hg:main',
+            'hybrid-graph = hg.hybrid_graph.cli:main',
         ],
     },
     author="Xiangyu Zhao;Zehui Li",
