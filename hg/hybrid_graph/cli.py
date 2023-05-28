@@ -112,10 +112,10 @@ class Main:
 
     def setup_model_and_data(self, a):
         # get dataset
+        print(f"datasets path: {a.dataset_path}")
         train_loader, val_loader, test_loader, dataset_info = get_dataset(
             name=a.dataset, batch_size=a.batch_size, workers=a.num_workers,
             datasets_path=a.dataset_path)
-        print(f"datasets path: {a.dataset_path}")
         # get model
         model_cls = factory[a.model]
         model = model_cls(info=dataset_info)

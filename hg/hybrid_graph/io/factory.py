@@ -12,6 +12,7 @@ import logging
 
 from .utils import device
 import yaml
+import hg.datasets as datasets
 torch.multiprocessing.set_sharing_strategy('file_system')
 
 
@@ -50,9 +51,9 @@ class DataLoader(torch_geometric.loader.DataLoader):
 
 
 def get_dataset(name, datasets_path ,original_mask=False, split=0.8, batch_size=6000, workers=2, num_steps=5):
-    if datasets_path not in sys.path:
-        sys.path.append(datasets_path)
-    import datasets
+    # if datasets_path not in sys.path:
+    #     sys.path.append(datasets_path)
+    # import datasets
 
     with open(os.path.join(datasets_path, 'dataset_info.yaml')) as f:
         DATASET_INFO = yaml.safe_load(f)
