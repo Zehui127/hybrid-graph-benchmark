@@ -4,6 +4,7 @@ setup(
     name="hybrid-graph",
     version="0.2",
     packages=find_packages(),
+    package_data={'hg': ['datasets/dataset_info.yaml']},
     install_requires=[
         'torch',
         'torch_scatter',
