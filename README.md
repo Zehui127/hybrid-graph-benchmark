@@ -32,7 +32,8 @@ python -m pip install torch-geometric==2.2.0
 Once these dependencies are installed, you can install this package with:
 ## Pip install
 ```bash
-pip install hybrid-graph
+#pip install hybrid-graph
+pip install git+https://github.com/Zehui127/hypergraph-benchmarks.git@pre-release
 ```
 ## From source
 ```bash
@@ -42,5 +43,77 @@ pip install -e .
 ```
 
 # Usage
+Hybrid-graph provide both datasets and flash training/evaluation capabilities.
+## (1) Access the Dataset
+we use the ```torch_geometric.data.Data``` to wrap the graphs with additional adjacency matrix for hyperedge representation.
+```python
+from hg.datasets import Facebook, mask_split ,HypergraphSAINTNodeSampler
+# download data to the path 'data/facebook'
+data = Facebook('data/facebook')
+print(data[0]) # e.g. Data(x=[22470, 128], edge_index=[2, 342004], y=[22470], hyperedge_index=[2, 2344151], num_hyperedges=236663)
+# create a sampler which sample 1000 nodes from the graph for 5 times
+sampler = HypergraphSAINTNodeSampler(data[0],batch_size=1000,num_steps=5)
+batch = next(iter(sampler))
+print(batch)  # e.g. Data(num_nodes=918, edge_index=[2, 7964], hyperedge_index=[2, 957528], num_hyperedges=210718, x=[918, 128], y=[918])
+```
+Data Loaders can also be obtained using ```hg.hybrid_graph.io.get_dataset```
+```python
+from hg.hybrid_graph.io import get_dataset
+name = 'musae_Facebook'
+train_loader, valid_loader, test_loader,data_info = get_dataset(name)
+```
+## (2) Train/Evaluate with ```hybrid-graph```
+Assuming that you have [Pip install](#pip-install).
 
-# Add New Datasets or New GNNs
+Training can be triggered with
+```bash
+hybrid-graph train grand_Lung gcn
+```
+Evaluation can be triggered with
+```bash
+# load the saved checkpoint from the path 'lightning_logs/version_0/checkpoints/best.ckpt'
+hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/best.ckpt'
+```
+
+# Add New Models
+In order to add new models, you should [Install from source](#from-source).
+```bash
+cd hypergraph-benchmarks/hg/hybrid_graph/models/gnn
+touch customize_model.py
+```
+Within ```customize_model.py```, it should correctly handle the input feature size, prediction size and task type.
+Below is the definition of vanila Graph convolutional networks (GCN)
+```python
+class CustomizeGNN(torch.nn.Module):
+    def __init__(
+            self, info, *args, **kwargs):
+        super().__init__()
+        dim = 32
+        self.conv1 = GCNConv(info["num_node_features"], dim)
+        self.is_regression = info["is_regression"]
+        if info["is_regression"]:
+            self.conv2 = GCNConv(dim, dim)
+            self.head = nn.Linear(dim, 1)
+        else:
+            self.conv2 = GCNConv(dim, info["num_classes"])
+
+    def forward(self, data, *args, **kargs):
+        x, edge_index = data.x, data.edge_index
+        x = F.relu(self.conv1(x, edge_index))
+        x = F.dropout(x, training=self.training)
+        x = self.conv2(x, edge_index)
+
+        if self.is_regression:
+            x = self.head(x).squeeze()
+        else:
+            x = F.log_softmax(x, dim=1)
+        return x
+```
+Finally, you should register you model in ```hypergraph-benchmarks/hg/hybrid_graph/models/__init__.py```
+```pyhton
+from .gnn.customize_model import CustomizeGNN
+factory = {
+            'sage': SAGENet,
+            'gcn':CustomizeGNN, # breviation: Class name,
+          }
+```

@@ -4,7 +4,7 @@ import math
 import signal
 import functools
 import numpy as np
-
+import pathlib
 import torch
 import torch_geometric
 import torch_geometric.utils as utils
@@ -50,7 +50,8 @@ class DataLoader(torch_geometric.loader.DataLoader):
                 yield item
 
 
-def get_dataset(name, datasets_path ,original_mask=False, split=0.8, batch_size=6000, workers=2, num_steps=5):
+def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(),'datasets'),
+                original_mask=False, split=0.8, batch_size=6000, workers=2, num_steps=5):
     # if datasets_path not in sys.path:
     #     sys.path.append(datasets_path)
     # import datasets
