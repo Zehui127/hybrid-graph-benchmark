@@ -16,7 +16,7 @@ setup(
         'seaborn==0.12.2',
         'torch>=1.13.1',
         'torch_geometric==2.2.0',
-        'torch_scatter==2.1.0+cpu',
+        'torch_scatter',
         'torchmetrics==0.11.1'],
     entry_points={
         'console_scripts': [
