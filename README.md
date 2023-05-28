@@ -20,9 +20,22 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
 
 # Installation
 ## Requirements
-## Pip install
-## From source
+First, install the required PyTorch packages. You will need to know the version of CUDA you have installed, as well as the version of PyTorch you want to use. Replace `${TORCH}` and `${CUDA}` with these versions in the following commands:
+
+```bash
+# TORCH=1.13
+# CUDA=cpu if cuda is not available
+python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+python -m pip install torch-geometric==2.2.0
 ```
+Once these dependencies are installed, you can install this package with:
+## Pip install
+```bash
+pip install hybrid-graph
+```
+## From source
+```bash
 git clone https://github.com/Zehui127/hypergraph-benchmarks.git
 cd hypergraph-benchmarks
 pip install -e .
