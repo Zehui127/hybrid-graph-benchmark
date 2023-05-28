@@ -2,9 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="hybrid-graph",
-    version="0.1",
+    version="0.2",
     packages=find_packages(),
     install_requires=[
+        'torch',
+        'torch_scatter',
+        'torch_sparse',
+        'torch_geometric==2.2.0',
         'ipdb==0.13.13',
         'ipython==8.13.2',
         'matplotlib==3.7.1',
@@ -14,17 +18,14 @@ setup(
         'PyYAML==6.0',
         'scikit_learn==1.2.1',
         'seaborn==0.12.2',
-        'torch>=1.13.1',
-        'torch_geometric==2.2.0',
-        'torch_scatter',
         'torchmetrics==0.11.1'],
     entry_points={
         'console_scripts': [
-            'hybrid-graph = hg.hybrid_graph.cli:main',
+            'hybrid-graph = hg.hg',
         ],
     },
     author="Xiangyu Zhao;Zehui Li",
-    author_email="zehui.li22@imperial.ac.uk",
+    author_email="zehui.li22@imperial.ac.uk;x.zhao22@imperial.ac.uk",
     description="A python package for accessing and Hybrid-graph Datasets and train-eval framework for GNNs",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
