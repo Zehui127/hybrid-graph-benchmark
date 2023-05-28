@@ -67,12 +67,13 @@ Assuming that you have [Pip install](#pip-install).
 
 Training can be triggered with
 ```bash
-hybrid-graph train grand_Lung gcn
+#-a=gpu,cpu,tpu
+hybrid-graph train grand_Lung gcn -a=cpu
 ```
 Evaluation can be triggered with
 ```bash
 # load the saved checkpoint from the path 'lightning_logs/version_0/checkpoints/best.ckpt'
-hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/best.ckpt'
+hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/best.ckpt' -a=cpu
 ```
 
 # Add New Models
