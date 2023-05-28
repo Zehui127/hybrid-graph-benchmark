@@ -1,4 +1,4 @@
-from hybrid_graph.cli import Main
+from hg.hybrid_graph.cli import Main
 
 def main():
     Main().run()

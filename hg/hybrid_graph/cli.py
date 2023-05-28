@@ -162,7 +162,3 @@ class Main:
         }
         test(**test_params)
     cli_eval = cli_test
-
-# hybrid_graph/cli.py
-def main():
-    Main().run()
