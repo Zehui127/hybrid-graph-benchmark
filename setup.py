@@ -26,7 +26,7 @@ setup(
         ],
     },
     author="Xiangyu Zhao;Zehui Li",
-    author_email="zehui.li22@imperial.ac.uk;x.zhao22@imperial.ac.uk",
+    author_email="zehui.li22@imperial.ac.uk, x.zhao22@imperial.ac.uk",
     description="A python package for accessing and Hybrid-graph Datasets and train-eval framework for GNNs",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
