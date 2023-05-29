@@ -1,5 +1,5 @@
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/title.png?raw=true" style="width: 80%; height: auto;"/>
+<img src="docs/title.png?raw=true" style="width: 80%; height: auto;"/>
 </p>
 
 ------------------------------------------------------------------
@@ -15,7 +15,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
  - Built-in functionalities for preprocessing hybrid-graphs
  - A framework to easily train and evaluate Graph Neural Networks
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/architecture.png?raw=true" style="width: 90%; height: auto;">
+<img src="docs/architecture.png?raw=true" style="width: 80%; height: auto;">
 
 
 # Installation
@@ -47,7 +47,7 @@ Hybrid-graph provide both datasets and flash training/evaluation capabilities.
 ## (1) Access the Dataset
 we use the ```torch_geometric.data.Data``` to wrap the graphs with additional adjacency matrix for hyperedge representation.
 ```python
-from hg.datasets import Facebook, mask_split ,HypergraphSAINTNodeSampler
+from hg.datasets import Facebook, HypergraphSAINTNodeSampler
 # download data to the path 'data/facebook'
 data = Facebook('data/facebook')
 print(data[0]) # e.g. Data(x=[22470, 128], edge_index=[2, 342004], y=[22470], hyperedge_index=[2, 2344151], num_hyperedges=236663)
@@ -66,7 +66,7 @@ train_loader, valid_loader, test_loader,data_info = get_dataset(name)
 ## (2) Train/Evaluate with ```hybrid-graph```
 Assuming that you have [Pip install](#pip-install).
 
-Training can be triggered with
+Training can be triggered with the following, it takes only a few minutes to train GCN on even on CPU device.
 ```bash
 #-a=gpu,cpu,tpu
 hybrid-graph train grand_Lung gcn -a=cpu
@@ -118,6 +118,6 @@ Finally, you should register you model in ```hypergraph-benchmarks/hg/hybrid_gra
 from .gnn.customize_model import CustomizeGNN
 factory = {
             'sage': SAGENet,
-            'gcn':CustomizeGNN, # breviation: Class name,
+            'gcn':CustomizeGNN, # abbreviation: ClassName,
           }
 ```

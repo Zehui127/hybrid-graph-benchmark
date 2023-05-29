@@ -1,5 +1,6 @@
+
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/title.png?raw=true" style="width: 80%; height: auto;"/>
+<img src="title.png?raw=true" style="width: 70%; height: auto;"/>
 </p>
 
 # Get Started
@@ -11,7 +12,7 @@ Install from [Github](https://github.com/Zehui127/hypergraph-benchmarks/tree/pre
 This datasets contains for evaluating machine learning.
 
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/graph_overview.jpg?raw=true" style="width: 65%; height: auto;"/>
+<img src="graph_overview.jpg?raw=true" style="width: 50%; height: auto;"/>
 </p>
 
 ## Musae
@@ -23,6 +24,7 @@ Description of Dataset 1.
 | Value     | Value     | Value     |
 
 Statistics
+
 
 | Name| #Nodes | #Edges |
 |-----|--------|--------|
@@ -42,6 +44,7 @@ Statistics
 | Name| #Nodes | #Edges |
 |-----|--------|--------|
 |Value| Value  | Value  |
+
 ## Amazon Review
 
 Description of Dataset 2.
@@ -59,6 +62,7 @@ Statistics
 
 
 # GNNs Performance
+
 | Name| Github | Facebook |
 |-----|--------|----------|
 |GCN  | 0.7    | 0.6      |
