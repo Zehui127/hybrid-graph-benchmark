@@ -1,5 +1,5 @@
 <p align='center'>
-<img src="docs/title.png?raw=true" style="width: 75%; height: auto;"/>
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/title.png?raw=true" style="width: 75%; height: auto;"/>
 </p>
 
 ------------------------------------------------------------------
@@ -16,7 +16,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
  - Built-in functionalities for preprocessing hybrid-graphs
  - A framework to easily train and evaluate Graph Neural Networks
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="docs/architecture.png?raw=true" style="width: 75%; height: auto;">
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/architecture.png?raw=true" style="width: 75%; height: auto;">
 
 
 # Installation
