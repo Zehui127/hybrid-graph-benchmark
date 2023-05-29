@@ -5,7 +5,7 @@
 
 # Get Started
 
-Install from [Github](https://github.com/Zehui127/hypergraph-benchmarks/tree/pre-release)
+Install from [Github](https://github.com/Zehui127/hybrid-graph-benchmark/)
 
 # Hybrid-graph Datasets
 

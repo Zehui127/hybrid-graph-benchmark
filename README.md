@@ -1,5 +1,5 @@
 <p align='center'>
-<img src="docs/title.png?raw=true" style="width: 80%; height: auto;"/>
+<img src="docs/title.png?raw=true" style="width: 75%; height: auto;"/>
 </p>
 
 ------------------------------------------------------------------
@@ -15,7 +15,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
  - Built-in functionalities for preprocessing hybrid-graphs
  - A framework to easily train and evaluate Graph Neural Networks
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="docs/architecture.png?raw=true" style="width: 80%; height: auto;">
+<img src="docs/architecture.png?raw=true" style="width: 75%; height: auto;">
 
 
 # Installation
@@ -33,12 +33,12 @@ Once these dependencies are installed, you can install this package with one of 
 ## Pip install
 ```bash
 #pip install hybrid-graph
-pip install git+https://github.com/Zehui127/hypergraph-benchmarks.git@pre-release
+pip install git+https://github.com/Zehui127/hybrid-graph-benchmark.git
 ```
 ## From source
 ```bash
-git clone https://github.com/Zehui127/hypergraph-benchmarks.git
-cd hypergraph-benchmarks
+git clone https://github.com/Zehui127/hybrid-graph-benchmark.git
+cd hybrid-graph-benchmark
 pip install -e .
 ```
 
@@ -80,7 +80,7 @@ hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/bes
 # Add New Models
 In order to add new models, you should [Install from source](#from-source).
 ```bash
-cd hypergraph-benchmarks/hg/hybrid_graph/models/gnn
+cd hybrid-graph-benchmark/hg/hybrid_graph/models/gnn
 touch customize_model.py
 ```
 Within ```customize_model.py```, it should correctly handle the input feature size, prediction size and task type.
@@ -112,7 +112,7 @@ class CustomizeGNN(torch.nn.Module):
             x = F.log_softmax(x, dim=1)
         return x
 ```
-Finally, you should register you model in ```hypergraph-benchmarks/hg/hybrid_graph/models/__init__.py```
+Finally, you should register you model in ```hybrid-graph-benchmark/hg/hybrid_graph/models/__init__.py```
 
 ```python
 from .gnn.customize_model import CustomizeGNN

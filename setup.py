@@ -30,7 +30,7 @@ setup(
     description="A python package for accessing and Hybrid-graph Datasets and train-eval framework for GNNs",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/Zehui127/hypergraph-benchmarks/",
+    url="https://github.com/Zehui127/hybrid-graph-benchmark/",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
