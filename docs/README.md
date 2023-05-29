@@ -1,5 +1,5 @@
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/title.png?raw=true" style="width: 80%; height: auto;"/>
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/title.png?raw=true" style="width: 80%; height: auto;"/>
 </p>
 
 # Get Started
@@ -11,7 +11,7 @@ Install from [Github](https://github.com/Zehui127/hypergraph-benchmarks/tree/pre
 This datasets contains for evaluating machine learning.
 
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/graph_overview.jpg?raw=true" style="width: 80%; height: auto;"/>
+<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/graph_overview.jpg?raw=true" style="width: 65%; height: auto;"/>
 </p>
 
 ## Musae
