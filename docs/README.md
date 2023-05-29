@@ -12,7 +12,7 @@ Install from [Github](https://github.com/Zehui127/hypergraph-benchmarks/tree/pre
 This datasets contains for evaluating machine learning.
 
 <p align='center'>
-<img src="graph_overview.jpg?raw=true" style="width: 50%; height: auto;"/>
+<img src="graph_overview.png?raw=true" style="width: 50%; height: auto;"/>
 </p>
 
 ## Musae
