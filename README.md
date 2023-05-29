@@ -23,7 +23,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
 First, install the required PyTorch packages. You will need to know the version of CUDA you have installed, as well as the version of PyTorch you want to use. Replace `${TORCH}` and `${CUDA}` with these versions in the following commands:
 
 ```bash
-# TORCH=1.13
+# TORCH=2.0.1
 # CUDA=cpu if cuda is not available
 python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
@@ -51,6 +51,7 @@ from hg.datasets import Facebook, mask_split ,HypergraphSAINTNodeSampler
 # download data to the path 'data/facebook'
 data = Facebook('data/facebook')
 print(data[0]) # e.g. Data(x=[22470, 128], edge_index=[2, 342004], y=[22470], hyperedge_index=[2, 2344151], num_hyperedges=236663)
+
 # create a sampler which sample 1000 nodes from the graph for 5 times
 sampler = HypergraphSAINTNodeSampler(data[0],batch_size=1000,num_steps=5)
 batch = next(iter(sampler))
@@ -83,8 +84,9 @@ cd hypergraph-benchmarks/hg/hybrid_graph/models/gnn
 touch customize_model.py
 ```
 Within ```customize_model.py```, it should correctly handle the input feature size, prediction size and task type.
-Below is the definition of vanila Graph convolutional networks (GCN)
+Below is the definition of vanila Graph Convolutional Networks (GCN)
 ```python
+from torch_geometric.nn import GCNConv
 class CustomizeGNN(torch.nn.Module):
     def __init__(
             self, info, *args, **kwargs):

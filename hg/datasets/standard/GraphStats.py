@@ -39,26 +39,27 @@ class HyperEdgeSizeHist:
         plt.savefig(self.title + ".png")
 
 class GraphStats:
-    def __init__(self, data: Data):
+    def __init__(self, data: Data, title='Graph Statistics'):
         self.data = data
-        print(self.data)
+        self.title = title
         self.graph = to_networkx(data, to_undirected=True) # Convert to a networkx graph for some computations
     def plot(self):
         #EmbeddingVisualizer(self.data).plot()
         HyperEdgeSizeHist(self.data).plot()
     def get_all_stats(self):
-        HyperEdgeSizeHist(self.data).plot()
+        HyperEdgeSizeHist(self.data,self.title).plot()
         return {
+            'title': self.title,
             'num_nodes': self.num_nodes(),
             'num_edges': self.num_edges(),
             'average_degree': self.average_degree(),
             'clustering_coefficient': self.clustering_coefficient(),
             'density': self.density(),
-            'diameter': self.diameter(),
+            # 'diameter': self.diameter(),
             'average_size_of_hyperedge': self.average_size_of_hyperedge()
         }
     def average_size_of_hyperedge(self):
-        return torch.sum(torch.bincount(self.data.hyperedge_index[1])) / self.data.num_edges
+        return torch.sum(torch.bincount(self.data.hyperedge_index[1])) / self.data.num_hyperedges
     def num_nodes(self):
         return self.data.num_nodes
 
