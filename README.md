@@ -23,7 +23,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
 First, install the required PyTorch packages. You will need to know the version of CUDA you have installed, as well as the version of PyTorch you want to use. Replace `${TORCH}` and `${CUDA}` with these versions in the following commands:
 
 ```bash
-# TORCH=2.0.1
+# TORCH=2.0.1 if use newest stable torch version
 # CUDA=cpu if cuda is not available
 python -m pip install torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
 python -m pip install torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
