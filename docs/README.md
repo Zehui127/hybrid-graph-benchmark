@@ -7,7 +7,7 @@
 
 Install from [Github](https://github.com/Zehui127/hypergraph-benchmarks/tree/pre-release)
 
-# Hybrid-graph Benchmark Datasets
+# Hybrid-graph Datasets
 
 This datasets contains for evaluating machine learning.
 
