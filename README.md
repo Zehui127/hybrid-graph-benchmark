@@ -5,9 +5,10 @@
 ------------------------------------------------------------------
 
 [![paper](https://img.shields.io/badge/Download-Raw%20Data-green)]()
+[![PyPI version](https://img.shields.io/pypi/v/hybrid-graph?color=purple)](https://pypi.org/project/hybrid-graph/)
+[![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark)](LICENSE)
 <!-- [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]() -->
 <!-- [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html) -->
-
 <!-- ![]() -->
 
 This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hierarchical graph) learning algorithms. It contains:
@@ -32,8 +33,8 @@ python -m pip install torch-geometric==2.2.0
 Once these dependencies are installed, you can install this package with one of the following:
 ## Pip install
 ```bash
-#pip install hybrid-graph
-pip install git+https://github.com/Zehui127/hybrid-graph-benchmark.git
+pip install hybrid-graph
+# or pip install git+https://github.com/Zehui127/hybrid-graph-benchmark.git
 ```
 ## From source
 ```bash
