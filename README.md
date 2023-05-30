@@ -4,9 +4,10 @@
 
 ------------------------------------------------------------------
 
-[![paper](https://img.shields.io/badge/Download-Raw%20Data-green)]()
+[![paper](https://img.shields.io/badge/Download-Raw%20Data-green)](https://zenodo.org/record/7982540)
 [![PyPI version](https://img.shields.io/pypi/v/hybrid-graph?color=purple)](https://pypi.org/project/hybrid-graph/)
 [![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark)](LICENSE)
+
 <!-- [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]() -->
 <!-- [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html) -->
 <!-- ![]() -->
