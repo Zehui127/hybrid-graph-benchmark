@@ -6,7 +6,7 @@
 
 [![paper](https://img.shields.io/badge/Download-Raw%20Data-green)](https://zenodo.org/record/7982540)
 [![PyPI version](https://img.shields.io/pypi/v/hybrid-graph?color=purple)](https://pypi.org/project/hybrid-graph/)
-[![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark)](LICENSE)
+[![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark?kill_cache=1)](LICENSE)
 
 <!-- [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]() -->
 <!-- [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html) -->
@@ -68,7 +68,7 @@ train_loader, valid_loader, test_loader,data_info = get_dataset(name)
 ## (2) Train/Evaluate with ```hybrid-graph```
 Assuming that you have [Pip install](#pip-install).
 
-Training can be triggered with the following, it takes only a few minutes to train GCN on even on CPU device.
+Training can be triggered with the following, it takes only a few minutes to train GCN even on CPU device.
 ```bash
 #-a=gpu,cpu,tpu
 hybrid-graph train grand_Lung gcn -a=cpu
