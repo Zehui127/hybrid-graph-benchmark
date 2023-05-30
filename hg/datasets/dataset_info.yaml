@@ -193,13 +193,23 @@ musae_Twitch_RU:
 musae_Facebook:
   type: Facebook
   root: data/musae/facebook
-  single_graph: false
+  single_graph: true
   info:
     original_mask: false
     num_node_features: 128
     num_classes: 4
     is_regression: false
     is_edge_pred: false
+    checkpoint1: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gcn/best-v2.ckpt
+    checkpoint2: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_sage/best-v2.ckpt
+    checkpoint3: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gat/best-v2.ckpt
+    checkpoint4: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gatv2/best-v2.ckpt
+    checkpoint5: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_hyper-gcn/best-v2.ckpt
+    model1: gcn
+    model2: sage
+    model3: gat
+    model4: gatv2
+    model5: hyper-gcn
 
 musae_Github:
   type: GitHub
