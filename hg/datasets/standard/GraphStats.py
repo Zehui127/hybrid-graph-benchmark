@@ -47,7 +47,7 @@ class GraphStats:
         #EmbeddingVisualizer(self.data).plot()
         HyperEdgeSizeHist(self.data).plot()
     def get_all_stats(self):
-        HyperEdgeSizeHist(self.data,self.title).plot()
+        # HyperEdgeSizeHist(self.data,self.title).plot()
         return {
             'title': self.title,
             'num_nodes': self.num_nodes(),
@@ -56,6 +56,7 @@ class GraphStats:
             'clustering_coefficient': self.clustering_coefficient(),
             'density': self.density(),
             # 'diameter': self.diameter(),
+            'num_hyperedges': self.data.num_hyperedges,
             'average_size_of_hyperedge': self.average_size_of_hyperedge()
         }
     def average_size_of_hyperedge(self):
