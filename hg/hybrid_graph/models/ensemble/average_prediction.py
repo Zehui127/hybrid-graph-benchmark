@@ -37,20 +37,10 @@ class Average_Ensemble(torch.nn.Module):
         super().__init__()
         self.model1 = mapstr2model[info["model1"]](info)
         self.model2 = mapstr2model[info["model2"]](info)
-        self.model3 = mapstr2model[info["model3"]](info)
-        self.model4 = mapstr2model[info["model4"]](info)
-        self.model5 = mapstr2model[info["model5"]](info)
         # initialize the two models with the checkpoint weights
         self.model1 = plt_model_load(self.model1, info["checkpoint1"])
         self.model2 = plt_model_load(self.model2, info["checkpoint2"])
-        self.model3 = plt_model_load(self.model3, info["checkpoint3"])
-        self.model4 = plt_model_load(self.model4, info["checkpoint4"])
-        self.model5 = plt_model_load(self.model5, info["checkpoint5"])
-        print(self.model1)
     def forward(self, data, *args, **kargs):
         x1 = self.model1(data, *args, **kargs)
         x2 = self.model2(data, *args, **kargs)
-        x3 = self.model3(data, *args, **kargs)
-        x4 = self.model4(data, *args, **kargs)
-        x5 = self.model5(data, *args, **kargs)
-        return (x1 + x2 + x3 + x4 + x5) / 5
+        return (x1 + x2) / 2
