@@ -150,9 +150,9 @@ data
 data/
 
 /lightning_logs*
-/checkpoints*
 slurm*
 temp.py
 /temp_img_csv*
 submit*.sh
 train_all.py
+/checkpoint*
