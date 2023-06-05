@@ -3,9 +3,6 @@
 <img src="title.png?raw=true" style="width: 70%; height: auto;"/>
 </p>
 
-# Install from [Github](https://github.com/Zehui127/hybrid-graph-benchmark/)
-
-# Hybrid graph Benchmark
 
 This is a benchmark dataset for evaluating hybrid-graph (hypergraph and hierarchical graph) learning algorithms. It contains:
 
@@ -16,6 +13,8 @@ This is a benchmark dataset for evaluating hybrid-graph (hypergraph and hierarch
 <p align='center'>
 <img src="graph_overview.png?raw=true" style="width: 50%; height: auto;"/>
 </p>
+
+## - Get started by Installing from [Github](https://github.com/Zehui127/hybrid-graph-benchmark/)
 
 ## - Summary
 
