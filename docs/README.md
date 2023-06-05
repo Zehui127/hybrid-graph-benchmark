@@ -21,7 +21,7 @@ This is a benchmark dataset for evaluating hybrid-graph (hypergraph and hierarch
 
 | Name            | #Graphs | #Nodes | #Edges | #Hyperedges | Avg. Node Degree | Avg. Hyperedge Degree | Clustering Coef. | Task Type          |
 |-----------------|---------|--------|--------|-------------|------------------|-----------------------|------------------|---------------------|
-| [MUSAE-GitHub](https://github.com/Zehui127/hybrid-graph-benchmark/blob/pre-release/docs/datasets.md#musae)    | 1       | 37,700 | 578,006| 223,672     | 30.7             | 4.6                   | 0.168            | Node Classification |
+| [MUSAE-GitHub](datasets.md#musae)    | 1       | 37,700 | 578,006| 223,672     | 30.7             | 4.6                   | 0.168            | Node Classification |
 | MUSAE-Facebook  | 1       | 22,470 | 342,004| 236,663     | 30.4             | 9.9                   | 0.360            | Node Classification |
 | MUSAE-Twitch    | 6       | 5,686  | 143,038| 110,142     | 50.6             | 6.0                   | 0.210            | Node Classification |
 | MUSAE-Wiki      | 3       | 6,370  | 266,998| 118,920     | 88.8             | 14.4                  | 0.413            | Node Regression     |
