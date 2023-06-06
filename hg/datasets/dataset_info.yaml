@@ -214,7 +214,7 @@ musae_Facebook:
 musae_Github:
   type: GitHub
   root: data/musae/github
-  single_graph: false
+  single_graph: true
   info:
     original_mask: false
     num_node_features: 128

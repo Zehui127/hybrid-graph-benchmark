@@ -51,7 +51,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
 
 
 def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(),'datasets'),
-                original_mask=False, split=0.8, batch_size=6000, workers=2, num_steps=5):
+                original_mask=False, split=0.6, batch_size=6000, workers=2, num_steps=5):
     # if datasets_path not in sys.path:
     #     sys.path.append(datasets_path)
     # import datasets
