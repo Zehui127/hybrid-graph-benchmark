@@ -46,6 +46,7 @@ Download Raw Data in JSON: [Zenodo](https://zenodo.org/record/7982540/files/musa
     are used) node features, and 2 classes.
 
 ### Graphs
+
 | Name | #nodes |  #edges | #hyperedges | #features   | #classes |
 |------|-------:|-------:|------------:|------------:|--------:|
 | DE   |  9,498 | 306,276 |     297,315 | 128 or 3,170 |       2 |
@@ -82,6 +83,7 @@ Download Raw Data in JSON:
     The task is to predict the average monthly traffic of the web page.
 
 ### Graphs
+
 | Name      | #nodes |  #edges | #hyperedges |    #features |
 |-----------|-------:|-------:|------------:|-------------:|
 | chameleon |  2,277 |  62,742 |      14,650 | 128 or 3,132 |
@@ -120,6 +122,7 @@ node. The hyperedges are constructed by grouping nearby genomic elements on the 
 i.e., the genomic elements within 200k base pair distance are grouped as hyperedges.
 
 ### Graphs
+
 | Name                            | #nodes | #edges | #hyperedges | #features | #classes |
 |---------------------------------|-------:|-------:|------------:|----------:|---------:|
 | Brain                           |  6,196 |  6,245 |      11,878 |      4608 |        3 |
@@ -158,6 +161,7 @@ node. The hyperedges are constructed by grouping nearby genomic elements on the 
 i.e., the genomic elements within 200k base pair distance are grouped as hyperedges.
 
 ### Graphs
+
 | Name                            | #nodes | #edges | #hyperedges | #features | #classes |
 |---------------------------------|-------:|-------:|------------:|----------:|---------:|
 | Leukemia                        |  4,651 |  6,362 |       7,812 |      4608 |        3 |
@@ -201,6 +205,7 @@ image is returned to assist the clustering. The hyperedges are then constructed 
 whose image embeddings’ pairwise distances are within a certain threshold.
 
 ### Graphs
+
 | Name      | #nodes  | #edges  | #hyperedges | #features | #classes |
 |-----------|--------:|--------:|------------:|----------:|---------:|
 | Photos    |   6,777 |  45,306 |       6,777 |      1000 |       10 |

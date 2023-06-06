@@ -31,4 +31,4 @@ This is a benchmark dataset for evaluating hybrid-graph (hypergraph and hierarch
 
 ## - Modules
 
-[Hybrid Graph Datasets](modules.md#dataset) and [Hybrid Graph train&eval](modules.md#traineval)
+[Hybrid Graph Datasets](demo.md#ModulesforDataPreprocessing) and [Hybrid Graph train&eval](demo.md#ModulesforTrainingandEvaluation)
