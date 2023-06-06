@@ -12,7 +12,7 @@ class GitHub(InMemoryDataset):
     Nodes represent developers on GitHub and edges are mutual follower relationships. Hyperedges are mutually following
     developer groups that contain at least 3 developers (i.e., maximal cliques with sizes of at least 3).
     It contains 37,300 nodes, 578,006 edges, 223,672 hyperedges, 128 (if the MUSAE preprocessed node embeddings
-    are used) or 4,005 (if the raw node features are used) node features, and 2 classes.
+    are used) or 4,005 (if the raw node features are used) node features, and 4 classes.
 
     Args:
         root (str): Root directory where the dataset should be saved.
@@ -42,7 +42,7 @@ class GitHub(InMemoryDataset):
           - 578,006
           - 223,672
           - 128 or 4,005
-          - 2
+          - 4
     """
 
     url_data = 'https://graphmining.ai/datasets/ptg/github.npz'
