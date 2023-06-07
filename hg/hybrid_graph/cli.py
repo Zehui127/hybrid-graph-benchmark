@@ -46,7 +46,7 @@ class Main:
             'type': float, 'default': 0.6, 'help': 'The train split ratio.',
         },
         ('-m', '--max-epochs'): {
-            'type': int, 'default': 100,
+            'type': int, 'default': 50,
             'help': 'Maximum number of epochs for training.',
         },
         ('-b', '--batch-size'): {
