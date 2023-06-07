@@ -83,7 +83,7 @@ def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.p
     Loader = functools.partial(DataLoader, **kwargs)
     if dataset_info['is_edge_pred']:
         dataset = datasets.create_edge_label(dataset)
-    dataset, masks = datasets.mask_split(dataset, original_mask)
+    dataset, masks = datasets.mask_split(dataset, original_mask,train_portion=split, eval_portion=(1-split)/2, test_portion=(1-split)/2)
     # take one sample mask out
     train_mask, eval_mask, test_mask = masks[0]
     dataset = dataset[0]

@@ -42,6 +42,9 @@ class Main:
         ('-lr', '--learning-rate'): {
             'type': float, 'default': 0.01, 'help': 'Initial learning rate.',
         },
+        ('-split', '--split'): {
+            'type': float, 'default': 0.6, 'help': 'The train split ratio.',
+        },
         ('-m', '--max-epochs'): {
             'type': int, 'default': 100,
             'help': 'Maximum number of epochs for training.',
@@ -115,6 +118,7 @@ class Main:
         print(f"datasets path: {a.dataset_path}")
         train_loader, val_loader, test_loader, dataset_info = get_dataset(
             name=a.dataset, batch_size=a.batch_size, workers=a.num_workers,
+            split=a.split,
             datasets_path=a.dataset_path)
         # get model
         model_cls = factory[a.model]
