@@ -1,13 +1,13 @@
 <p align='center'>
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/title.png?raw=true" style="width: 75%; height: auto;"/>
+<img src="https://github.com/Zehui127/hybrid-graph-benchmark/blob/pre-release/docs/title.png?raw=true" style="width: 75%; height: auto;"/>
 </p>
 
 ------------------------------------------------------------------
 
 [![paper](https://img.shields.io/badge/Download-Raw%20Data-green)](https://zenodo.org/record/7982540)
 [![PyPI version](https://img.shields.io/pypi/v/hybrid-graph?color=purple)](https://pypi.org/project/hybrid-graph/)
-[![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark)](LICENSE)
 [![paper](https://img.shields.io/badge/Document-Website-purple)](https://zehui127.github.io/hybrid-graph-benchmark/)
+[![license](https://img.shields.io/github/license/Zehui127/hybrid-graph-benchmark)](LICENSE)
 <!-- [![paper](https://img.shields.io/badge/Paper-Open%20Review-orange)]() -->
 <!-- [![paper](https://img.shields.io/badge/Access-PyTorch%20Geometric-green)](https://pytorch-geometric.readthedocs.io/en/latest/index.html) -->
 <!-- ![]() -->
@@ -17,7 +17,7 @@ This is a benchmark dataset for evaluating **hybrid-graph** (hypergraph and hier
  - Built-in functionalities for preprocessing hybrid-graphs
  - A framework to easily train and evaluate Graph Neural Networks
 <!-- ![](https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/img/architecture.png?raw=true) -->
-<img src="https://github.com/Zehui127/hypergraph-benchmarks/blob/pre-release/docs/architecture.png?raw=true" style="width: 75%; height: auto;">
+<img src="https://github.com/Zehui127/hybrid-graph-benchmark/blob/pre-release/docs/architecture.png?raw=true" style="width: 75%; height: auto;">
 
 
 # Installation

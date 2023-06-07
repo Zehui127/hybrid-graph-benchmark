@@ -1,4 +1,3 @@
-from .gnn.toynet import ToyNet
 from .gnn.baseline import GCNNet, SAGENet
 from .gnn.hybrid import HybridGCN, HybridSAGE
 from .gnn.gat import GATNet, GATV2Net
@@ -7,7 +6,6 @@ from .gnn.linearprobe import LPGCNHyperGCN, CATTGCNHyperGCN,LPGGATGCN, LPGATHype
 from .ensemble.average_prediction import Average_Ensemble
 
 factory = {
-    'toynet': ToyNet,
     'gcn': GCNNet,
     'sage': SAGENet,
     'gat': GATNet,
