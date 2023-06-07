@@ -14,9 +14,9 @@ This is a benchmark dataset for evaluating hybrid-graph (hypergraph and hierarch
 <img src="graph_overview.png?raw=true" style="width: 50%; height: auto;"/>
 </p>
 
-# Get started by **Installing from [Github](https://github.com/Zehui127/hybrid-graph-benchmark/)**
+## Get started by **Installing from [Github](https://github.com/Zehui127/hybrid-graph-benchmark/)**
 
-# Summary 
+## Summary 
 Click the dataset name to see more details
 
 | Name                                 | #Graphs | #Nodes | #Edges | #Hyperedges | Avg. Node Degree | Avg. Hyperedge Degree | Clustering Coef. | Task Type           |
@@ -30,6 +30,6 @@ Click the dataset name to see more details
 | [AMAZON-Computers](datasets.md#computers--photos)| 1       | 10,226 | 55,324 | 10,226      | 10.8             | 4.0                   | 0.249            | Node Classification |
 | [AMAZON-Photos](datasets.md#computers--photos)   | 1       | 6,777  | 45,306 | 6,777       | 13.4             | 4.8                   | 0.290            | Node Classification |
 
-# Modules
+## Modules
 
 [Hybrid Graph Datasets](demo.md#train) and [Hybrid Graph train&eval](demo.md#train)
