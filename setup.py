@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="hybrid-graph",
-    version="0.6",
+    version="0.61",
     packages=find_packages(),
     package_data={'hg': ['datasets/dataset_info.yaml']},
     install_requires=[
