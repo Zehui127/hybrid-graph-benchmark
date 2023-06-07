@@ -3,7 +3,6 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 from torch_geometric.nn import GCNConv, HypergraphConv, GAT
-from .attention import Attention
 
 
 class LPGCNHyperGCN(torch.nn.Module):
