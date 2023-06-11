@@ -1,24 +1,44 @@
-# Modules for Data Preprocessing
-
-## Sampler
-
-```python
-from hg.datasets import Facebook, HypergraphSAINTNodeSampler
-# download data to the path 'data/facebook'
-data = Facebook('data/facebook')
-print(data[0]) 
-# e.g. Data(x=[22470, 128], edge_index=[2, 342004], y=[22470], hyperedge_index=[2, 2344151], num_hyperedges=236663)
-
-# create a sampler which sample 1000 nodes from the graph for 5 times
-sampler = HypergraphSAINTNodeSampler(data[0],batch_size=1000,num_steps=5)
-batch = next(iter(sampler))
-print(batch)  
-# e.g. Data(num_nodes=918, edge_index=[2, 7964], hyperedge_index=[2, 957528], num_hyperedges=210718, x=[918, 128], y=[918])
+# Modules for Training and Evaluation
+Assuming that you have [Pip install](https://github.com/Zehui127/hybrid-graph-benchmark/#pip-install).
+## Train
+Training can be triggered with the following, it takes only a few minutes to train GCN even on CPU device.
+```bash
+#-a=gpu,cpu,tpu
+hybrid-graph train grand_Lung gcn -a=cpu
+```
+## Evaluate
+Evaluation can be triggered with
+```bash
+# load the saved checkpoint from the path 'lightning_logs/version_0/checkpoints/best.ckpt'
+hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/best.ckpt' -a=cpu
 ```
 
+## Command Line Interface
+===============
 
-# Modules for Training and Evaluation
-## Train
+This class is responsible for parsing the command-line arguments and setting up the training and testing environment.
 
+Command-line Arguments
+----------------------
 
-## Evaluate
+The command-line arguments are stored in the `arguments` dictionary as follows:
+
+- `action`: Name of the action to perform.
+- `dataset`: Name of the dataset.
+- `model`: Name of the model.
+
+Optional arguments:
+-------------------
+
+- `-load, --load-name`: Name of the saved model to restore.
+- `-save, --save-name`: Name of the saved model to save.
+- `-opt, --optimizer`: Pick an optimizer.
+- `-lr, --learning-rate`: Initial learning rate.
+- `-m, --max-epochs`: Maximum number of epochs for training.
+- `-b, --batch-size`: Batch size for training and evaluation.
+- `-d, --debug`: Verbose debug.
+- `-seed, --seed`: Number of steps for model optimization.
+- `-w, --num_workers`: Number of CPU workers.
+- `-n, --num_devices`: Number of GPU devices.
+- `-a, --accelerator`: Accelerator style. (cpu, gpu, tpu)
+- `-s, --strategy`: Strategy style. (ddp, ddp2, ddp_spawn, ddp_cpu, ddp_sharded, dp, horovod, single)
