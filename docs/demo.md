@@ -19,8 +19,8 @@ hybrid-graph eval grand_lung gcn -load='lightning_logs/version_0/checkpoints/bes
 The command-line arguments are stored in the `arguments` dictionary as follows:
 
 - `action`: Name of the action to perform. (train, eval)
-- `dataset`: Name of the dataset. (grand_Lung, musae_Facebook, amazon_Computer, ...) Check [below](#Available-Datasets) for all the options.
-- `model`: Name of the model. (gcn, sage, gat,...) Check [below](#Available-Models) for all the options.
+- `dataset`: Name of the dataset. (grand_Lung, musae_Facebook, amazon_Computer, ...) Check [below](#available-datasets) for all the options.
+- `model`: Name of the model. (gcn, sage, gat,...) Check [below](#available-models) for all the options.
 
 ### Optional arguments:
 
@@ -42,29 +42,30 @@ The command-line arguments are stored in the `arguments` dictionary as follows:
 
 [Details](datasets.md#musae-github)
 
-1. grand_ArteryAorta
-2. grand_ArteryCoronary
-3. grand_Breast
-4. grand_Brain
-5. grand_Lung
-6. grand_Stomach
-7. grand_Leukemia
-8. grand_Lungcancer
-9. grand_Stomachcancer
-10. grand_KidneyCancer
-11. musae_Twitch_DE
-12. musae_Twitch_EN
-13. musae_Twitch_ES
-14. musae_Twitch_FR
-15. musae_Twitch_PT
-16. musae_Twitch_RU
-17. musae_Facebook
-18. musae_Github
-19. musae_Wiki_chameleon
-20. musae_Wiki_crocodile
-21. musae_Wiki_squirrel
-22. amazon_Photo
-23. amazon_Computer
+1. `grand_ArteryAorta`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains a graph of the human aorta artery.
+2. `grand_ArteryCoronary`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains a graph of the coronary arteries.
+3. `grand_Breast`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains information about breast tissue.
+4. `grand_Brain`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains information about brain tissue.
+5. `grand_Lung`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains information about lung tissue.
+6. `grand_Stomach`: belong to one of [Grand-Tissues](datasets.md#grand-tissues) - This dataset contains information about stomach tissue.
+7. `grand_Leukemia`: belong to one of [Grand-Tissues](datasets.md#grand-diseases) - This dataset contains information about leukemia.
+8. `grand_Lungcancer`: belong to one of [Grand-Tissues](datasets.md#grand-diseases) - This dataset contains information about lung cancer.
+9. `grand_Stomachcancer`: belong to one of [Grand-Tissues](datasets.md#grand-diseases) - This dataset contains information about stomach cancer.
+10. `grand_KidneyCancer`: belong to one of [Grand-Tissues](datasets.md#grand-diseases) - This dataset contains information about kidney cancer.
+11. `musae_Twitch_DE`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in German.
+12. `musae_Twitch_EN`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in English.
+13. `musae_Twitch_ES`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in Spanish.
+14. `musae_Twitch_FR`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in French.
+15. `musae_Twitch_PT`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in Portuguese.
+16. `musae_Twitch_RU`: belong to one of [Musae-Twitch](datasets.md#musae-twitch) - This dataset contains a graph of Twitch streamers in Russian.
+17. `musae_Facebook`: belong to one of [Musae-Facebook](datasets.md#musae-facebook) - This dataset contains a graph of Facebook users.
+18. `musae_Github`: belong to one of [Musae-Github](datasets.md#musae-github) - This dataset contains a graph of GitHub users.
+19. `musae_Wiki_chameleon`: belong to one of [Musae-Wiki](datasets.md#musae-wiki) - This dataset contains a graph of Wikipedia users editing pages about chameleons.
+20. `musae_Wiki_crocodile`: belong to one of [Musae-Wiki](datasets.md#musae-wiki) - This dataset contains a graph of Wikipedia users editing pages about crocodiles.
+21. `musae_Wiki_squirrel`: belong to one of [Musae-Wiki](datasets.md#musae-wiki) - This dataset contains a graph of Wikipedia users editing pages about squirrels.
+22. `amazon_Photo`: belong to one of [Amazon-Computers](datasets.md#amazon-computers) - This dataset contains a graph of Amazon products related to photography.
+23. `amazon_Computer`: belong to one of [Amazon-Computers](datasets.md#amazon-computers) - This dataset contains a graph of Amazon computer products.
+
 
 ## Available Models
 
