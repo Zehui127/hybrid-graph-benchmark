@@ -19,7 +19,7 @@ This is a benchmark dataset for evaluating **hybrid graph** (a unified definitio
 # Modules
 
 ### [Hybrid Graph Datasets](datasets.md)
-### [Hybrid Graph Evaluation Framework](demo.md#train)
+### [Hybrid Graph Evaluation Framework](demo.md)
 
 # Summary 
 
