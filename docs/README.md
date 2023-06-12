@@ -18,7 +18,7 @@ This is a benchmark dataset for evaluating **hybrid graph** (a unified definitio
 
 # Modules
 
-### [Hybrid Graph Datasets](datasets.md#musae-github)
+### [Hybrid Graph Datasets](datasets.md)
 ### [Hybrid Graph Evaluation Framework](demo.md#train)
 
 # Summary 
@@ -33,8 +33,8 @@ Click the dataset name to see more details:
 | [MUSAE-Wiki](datasets.md#musae-wiki)             | 3       | 6,370  | 266,998| 118,920     | 88.8             | 14.4                  | 0.413            | Node Regression     |
 | [GRAND-Tissues](datasets.md#grand-tissues)       | 6       | 5,931  | 5,926  | 11,472      | 2.0              | 1.3                   | 0.000            | Node Classification |
 | [GRAND-Diseases](datasets.md#grand-diseases)     | 4       | 4,596  | 6,252  | 7,743       | 2.7              | 1.3                   | 0.000            | Node Classification |
-| [Amazon-Computers](datasets.md#computers--photos)| 1       | 10,226 | 55,324 | 10,226      | 10.8             | 4.0                   | 0.249            | Node Classification |
-| [Amazon-Photos](datasets.md#computers--photos)   | 1       | 6,777  | 45,306 | 6,777       | 13.4             | 4.8                   | 0.290            | Node Classification |
+| [Amazon-Computers](datasets.md#amazon-datasets)  | 1       | 10,226 | 55,324 | 10,226      | 10.8             | 4.0                   | 0.249            | Node Classification |
+| [Amazon-Photos](datasets.md#amazon-datasets)     | 1       | 6,777  | 45,306 | 6,777       | 13.4             | 4.8                   | 0.290            | Node Classification |
 
 # License
 
