@@ -156,3 +156,7 @@ temp.py
 submit*.sh
 train_all.py
 /checkpoint*
+
+#test
+t_*
+hg.py

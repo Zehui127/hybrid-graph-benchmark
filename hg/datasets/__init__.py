@@ -3,7 +3,7 @@ from .musae import GitHub, Facebook, Twitch, Wikipedia
 from .amazon import Amazon
 from .standard import Benchmark, GraphStats
 from .hg_spliter import mask_split, random_node_split, create_edge_label
-from .hg_formatter import GraphFormatter
+from .hg_formatter import GraphFormatter, HierachicyConstructor
 from .hg_samplers import (
     HypergraphSAINTSampler,
     HypergraphSAINTNodeSampler,
@@ -17,4 +17,5 @@ __all__ = ['Grand', 'GitHub', 'Facebook', 'Twitch', 'Wikipedia', 'Amazon',
            'mask_split', 'random_node_split', 'create_edge_label',
            'HypergraphSAINTSampler', 'HypergraphSAINTNodeSampler',
            'HypergraphSAINTEdgeSampler', 'HypergraphSAINTRandomWalkSampler',
-           "RandomNodeSampler", "RandomHyperedgeSampler"]
+           "RandomNodeSampler", "RandomHyperedgeSampler",
+           "HierachicyConstructor"]

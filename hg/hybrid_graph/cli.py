@@ -20,6 +20,12 @@ class Main:
         ('dataset', ): {'type': str, 'help': 'Name of the dataset.'},
         ('model', ): {'type': str, 'help': 'Name of the model.'},
 
+        # sampler name
+        ('-sampler', '--sampler'): {
+            'type': str, 'default': 'HypergraphSAINTNodeSampler',
+            'help': 'Sampler name.',
+        },
+
         # dataset path
         ('-dp', '--dataset-path'): {
             'type': str, 'default': os.path.join(pathlib.Path(__file__).parent.parent.resolve(),'datasets'), 'help': 'Path to the dataset.',
@@ -119,7 +125,8 @@ class Main:
         train_loader, val_loader, test_loader, dataset_info = get_dataset(
             name=a.dataset, batch_size=a.batch_size, workers=a.num_workers,
             split=a.split,
-            datasets_path=a.dataset_path)
+            datasets_path=a.dataset_path,
+            sampler_type=a.sampler)
         # get model
         model_cls = factory[a.model]
         model = model_cls(info=dataset_info)

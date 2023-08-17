@@ -6,6 +6,7 @@ grand_ArteryAorta:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 5848
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -18,6 +19,7 @@ grand_ArteryCoronary:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 5755
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -30,6 +32,7 @@ grand_Breast:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 5921
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -42,6 +45,7 @@ grand_Brain:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 6196
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -54,6 +58,7 @@ grand_Lung:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 6119
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -66,6 +71,7 @@ grand_Stomach:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 5745
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -78,6 +84,7 @@ grand_Leukemia:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 4651
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -90,6 +97,7 @@ grand_Lungcancer:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 4896
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -102,6 +110,7 @@ grand_Stomachcancer:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 4518
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -114,6 +123,7 @@ grand_KidneyCancer:
   info:
     original_mask: false
     num_node_features: 4608
+    num_node: 4319
     num_classes: 3
     is_regression: false
     is_edge_pred: false
@@ -126,6 +136,7 @@ musae_Twitch_DE:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 9498
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -138,6 +149,7 @@ musae_Twitch_EN:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 7126
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -150,6 +162,7 @@ musae_Twitch_ES:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 4648
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -162,6 +175,7 @@ musae_Twitch_FR:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 6549
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -174,6 +188,7 @@ musae_Twitch_PT:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 1912
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -186,6 +201,7 @@ musae_Twitch_RU:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 4385
     num_classes: 2
     is_regression: false
     is_edge_pred: false
@@ -197,19 +213,10 @@ musae_Facebook:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 22470
     num_classes: 4
     is_regression: false
     is_edge_pred: false
-    checkpoint1: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gcn/best-v2.ckpt
-    checkpoint2: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_sage/best-v2.ckpt
-    checkpoint3: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gat/best-v2.ckpt
-    checkpoint4: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_gatv2/best-v2.ckpt
-    checkpoint5: /home/z/zehuiml/repositories/hypergraph-benchmarks/checkpoints/musae_Facebook_hyper-gcn/best-v2.ckpt
-    model1: gcn
-    model2: sage
-    model3: gat
-    model4: gatv2
-    model5: hyper-gcn
 
 musae_Github:
   type: GitHub
@@ -218,6 +225,7 @@ musae_Github:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 37700
     num_classes: 4
     is_regression: false
     is_edge_pred: false
@@ -230,6 +238,7 @@ musae_Wiki_chameleon:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 2277
     is_regression: true
     is_edge_pred: false
 
@@ -241,6 +250,7 @@ musae_Wiki_crocodile:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 11631
     is_regression: true
     is_edge_pred: false
 
@@ -252,6 +262,7 @@ musae_Wiki_squirrel:
   info:
     original_mask: false
     num_node_features: 128
+    num_node: 5201
     is_regression: true
     is_edge_pred: false
 
@@ -264,6 +275,7 @@ amazon_Photo:
   info:
     original_mask: false
     num_node_features: 1000
+    num_node: 6777
     num_classes: 10
     is_regression: false
     is_edge_pred: false
@@ -276,6 +288,7 @@ amazon_Computer:
   info:
     original_mask: false
     num_node_features: 1000
+    num_node: 10226
     num_classes: 10
     is_regression: false
     is_edge_pred: false
