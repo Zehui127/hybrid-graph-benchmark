@@ -124,6 +124,8 @@ def get_dataset_single(name, datasets_path=os.path.join(pathlib.Path(__file__).p
     # if datasets_path not in sys.path:
     #     sys.path.append(datasets_path)
     # import datasets
+    if name=="cora_coauthorship" or name=="cora_cocitation" or name=="pubmed_cocitation":
+        return torch.load(f"/home/zl6222/repositories/hybrid-graph-benchmark/standard_dataset/{name}.pt")
 
     with open(os.path.join(datasets_path, 'dataset_info.yaml')) as f:
         DATASET_INFO = yaml.safe_load(f)
@@ -132,7 +134,10 @@ def get_dataset_single(name, datasets_path=os.path.join(pathlib.Path(__file__).p
     np.random.seed(1)
     torch.manual_seed(1)
     info = dict(DATASET_INFO[name])
+    dataset_info = info.pop('info', {})
+    single_graph = info.pop('single_graph', False)
+    onehot = info.pop('onehot', False)
     cls = getattr(datasets, info.pop('type'))
     print(info)
     dataset = cls(**info)
-    return dataset
+    return dataset[0]

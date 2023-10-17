@@ -293,37 +293,37 @@ amazon_Computer:
     is_regression: false
     is_edge_pred: false
 
-benchmark_Cora:
+benchmark_Cora_Author:
   type: Benchmark
-  name: Cora
+  name: CoraAuthor
   root: data/benchmark
   single_graph: true
   info:
-    original_mask: true
+    original_mask: false
     num_node_features: 1433
     num_classes: 7
     is_regression: false
     is_edge_pred: false
 
-benchmark_Citeseer:
+benchmark_Cora_Cite:
   type: Benchmark
-  name: CiteSeer
+  name: CoraCite
   root: data/benchmark
   single_graph: true
   info:
-    original_mask: true
-    num_node_features: 3703
-    num_classes: 6
+    original_mask: false
+    num_node_features: 1433
+    num_classes: 7
     is_regression: false
     is_edge_pred: false
 
-benchmark_PubMed:
+benchmark_Pubmed:
   type: Benchmark
-  name: PubMed
+  name: Pubmed
   root: data/benchmark
   single_graph: true
   info:
-    original_mask: true
+    original_mask: false
     num_node_features: 500
     num_classes: 3
     is_regression: false
