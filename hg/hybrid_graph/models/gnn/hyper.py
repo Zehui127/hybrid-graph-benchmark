@@ -27,6 +27,7 @@ class HyperGCN(torch.nn.Module):
         else:
             self.conv2 = HypergraphConv(dim, info["num_classes"])
 
+
     def forward(self, data, *args, **kargs):
         x, edge_index = data.x, data.hyperedge_index
         if self.is_edge_pred:

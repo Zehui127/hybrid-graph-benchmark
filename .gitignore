@@ -160,3 +160,5 @@ train_all.py
 #test
 t_*
 hg.py
+/jaccard*
+*.pt

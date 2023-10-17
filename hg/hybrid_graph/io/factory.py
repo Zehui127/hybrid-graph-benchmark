@@ -51,7 +51,7 @@ class DataLoader(torch_geometric.loader.DataLoader):
 
 
 def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(),'datasets'),
-                original_mask=False, split=0.6, batch_size=6000, workers=2, num_steps=5,sampler_type='HypergraphSAINTNodeSampler'):
+                original_mask=False, split=0.6, batch_size=6000, workers=2, num_steps=30,sampler_type='HypergraphSAINTNodeSampler'):
     # if datasets_path not in sys.path:
     #     sys.path.append(datasets_path)
     # import datasets
@@ -100,7 +100,7 @@ def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.p
     # for single graph the masks is of no use
     print(dataset_info)
     if single_graph:
-        return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dataset_info
+        return Loader(dataset, masks), Loader(dataset, masks), Loader(dataset, masks), dict(DATASET_INFO[name]),
     else:
         kwargs = {
             "batch_size": batch_size,
@@ -108,15 +108,15 @@ def get_dataset(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.p
             "num_workers": workers,
         }
         print(f"Using {sampler_type} sampler with {kwargs}")
-        if sampler_type == "HypergraphSAINTRandomWalkSampler":
-            kwargs["walk_length"] = 2
+        if sampler_type == "HypergraphSAINTRandomWalkSampler" or sampler_type == "GraphSAINTRandomWalkSampler":
+            kwargs["walk_length"] = 3
         sample = getattr(datasets, sampler_type)
         Sampler = functools.partial(sample, **kwargs)
         return (
             Loader(dataset, masks, sampler=Sampler(dataset[0])),
             Loader(dataset, masks, sampler=Sampler(dataset[0])),
             Loader(dataset, masks, sampler=Sampler(dataset[0])),
-            dataset_info,
+            dict(DATASET_INFO[name]),
         )
 
 def get_dataset_single(name, datasets_path=os.path.join(pathlib.Path(__file__).parent.parent.parent.resolve(),'datasets'),
@@ -124,6 +124,8 @@ def get_dataset_single(name, datasets_path=os.path.join(pathlib.Path(__file__).p
     # if datasets_path not in sys.path:
     #     sys.path.append(datasets_path)
     # import datasets
+    if name=="cora_coauthorship" or name=="cora_cocitation" or name=="pubmed_cocitation":
+        return torch.load(f"/home/zl6222/repositories/hybrid-graph-benchmark/standard_dataset/{name}.pt")
 
     with open(os.path.join(datasets_path, 'dataset_info.yaml')) as f:
         DATASET_INFO = yaml.safe_load(f)
@@ -132,7 +134,10 @@ def get_dataset_single(name, datasets_path=os.path.join(pathlib.Path(__file__).p
     np.random.seed(1)
     torch.manual_seed(1)
     info = dict(DATASET_INFO[name])
+    dataset_info = info.pop('info', {})
+    single_graph = info.pop('single_graph', False)
+    onehot = info.pop('onehot', False)
     cls = getattr(datasets, info.pop('type'))
     print(info)
     dataset = cls(**info)
-    return dataset
+    return dataset[0]

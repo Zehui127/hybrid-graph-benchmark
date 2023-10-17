@@ -4,6 +4,7 @@ from .gnn.hyper import HyperGCN, HyperGAT
 from .gnn.linearprobe import LPGCNHyperGCN,LPGGATGCN, LPGATHyperGCN, LPHYPERHYPER, LPGCNGCN, LPGGATGAT
 from .ensemble.average_prediction import Average_Ensemble
 from .gnn.diff_pool import DiffPool
+from .gnn.obg_gcn import GCN, SAGE, HyperSAGE
 
 factory = {
     'gcn': GCNNet,
@@ -20,4 +21,7 @@ factory = {
     'lp-gat-gat': LPGGATGAT,
     'lp-hyper-hyper': LPHYPERHYPER,
     'diff': DiffPool,
+    'obg-gcn':GCN,
+    'obg-sage':SAGE,
+    'obg-hypersage':HyperSAGE,
 }

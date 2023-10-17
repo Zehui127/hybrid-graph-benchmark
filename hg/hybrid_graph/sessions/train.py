@@ -23,6 +23,7 @@ def train(
         save_last=True,
     )
     plt_trainer_args['callbacks'] = [checkpoint_callback]
+    plt_trainer_args['check_val_every_n_epoch'] = 5
     if save_path is not None:
         plt_trainer_args['default_root_dir'] = f'./lightning_logs/{save_path.split("checkpoints/")[1]}'
     plt_model = ModelWrapper(

@@ -129,7 +129,7 @@ class Main:
             sampler_type=a.sampler)
         # get model
         model_cls = factory[a.model]
-        model = model_cls(info=dataset_info)
+        model = model_cls(info=dataset_info['info'])
         return model, train_loader, val_loader, test_loader, dataset_info
 
     def cli_train(self):
